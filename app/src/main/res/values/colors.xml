@@ -7,5 +7,5 @@
     <!--Amplify General Colors GUI-->
     <color name="black">#000</color>
     <color name="clearGrey">#cacaca</color>
-    <color name="darkGrey">#7e7e7e</color>
+    <color name="darkGrey">#464646</color>
 </resources>
