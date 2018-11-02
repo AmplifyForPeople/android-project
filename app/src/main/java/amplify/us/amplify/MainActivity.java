@@ -3,15 +3,20 @@ package amplify.us.amplify;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-
     private BottomNavigationView nav;
+
+    private DiscoverFragment discoverFragment;
+    private AmplifySiteFragment amplifySiteFragment;
+    private ProfileFragment profileFragment;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -19,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_discover:
-                    mTextMessage.setText(R.string.title_discover);
+                    setFragment(discoverFragment);
                     return true;
                 case R.id.navigation_amplifySite:
-                    mTextMessage.setText(R.string.title_amplify_site);
+                    setFragment(amplifySiteFragment);
                     return true;
                 case R.id.navigation_profile:
-                    mTextMessage.setText(R.string.title_profile);
+                    setFragment(profileFragment);
                     return true;
             }
             return false;
@@ -37,10 +42,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-
         nav = (BottomNavigationView) findViewById(R.id.navigation);
+
         nav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        discoverFragment = new DiscoverFragment();
+        amplifySiteFragment = new AmplifySiteFragment();
+        profileFragment = new ProfileFragment();
+
+        //Default MainFragment :: DiscoverFragment
+        setFragment(discoverFragment);
+
+    }
+
+    private void setFragment (Fragment fragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
     }
 
 }
