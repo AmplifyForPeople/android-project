@@ -4,8 +4,15 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <!--Navigation-->
+    <color name="colorWhite">#fff</color>
+    <color name="colorWhiteTransparent">#80ffffff</color>
+
+
     <!--Amplify General Colors GUI-->
     <color name="black">#000</color>
     <color name="clearGrey">#cacaca</color>
     <color name="darkGrey">#464646</color>
+
 </resources>
+
