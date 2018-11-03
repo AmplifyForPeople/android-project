@@ -13,5 +13,8 @@
     <color name="clearGrey">#cacaca</color>
     <color name="darkGrey">#464646</color>
 
+    <!--active color-->
+    <color name="active">#38bf07</color>
+
 </resources>
 

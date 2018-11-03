@@ -3,6 +3,7 @@ package amplify.us.amplify;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -23,6 +24,7 @@ import amplify.us.amplify.entities.EstablishmentEntity;
  */
 public class DiscoverFragment extends Fragment {
 
+    //RecyclerView establishments nearby
     private RecyclerView rv_establishments_nearby;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
@@ -33,7 +35,7 @@ public class DiscoverFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_discover, container, false);
 
@@ -46,7 +48,6 @@ public class DiscoverFragment extends Fragment {
         rv_establishments_nearby.setAdapter(mAdapter);
 
         //Most voted song to -> song detail
-
         CardView card_view = (CardView) rootView.findViewById(R.id.cardView); // creating a CardView and assigning a value.
 
         card_view.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +64,7 @@ public class DiscoverFragment extends Fragment {
 
     }
 
-    //Adding dataSet
+    //Adding dataSet into RecyclerView Establishments Nearby
     private ArrayList<EstablishmentEntity> dataSet(){
         ArrayList<EstablishmentEntity> data = new ArrayList<>();
         data.add(new EstablishmentEntity("Establishment 1","Info Establishment 1"));

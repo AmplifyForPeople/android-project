@@ -43,4 +43,18 @@
     <string name="similar_songs">Similar Songs</string>
     <string name="description_song">description song</string>
 
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <!-- Amplify Site Fragment -->
+    <string name="name_local">Local 1</string>
+    <string name="active">Amplify Active</string>
+    <string name="listening">Song Listening...</string>
+    <!--added properties of song detail-->
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <!--added button addFav-->
+    <!--added similar songs-->
+
+
+    <!--nearby establishment-->
+
 </resources>
