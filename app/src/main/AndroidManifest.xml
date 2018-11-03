@@ -36,7 +36,10 @@
         <activity
             android:name=".SetSelfDataActivity"
             android:label="SetSelfData" />
-        
+        <activity
+            android:name=".SetGenresActivity"
+            android:label="SetGenres"
+            ></activity>
     </application>
 
 </manifest>
