@@ -48,6 +48,7 @@ public class DiscoverFragment extends Fragment {
         return rootView;
     }
 
+    //Adding dataSet
     private ArrayList<EstablishmentEntity> dataSet(){
         ArrayList<EstablishmentEntity> data = new ArrayList<>();
         data.add(new EstablishmentEntity("Establishment 1","Info Establishment 1"));
