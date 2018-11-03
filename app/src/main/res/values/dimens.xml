@@ -5,4 +5,9 @@
 
     <!-- Welcome Activity -->
     <dimen name="footer_margin">8dp</dimen>
+
+    <!--main Activity-->
+    <dimen name="nav_dim">56dp</dimen>
+    <dimen name="zero_dim">0dp</dimen>
+    <dimen name="space_framesLayouts">20dp</dimen>
 </resources>
