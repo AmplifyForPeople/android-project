@@ -13,6 +13,7 @@
     <string name="title_profile">Profile</string>
 
     <!-- Discover Fragment -->
+
     <!--nearby establishment-->
     <string name="title_nearby_establishments">Establishments nearby</string>
     <!--cardView & detail-->
@@ -25,5 +26,21 @@
     <string name="genre_2">Genre 2</string>
     <string name="most_voted_songs_in_this_establishment">Most voted songs in this establishment</string>
 
+    <!-- fav genres in your city-->
+    <string name="favourite_genres_in_your_city">Favourite genres in your city</string>
+    <string name="genre_fav_1">Genre 1</string>
+    <string name="genre_fav_2">Genre 2</string>
+    <string name="genre_fav_3">Genre 3</string>
+
+    <!-- Most voted songs -->
+    <string name="mostVotSong">Most voted songs</string>
+    <!-- song detail -->
+    <string name="song_name">Song name</string>
+    <string name="artist_name">Artist name</string>
+    <string name="album_name">Album name</string>
+    <string name="genresSong">Genres</string>
+    <string name="addFav">add to Fav</string>
+    <string name="similar_songs">Similar Songs</string>
+    <string name="description_song">description song</string>
 
 </resources>

@@ -1,9 +1,11 @@
 package amplify.us.amplify;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,9 +45,22 @@ public class DiscoverFragment extends Fragment {
         mAdapter = new EstablishmentAdapter(dataSet());
         rv_establishments_nearby.setAdapter(mAdapter);
 
+        //Most voted song to -> song detail
+
+        CardView card_view = (CardView) rootView.findViewById(R.id.cardView); // creating a CardView and assigning a value.
+
+        card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         // Inflate the layout for this fragment
         return rootView;
+
+
     }
 
     //Adding dataSet

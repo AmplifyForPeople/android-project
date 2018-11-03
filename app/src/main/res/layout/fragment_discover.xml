@@ -22,6 +22,21 @@
             android:layout_marginTop="@dimen/space_framesLayouts">
             <include layout="@layout/nearby_establishments"/>
         </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fav_genres">
+            <include layout="@layout/fav_genres_in_your_city"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/most_voted_songs"
+            android:paddingBottom="@dimen/space_framesLayouts">
+            <include layout="@layout/most_voted_songs"/>
+        </FrameLayout>
     </LinearLayout>
 
 </ScrollView>
