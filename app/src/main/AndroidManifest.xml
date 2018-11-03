@@ -33,6 +33,9 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/register" />
+        <activity
+            android:name=".SetSelfDataActivity"
+            android:label="SetSelfData" />
         
     </application>
 
