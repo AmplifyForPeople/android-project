@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nearbyEstablishments"
-            android:layout_marginTop="@dimen/space_framesLayouts"
-            android:layout_marginStart="@dimen/space_framesLayouts">
+            android:layout_marginTop="@dimen/space_framesLayouts">
             <include layout="@layout/nearby_establishments"/>
         </FrameLayout>
     </LinearLayout>
