@@ -24,6 +24,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.FullScreenTheme">
         </activity>
+        <activity android:name=".DetailEstablishmentActivity"/>
     </application>
 
 </manifest>
