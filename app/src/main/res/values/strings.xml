@@ -15,5 +15,7 @@
     <!-- Discover Fragment -->
     <!--nearby establishment-->
     <string name="title_nearby_establishments">Establishments nearby</string>
+    <string name="name_establishment">Name Establishment</string>
+    <string name="info_establishment">Info Establishment</string>
 
 </resources>
