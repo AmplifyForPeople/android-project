@@ -4,10 +4,17 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_description">Description</string>
 
     <!-- Welcome Activity (Hero Page) -->
     <string name="logo">"\"Logo\""</string>
     <string name="banner">"for people"</string>
     <string name="develop">"Develop by"</string>
+
+    <!-- Description Activity -->
+
+    <string name="description_intro">"What is Amplify?"</string>
+    <string name="description_body">"Amplify is an application to connect and share your preferences. Discover new music and places to go. "</string>
+
 
 </resources>
