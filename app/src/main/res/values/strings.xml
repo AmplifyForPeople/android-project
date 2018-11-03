@@ -15,7 +15,7 @@
     <!-- Discover Fragment -->
     <!--nearby establishment-->
     <string name="title_nearby_establishments">Establishments nearby</string>
-    <!--cardView-->
+    <!--cardView & detail-->
     <string name="name_establishment">Name Establishment</string>
     <string name="info_establishment">Info Establishment</string>
     <string name="image_desc">Image Description</string>
