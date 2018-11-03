@@ -24,12 +24,10 @@ public class DescriptionActivity extends AppCompatActivity {
     private void setButtonToStartMainActivity() {
         Button btn = (Button) findViewById(R.id.description_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn.setOnClickListener((View v) -> {
                 startActivity(new Intent(DescriptionActivity.this, MainActivity.class));
-            }
-        });
+                finish();
+            });
     }
 
 }
