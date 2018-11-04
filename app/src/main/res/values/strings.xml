@@ -185,4 +185,8 @@
     <string name="artist_name_fav">Artist name</string>
     <string name="album_name_fav">Album name</string>
 
+    <!-- Edit Profile-->
+    <string name="title_edit_prof">Edit Profile</string>
+
+
 </resources>
