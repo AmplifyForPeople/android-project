@@ -28,7 +28,7 @@ public class AmplifySiteFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_amplify_site, container, false);
 
 
-        //Similar song to -> song detail
+        //Similar song to -> song detail (simple)
         CardView card_view = rootView.findViewById(R.id.similar_amp); // creating a CardView and assigning a value.
 
         card_view.setOnClickListener(new View.OnClickListener() {
