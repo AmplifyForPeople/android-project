@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileActivity">
+
+    <TextView
+        android:id="@+id/titleEditPro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/title_edit_prof"
+        android:textColor="@color/darkGrey"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/set_self_data_name"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleEditPro" />
+
+    <EditText
+        android:id="@+id/set_self_data_name"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@+id/name_data"
+        app:layout_constraintTop_toBottomOf="@+id/name_data" />
+
+    <TextView
+        android:id="@+id/age_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/set_self_data_age"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/set_self_data_name"
+        app:layout_constraintTop_toBottomOf="@+id/set_self_data_name" />
+
+    <EditText
+        android:id="@+id/set_self_data_age"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape"
+        android:inputType="number"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@+id/age_data"
+        app:layout_constraintTop_toBottomOf="@+id/age_data" />
+
+    <TextView
+        android:id="@+id/sex_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/set_self_data_sex"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/set_self_data_age"
+        app:layout_constraintTop_toBottomOf="@+id/set_self_data_age" />
+
+    <Spinner
+        android:id="@+id/set_self_data_sex"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape"
+        android:inputType="number"
+        android:maxLines="1"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@+id/sex_data"
+        app:layout_constraintTop_toBottomOf="@+id/sex_data" />
+
+    <TextView
+        android:id="@+id/location_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/set_self_data_location"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/set_self_data_sex"
+        app:layout_constraintTop_toBottomOf="@+id/set_self_data_sex" />
+
+    <Spinner
+        android:id="@+id/set_self_data_location"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape"
+        android:inputType="number"
+        android:maxLines="1"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@+id/location_data"
+        app:layout_constraintTop_toBottomOf="@+id/location_data" />
+
+    <Button
+        android:id="@+id/cancel_but"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/cancel_but"
+        app:layout_constraintStart_toStartOf="@+id/set_self_data_location"
+        app:layout_constraintTop_toBottomOf="@+id/set_self_data_location" />
+
+    <Button
+        android:id="@+id/save_but"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:text="@string/save_but"
+        app:layout_constraintBottom_toBottomOf="@+id/cancel_but"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cancel_but" />
+
+
+</android.support.constraint.ConstraintLayout>

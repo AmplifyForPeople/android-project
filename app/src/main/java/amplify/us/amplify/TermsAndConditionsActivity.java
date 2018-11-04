@@ -18,7 +18,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),WelcomeActivity.class);
+                Intent myIntent = new Intent(view.getContext(),LoginActivity.class);
                 startActivityForResult(myIntent,0);
             }
         });
