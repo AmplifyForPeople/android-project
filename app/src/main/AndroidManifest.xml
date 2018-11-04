@@ -22,7 +22,25 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"/>
+        <activity
+            android:name=".DescriptionActivity"
+            android:label="@string/title_description"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/register" />
+        <activity
+            android:name=".SetSelfDataActivity"
+            android:label="SetSelfData" />
+        <activity
+            android:name=".SetGenresActivity"
+            android:label="SetGenres">
+        </activity>
         <activity
             android:name=".DetailEstablishmentActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />

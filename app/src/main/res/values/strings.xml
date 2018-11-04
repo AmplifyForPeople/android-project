@@ -6,6 +6,36 @@
     <string name="logo">"\"Logo\""</string>
     <string name="banner">"for people"</string>
     <string name="develop">"Develop by"</string>
+    <string name="title_activity_login">Login</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!-- LoginActivity -->
+    <string name="login">Login</string>
+    <string name="login_email">Email:</string>
+    <string name="login_password">Password:</string>
+    <string name="login_sign_in">Sign in</string>
+    <string name="login_new">Create acount</string>
+    <string name="login_terms">Terms &amp; Conditions</string>
+
+
+    <!-- RegisterActivity -->
+    <string name="register">Register</string>
+    <string name="register_email">Email:</string>
+    <string name="register_password">Password:</string>
+    <string name="register_repeat_password">Repeat Password:</string>
+    <string name="register_next_button">Next</string>
+
 
     <!-- Main Activity - General -->
     <string name="title_discover">Discover</string>
@@ -76,4 +106,59 @@
     <string name="album_name_fav">Album name</string>
 
 
+    <!-- SetSelfDataActivity -->
+    <string name="set_self_data_hey">Hey!</string>
+    <string name="set_self_data_message">Give something about your self?</string>
+    <string name="set_self_data_name">Name:</string>
+    <string name="set_self_data_age">Age:</string>
+    <string name="set_self_data_sex">Sex:</string>
+    <string name="set_self_data_location">Location:</string>
+    <string name="set_self_data_next_button">Next</string>
+    <string-array name="set_self_data_sexs">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Alien</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="set_self_data_locations">
+        <item>Lleida</item>
+        <item>Balaguer</item>
+        <item>Oliana</item>
+        <item>Guisona</item>
+        <item>La Seu</item>
+    </string-array>
+    <!-- SetGenresActivity -->
+    <string name="set_genres_title">Choose your favorite genres</string>
+    <string name="set_genres_next_button">Save</string>
+    <string-array name="set_genres_genres">
+        <item>Classic</item>
+        <item>Blues</item>
+        <item>Jazz</item>
+        <item>Rock</item>
+        <item>Gospel</item>
+        <item>Soul</item>
+        <item>Metal</item>
+        <item>Country</item>
+        <item>Funk</item>
+        <item>Disco</item>
+        <item>House</item>
+        <item>Techno</item>
+        <item>Pop</item>
+        <item>Ska</item>
+        <item>Reggae</item>
+        <item>Hip Hop</item>
+        <item>Garage</item>
+        <item>Flamenco</item>
+        <item>Raggaeton</item>
+    </string-array>
+
+    <!-- Description Activity -->
+
+    <string name="description_intro">"What is Amplify?"</string>
+    <string name="description_body">"Amplify is an application to connect and share your preferences. Discover new music and places to go. How does it work?"</string>
+    <string name="description_step1"> 1.First configure your musical preferences. </string>
+    <string name="description_step2"> 2.Second connect to an Amplify site.</string>
+    <string name="description_step3"> 3.Third enjoy! It is really that easy!  </string>
+    <string name="description_step4"> Don\'t forget to discover new places around you and add music to favourites.</string>
+    <string name="description_button_next">Start using Amplify!</string>
 </resources>
