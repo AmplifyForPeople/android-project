@@ -17,6 +17,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_margin="10sp"
+            android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
