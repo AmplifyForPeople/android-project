@@ -7,7 +7,7 @@
     tools:context=".FavouriteSongListActivity">
 
     <ImageView
-        android:id="@+id/back_detail_song"
+        android:id="@+id/back_favlist_song"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
@@ -24,7 +24,7 @@
         android:text="@string/title_list_fav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_detail_song" />
+        app:layout_constraintTop_toBottomOf="@+id/back_favlist_song" />
 
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="30dp"
@@ -37,6 +37,7 @@
         app:layout_constraintTop_toTopOf="@+id/name_song" />
 
     <ListView
+        android:id="@+id/listViewSongsFav"
         android:layout_width="400dp"
         android:layout_height="550dp"
         android:layout_marginStart="8dp"

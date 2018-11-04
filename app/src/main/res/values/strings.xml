@@ -47,7 +47,7 @@
     <!-- Amplify Site Fragment -->
     <string name="name_local">Local 1</string>
     <string name="active">Amplify Active</string>
-    <string name="listening">Song Listening...</string>
+    <string name="listening">Song Listening…</string>
     <!--added properties of song detail-->
     <string name="like">Like</string>
     <string name="dislike">Dislike</string>
@@ -71,7 +71,9 @@
 
     <!--Favourite song List-->
     <string name="title_list_fav">My favourites songs</string>
-
+    <string name="name_song_fav">Name song</string>
+    <string name="artist_name_fav">Artist name</string>
+    <string name="album_name_fav">Album name</string>
 
 
 </resources>
