@@ -57,8 +57,10 @@
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".ChangePasswordActivity"
-            android:theme="@style/AppTheme.FullScreenTheme">
-        </activity>
+            android:theme="@style/AppTheme.FullScreenTheme"></activity>
+        <activity
+            android:name=".ModifyGenresActivitiy"
+            android:theme="@style/AppTheme.FullScreenTheme"></activity>
     </application>
 
 </manifest>

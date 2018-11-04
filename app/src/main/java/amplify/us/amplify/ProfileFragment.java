@@ -62,6 +62,18 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //Profile -> Modify Genres
+
+        TextView modGen = (TextView) rootView.findViewById((R.id.modifyGen));
+
+        modGen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ModifyGenresActivitiy.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+
 
         return rootView;
 

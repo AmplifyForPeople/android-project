@@ -198,6 +198,8 @@
     <string name="new_password">New password :</string>
     <string name="repeat_new_password">Repeat new password :</string>
 
+    <!--Modify Genres-->
+    <string name="mod_genres">Modify genres of music</string>
 
 
 </resources>
