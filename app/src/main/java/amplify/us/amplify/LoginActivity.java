@@ -3,6 +3,7 @@ package amplify.us.amplify;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,17 +83,48 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+        this.set_button_sig_in();
+        this.set_register_onclick();
+        this.set_terms_onclick();
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
+    }
 
+    private void set_button_sig_in(){
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                //attemptLogin(); TODO implement it on next sprint
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
+    }
+    private void set_register_onclick(){
+        TextView register_text_view = (TextView) findViewById(R.id.email_register_text);
+        register_text_view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+    private void set_terms_onclick(){
+        TextView register_text_view = (TextView) findViewById(R.id.email_terms_text);
+        register_text_view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(LoginActivity.this, TODO); TODO implementar
+                //startActivity(intent);
+                Toast.makeText(getBaseContext(),"Not Implemented", Toast.LENGTH_SHORT).show(); //Todo remove
+                //finish();
+            }
+        });
     }
 
     private void populateAutoComplete() {
