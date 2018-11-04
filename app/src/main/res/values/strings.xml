@@ -60,6 +60,8 @@
     <string name="fav_song_but">My favourite songs</string>
     <string name="desc_fav">favorite desc</string>
     <string name="account_title">Account</string>
+    <string name="edit_profile">Edit Profile</string>
+
 
 
 </resources>

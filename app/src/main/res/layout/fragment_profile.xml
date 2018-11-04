@@ -66,7 +66,8 @@
         android:layout_marginStart="8dp"
         android:text="@string/account_title"
         android:textColor="@color/darkGrey"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
         app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
@@ -79,5 +80,26 @@
         android:background="@color/darkGrey"
         app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+
+    <TextView
+        android:id="@+id/editProf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/edit_profile"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lineAccount"
+        app:layout_constraintTop_toBottomOf="@+id/lineAccount" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@+id/editProf"
+        app:layout_constraintEnd_toEndOf="@+id/lineAccount"
+        app:layout_constraintTop_toTopOf="@+id/editProf" />
 
 </android.support.constraint.ConstraintLayout>
