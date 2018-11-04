@@ -4,10 +4,20 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_description">Description</string>
 
     <!-- Welcome Activity (Hero Page) -->
     <string name="logo">"\"Logo\""</string>
     <string name="banner">"for people"</string>
     <string name="develop">"Develop by"</string>
 
+    <!-- Description Activity -->
+
+    <string name="description_intro">"What is Amplify?"</string>
+    <string name="description_body">"Amplify is an application to connect and share your preferences. Discover new music and places to go. How does it work?"</string>
+    <string name="description_step1"> 1.First configure your musical preferences. </string>
+    <string name="description_step2"> 2.Second connect to an Amplify site.</string>
+    <string name="description_step3"> 3.Third enjoy! It is really that easy!  </string>
+    <string name="description_step4"> Don\'t forget to discover new places around you and add music to favourites.</string>
+    <string name="description_button_next">Start using Amplify!</string>
 </resources>
