@@ -61,6 +61,8 @@
         <activity
             android:name=".ModifyGenresActivitiy"
             android:theme="@style/AppTheme.FullScreenTheme"></activity>
+        <activity android:name=".TermsAndConditionsActivity"
+            android:theme="@style/AppTheme.FullScreenTheme"/>
     </application>
 
 </manifest>

@@ -119,10 +119,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         register_text_view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(LoginActivity.this, TODO); TODO implementar
-                //startActivity(intent);
-                Toast.makeText(getBaseContext(),"Not Implemented", Toast.LENGTH_SHORT).show(); //Todo remove
-                //finish();
+                Intent intent = new Intent(LoginActivity.this, TermsAndConditionsActivity.class);
+                startActivity(intent);
             }
         });
     }

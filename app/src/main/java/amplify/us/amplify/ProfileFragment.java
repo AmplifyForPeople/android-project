@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -73,6 +74,19 @@ public class ProfileFragment extends Fragment {
                 v.getContext().startActivity(intent);
             }
         });
+
+        //Profile -> Log Out
+        Button logUot = (Button) rootView.findViewById((R.id.button_logout));
+
+        logUot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),LoginActivity.class);
+                v.getContext().startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
 
 
         return rootView;
