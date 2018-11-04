@@ -26,20 +26,24 @@
         <activity
             android:name=".DescriptionActivity"
             android:label="@string/title_description"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.FullScreenTheme">
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.FullScreenTheme"/>
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/register" />
+            android:label="@string/register"
+            android:theme="@style/AppTheme.FullScreenTheme"/>
         <activity
             android:name=".SetSelfDataActivity"
-            android:label="SetSelfData" />
+            android:label="SetSelfData"
+            android:theme="@style/AppTheme.FullScreenTheme"/>
         <activity
             android:name=".SetGenresActivity"
-            android:label="SetGenres">
+            android:label="SetGenres"
+            android:theme="@style/AppTheme.FullScreenTheme">
         </activity>
         <activity
             android:name=".DetailEstablishmentActivity"

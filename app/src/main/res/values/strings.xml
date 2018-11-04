@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Amplify</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_description">Description</string>
 
     <!-- Welcome Activity (Hero Page) -->
     <string name="logo">"\"Logo\""</string>
