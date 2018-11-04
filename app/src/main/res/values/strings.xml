@@ -61,7 +61,13 @@
     <string name="desc_fav">favorite desc</string>
     <string name="account_title">Account</string>
     <string name="edit_profile">Edit Profile</string>
-
+    <string name="change_password">Change password</string>
+    <string name="modify_gen">Modify your favourites genres of musics</string>
+    <string name="notifications">Notifications</string>
+    <string name="app_notifications">App notifications</string>
+    <string name="privacity">Privacity</string>
+    <string name="offline_mode">Offline Mode</string>
+    <string name="log_out">Log Out</string>
 
 
 </resources>

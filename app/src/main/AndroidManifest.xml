@@ -22,13 +22,17 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.FullScreenTheme"></activity>
+            android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".DetailEstablishmentActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".DetailSongActivity"
-            android:theme="@style/AppTheme.FullScreenTheme"></activity>
+            android:theme="@style/AppTheme.FullScreenTheme" />
+        <activity
+            android:name=".FavouriteSongListActivity"
+            android:theme="@style/AppTheme.FullScreenTheme">
+        </activity>
     </application>
 
 </manifest>
