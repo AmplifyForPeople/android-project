@@ -25,7 +25,7 @@ public class DescriptionActivity extends AppCompatActivity {
         Button btn = (Button) findViewById(R.id.description_button);
 
         btn.setOnClickListener((View v) -> {
-                startActivity(new Intent(DescriptionActivity.this, MainActivity.class));
+                startActivity(new Intent(DescriptionActivity.this, LoginActivity.class));
                 finish();
             });
     }

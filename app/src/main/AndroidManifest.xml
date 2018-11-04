@@ -26,7 +26,6 @@
             android:name=".DescriptionActivity"
             android:label="@string/title_description"
             android:theme="@style/AppTheme"></activity>
-            android:label="@string/title_activity_main" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
