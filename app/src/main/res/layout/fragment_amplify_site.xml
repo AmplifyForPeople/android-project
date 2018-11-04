@@ -153,5 +153,40 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/genres_song_amp" />
 
+        <TextView
+            android:id="@+id/similar_songs_amp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/similar_songs"
+            android:textColor="@color/darkGrey"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/button_like"
+            app:layout_constraintTop_toBottomOf="@+id/button_like" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/similar_amp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/clearGrey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/similar_songs_amp"
+            app:layout_constraintTop_toBottomOf="@+id/similar_songs_amp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/similar_amp1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/clearGrey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/similar_amp"
+            app:layout_constraintTop_toBottomOf="@+id/similar_songs_amp" />
+
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
