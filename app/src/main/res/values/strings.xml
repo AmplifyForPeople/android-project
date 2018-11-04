@@ -69,5 +69,9 @@
     <string name="offline_mode">Offline Mode</string>
     <string name="log_out">Log Out</string>
 
+    <!--Favourite song List-->
+    <string name="title_list_fav">My favourites songs</string>
+
+
 
 </resources>
