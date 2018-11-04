@@ -26,7 +26,7 @@
         <activity
             android:name=".DescriptionActivity"
             android:label="@string/title_description"
-            android:theme="@style/AppTheme.FullScreenTheme"></activity>
+            android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
@@ -42,7 +42,7 @@
         <activity
             android:name=".SetGenresActivity"
             android:label="SetGenres"
-            android:theme="@style/AppTheme.FullScreenTheme"></activity>
+            android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".DetailEstablishmentActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
@@ -51,10 +51,11 @@
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".FavouriteSongListActivity"
-            android:theme="@style/AppTheme.FullScreenTheme"></activity>
+            android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".EditProfileActivity"
-            android:theme="@style/AppTheme.FullScreenTheme"></activity>
+            android:theme="@style/AppTheme.FullScreenTheme" />
+        <activity android:name=".ChangePasswordActivity"></activity>
     </application>
 
 </manifest>
