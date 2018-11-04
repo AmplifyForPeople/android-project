@@ -1,26 +1,46 @@
 package amplify.us.amplify;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.text.TextUtils;
 
 public class WelcomeActivity extends AppCompatActivity {
+
+    private final int TRANSITION_TIME = 3500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+    }
 
-        Button button = (Button)findViewById(R.id.buttonToTermsAndConditions);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),TermsAndConditionsActivity.class);
-                startActivityForResult(myIntent,0);
-        }
-        });
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Thread timer = new Thread() {
+            public void run() {
+                try {
+                    sleep(TRANSITION_TIME);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    showNextScreen();
+                }
+            }
+
+        };
+        timer.start();
+
+    }
+
+    private void showNextScreen() {
+
+        // Class activity = MainActivity.class;
+        Class activity = DescriptionActivity.class;
+
+        startActivity(new Intent(WelcomeActivity.this, activity));
+        finish();
     }
 }

@@ -6,14 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity">
 
-    <Button
-        android:id="@+id/buttonToTermsAndConditions"
+    <TextView
+        android:id="@+id/logoID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:gravity="center"
+        android:text="@string/logo"
+        android:textColor="@color/black"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bannerWelcomeID"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/developID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="259dp"
-        android:text="Terms &amp; Conditions"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="@dimen/footer_margin"
+        android:layout_marginEnd="@dimen/footer_margin"
+        android:layout_marginBottom="32sp"
+        android:text="@string/develop"
+        android:textColor="@color/darkGrey"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/bannerWelcomeID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/footer_margin"
+        android:layout_marginEnd="@dimen/footer_margin"
+        android:layout_marginBottom="60sp"
+        android:text="@string/banner"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/darkGrey"
+        app:layout_constraintBottom_toTopOf="@+id/developID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
