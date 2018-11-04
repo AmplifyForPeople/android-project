@@ -55,7 +55,10 @@
         <activity
             android:name=".EditProfileActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
-        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:theme="@style/AppTheme.FullScreenTheme">
+        </activity>
     </application>
 
 </manifest>

@@ -179,6 +179,9 @@
     <string name="offline_mode">Offline Mode</string>
     <string name="log_out">Log Out</string>
 
+    <string name="cancel_but">Cancel</string>
+    <string name="save_but">Save</string>
+
     <!--Favourite song List-->
     <string name="title_list_fav">My favourites songs</string>
     <string name="name_song_fav">Name song</string>
@@ -187,6 +190,14 @@
 
     <!-- Edit Profile-->
     <string name="title_edit_prof">Edit Profile</string>
+
+
+    <!-- Change Password-->
+    <string name="change_pass">Change Password</string>
+    <string name="actual_password">Actual password :</string>
+    <string name="new_password">New password :</string>
+    <string name="repeat_new_password">Repeat new password :</string>
+
 
 
 </resources>

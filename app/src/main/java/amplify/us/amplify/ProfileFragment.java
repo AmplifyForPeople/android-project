@@ -28,7 +28,6 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-
         //Profile -> My Fav list Songs
         FrameLayout favLayout = (FrameLayout) rootView.findViewById(R.id.frameLayout_fav);
         favLayout.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +50,22 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //Profile -> Edit Password
 
+        TextView editPass = (TextView) rootView.findViewById((R.id.changePssw));
+
+        editPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ChangePasswordActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
 
         return rootView;
 
     }
+
 
 }
