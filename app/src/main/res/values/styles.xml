@@ -49,6 +49,12 @@
         <item name="android:textColor">@color/darkGrey</item>
     </style>
 
+    <!--button fav song style-->
+    <style name="favSongs" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">@color/colorWhite</item>
+    </style>
+
+
 
 
 </resources>

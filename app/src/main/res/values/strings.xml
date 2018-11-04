@@ -54,7 +54,12 @@
     <!--added button addFav-->
     <!--added similar songs-->
 
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
-    <!--nearby establishment-->
+    <!--Profile Fragment-->
+    <string name="fav_song_but">My favourite songs</string>
+    <string name="desc_fav">favorite desc</string>
+    <string name="account_title">Account</string>
+
 
 </resources>
