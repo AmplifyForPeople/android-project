@@ -19,10 +19,28 @@ import amplify.us.amplify.R;
 import amplify.us.amplify.entities.EstablishmentEntity;
 
 public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdapter.EstablishmentViewHolder>{
-    private ArrayList<EstablishmentEntity> data;
+
+    class EstablishmentViewHolder extends RecyclerView.ViewHolder {
+
+        TextView name_establishment;
+        TextView info_establishment;
+        CardView parentLayout;
+
+        public EstablishmentViewHolder (View itemView){
+            super(itemView);
+            name_establishment = (TextView) itemView.findViewById(R.id.name_establishment);
+            info_establishment = (TextView) itemView.findViewById(R.id.info_establishment);
+            parentLayout = (CardView) itemView.findViewById(R.id.card_establishment);
+        }
+
+    }
+
+    private final ArrayList<EstablishmentEntity> data;
+
     public EstablishmentAdapter(ArrayList<EstablishmentEntity> data){
         this.data = data;
     }
+
     @Override
     public EstablishmentViewHolder onCreateViewHolder (ViewGroup parent, int viewType){
         return new EstablishmentViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_establishments_nearby,parent,false));
@@ -33,14 +51,11 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
         holder.name_establishment.setText(establishmentEntity.getName());
         holder.info_establishment.setText(establishmentEntity.getInfo());
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.parentLayout.setOnClickListener((View v) -> {
                 Intent intent = new Intent(v.getContext(),DetailEstablishmentActivity.class);
                 intent.putExtra("establishment_title",data.get(position).getName());
                 intent.putExtra("info_title",data.get(position).getInfo());
                 v.getContext().startActivity(intent);
-            }
         });
     }
 
@@ -49,15 +64,5 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
         return data.size();
     }
 
-    class EstablishmentViewHolder extends RecyclerView.ViewHolder{
-        TextView name_establishment;
-        TextView info_establishment;
-        CardView parentLayout;
-        public EstablishmentViewHolder (View itemView){
-            super(itemView);
-            name_establishment = (TextView) itemView.findViewById(R.id.name_establishment);
-            info_establishment = (TextView) itemView.findViewById(R.id.info_establishment);
-            parentLayout = (CardView) itemView.findViewById(R.id.card_establishment);
-        }
-    }
+
 }

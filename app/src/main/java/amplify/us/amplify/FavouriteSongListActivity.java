@@ -24,19 +24,14 @@ public class FavouriteSongListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_song_list);
+        mSongList = new ArrayList<>();
 
         //return activity
         ImageView img = (ImageView) findViewById(R.id.back_favlist_song);
-        img.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        img.setOnClickListener((View v) -> finish());
 
         //Preview list songs
-
         lvFavSongs = (ListView) findViewById(R.id.listViewSongsFav);
-        mSongList = new ArrayList<>();
 
         //Add sample data for list
         //We can get data form DB, webService here
@@ -55,12 +50,8 @@ public class FavouriteSongListActivity extends AppCompatActivity {
         adapter = new ListFavSongsAdapter(getApplicationContext(),mSongList);
         lvFavSongs.setAdapter(adapter);
 
-        lvFavSongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
-                Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
-            }
+        lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+            Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
         });
 
     }

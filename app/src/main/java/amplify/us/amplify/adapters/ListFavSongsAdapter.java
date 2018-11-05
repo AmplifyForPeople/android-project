@@ -39,18 +39,18 @@ public class ListFavSongsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(mContext,R.layout.item_fav_song,null);
+        View view = View.inflate(mContext,R.layout.item_fav_song,null);
 
-        TextView tvSong = (TextView) v.findViewById(R.id.name_song_unique);
-        TextView tvArtist = (TextView) v.findViewById(R.id.artist_name_unique);
-        TextView tvAlbum = (TextView) v.findViewById(R.id.album_name_unique);
+        TextView tvSong = (TextView) view.findViewById(R.id.name_song_unique);
+        TextView tvArtist = (TextView) view.findViewById(R.id.artist_name_unique);
+        TextView tvAlbum = (TextView) view.findViewById(R.id.album_name_unique);
 
         tvSong.setText(mSongList.get(position).getName());
         tvArtist.setText(mSongList.get(position).getArtist());
         tvAlbum.setText(mSongList.get(position).getAlbum());
 
-        v.setTag(mSongList.get(position).getName());
+        view.setTag(mSongList.get(position).getName());
 
-        return v;
+        return view;
     }
 }
