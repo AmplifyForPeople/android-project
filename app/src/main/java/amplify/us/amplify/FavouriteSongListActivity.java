@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import amplify.us.amplify.adapters.ListFavSongsAdapter;
+import amplify.us.amplify.adapters.FavouriteSongsAdapter;
 import amplify.us.amplify.entities.SongEntity;
 
 public class FavouriteSongListActivity extends AppCompatActivity {
@@ -46,7 +46,7 @@ public class FavouriteSongListActivity extends AppCompatActivity {
         mSongList.add(new SongEntity("Song 10","artist 10","album 10"));
 
         //Init Adapter
-        lvFavSongs.setAdapter(new ListFavSongsAdapter(getApplicationContext(), mSongList));
+        lvFavSongs.setAdapter(new FavouriteSongsAdapter(getApplicationContext(), mSongList));
 
         lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();

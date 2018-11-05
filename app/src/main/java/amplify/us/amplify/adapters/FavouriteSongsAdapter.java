@@ -11,11 +11,11 @@ import java.util.List;
 import amplify.us.amplify.R;
 import amplify.us.amplify.entities.SongEntity;
 
-public class ListFavSongsAdapter extends BaseAdapter {
+public class FavouriteSongsAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    public ListFavSongsAdapter(Context mContext, List<SongEntity> mSongList) {
+    public FavouriteSongsAdapter(Context mContext, List<SongEntity> mSongList) {
         this.mContext = mContext;
         this.mSongList = mSongList;
     }
