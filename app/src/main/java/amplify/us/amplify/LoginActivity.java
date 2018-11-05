@@ -73,16 +73,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+        mPasswordView.setOnEditorActionListener((TextView textView, int id, KeyEvent keyEvent) -> {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                     attemptLogin();
                     return true;
                 }
                 return false;
-            }
         });
+
         this.set_button_sig_in();
         this.set_register_onclick();
         this.set_terms_onclick();
@@ -92,36 +90,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void set_button_sig_in(){
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mEmailSignInButton.setOnClickListener((View view) -> {
                 //attemptLogin(); TODO implement it on next sprint
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-            }
         });
     }
     private void set_register_onclick(){
         TextView register_text_view = (TextView) findViewById(R.id.email_register_text);
-        register_text_view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        register_text_view.setOnClickListener((View v) -> {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
-            }
         });
     }
 
     private void set_terms_onclick(){
         TextView register_text_view = (TextView) findViewById(R.id.email_terms_text);
-        register_text_view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        register_text_view.setOnClickListener((View v) -> {
                 Intent intent = new Intent(LoginActivity.this, TermsAndConditionsActivity.class);
                 startActivity(intent);
-            }
         });
     }
 
