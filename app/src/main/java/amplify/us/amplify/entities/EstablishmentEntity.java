@@ -1,8 +1,8 @@
 package amplify.us.amplify.entities;
 
 public class EstablishmentEntity {
-    private String name;
-    private String info;
+    private final String name;
+    private final String info;
 
 
     public EstablishmentEntity(String name,String info) {
@@ -14,15 +14,8 @@ public class EstablishmentEntity {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getInfo() {
         return info;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
 }
