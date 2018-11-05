@@ -15,12 +15,9 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_terms_and_conditions);
 
         ImageView backArrow = (ImageView)findViewById(R.id.backToLogin);
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        backArrow.setOnClickListener((View view) -> {
                 Intent myIntent = new Intent(view.getContext(),LoginActivity.class);
                 startActivityForResult(myIntent,0);
-            }
         });
     }
 }
