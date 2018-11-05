@@ -7,16 +7,30 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private BottomNavigationView nav;
 
     private DiscoverFragment discoverFragment;
     private AmplifySiteFragment amplifySiteFragment;
     private ProfileFragment profileFragment;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        discoverFragment = new DiscoverFragment();
+        amplifySiteFragment = new AmplifySiteFragment();
+        profileFragment = new ProfileFragment();
+
+        //Default MainFragment :: DiscoverFragment
+        setFragment(discoverFragment);
+    }
+
+    // To refactor
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -37,27 +51,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        nav = (BottomNavigationView) findViewById(R.id.navigation);
-
-        nav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        discoverFragment = new DiscoverFragment();
-        amplifySiteFragment = new AmplifySiteFragment();
-        profileFragment = new ProfileFragment();
-
-        //Default MainFragment :: DiscoverFragment
-        setFragment(discoverFragment);
-
-    }
-
     private void setFragment (Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
 
