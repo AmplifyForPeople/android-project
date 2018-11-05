@@ -90,7 +90,7 @@ public class ProfileFragment extends Fragment {
     private void setListenerFavList(View rootView) {
         FrameLayout favLayout = (FrameLayout) rootView.findViewById(R.id.frameLayout_fav);
         favLayout.setOnClickListener((View v) -> {
-                Intent intent = new Intent(v.getContext(),FavouriteSongListActivity.class);
+                Intent intent = new Intent(v.getContext(),FavouriteSongsActivity.class);
                 v.getContext().startActivity(intent);
         });
     }

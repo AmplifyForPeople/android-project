@@ -14,7 +14,7 @@ import java.util.List;
 import amplify.us.amplify.adapters.FavouriteSongsAdapter;
 import amplify.us.amplify.entities.SongEntity;
 
-public class FavouriteSongListActivity extends AppCompatActivity {
+public class FavouriteSongsActivity extends AppCompatActivity {
 
     private ListView lvFavSongs;
     private List<SongEntity> mSongList;

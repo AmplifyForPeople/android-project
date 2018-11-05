@@ -52,7 +52,7 @@
             android:name=".DetailSongActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".FavouriteSongListActivity"
+            android:name=".FavouriteSongsActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
             android:name=".EditProfileActivity"
