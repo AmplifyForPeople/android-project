@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DetailEstablishmentActivity extends AppCompatActivity {
+
     private  static final String TAG = "DetailEstablishment";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -17,11 +19,7 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
         Log.d(TAG,"On create: started");
 
         ImageView img = (ImageView) findViewById(R.id.back_detail_establishment);
-        img.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        img.setOnClickListener((View v) ->finish());
 
         getIncomingIntent();
 
@@ -32,7 +30,6 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
         if(getIntent().hasExtra("establishment_title") && getIntent().hasExtra(("info_title"))){
             String title = getIntent().getStringExtra("establishment_title");
             String info = getIntent().getStringExtra("info_title");
-
             setData(title,info);
         }
     }
