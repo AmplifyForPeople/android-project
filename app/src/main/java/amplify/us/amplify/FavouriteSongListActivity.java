@@ -17,7 +17,6 @@ import amplify.us.amplify.entities.SongEntity;
 public class FavouriteSongListActivity extends AppCompatActivity {
 
     private ListView lvFavSongs;
-    private ListFavSongsAdapter adapter;
     private List<SongEntity> mSongList;
 
     @Override
@@ -47,8 +46,7 @@ public class FavouriteSongListActivity extends AppCompatActivity {
         mSongList.add(new SongEntity("Song 10","artist 10","album 10"));
 
         //Init Adapter
-        adapter = new ListFavSongsAdapter(getApplicationContext(),mSongList);
-        lvFavSongs.setAdapter(adapter);
+        lvFavSongs.setAdapter(new ListFavSongsAdapter(getApplicationContext(), mSongList));
 
         lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
