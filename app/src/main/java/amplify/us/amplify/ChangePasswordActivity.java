@@ -18,22 +18,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private void save(){
         Button safeBut = (Button) findViewById((R.id.save_but));
-        safeBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        safeBut.setOnClickListener((View v) -> finish());
     }
 
     private void cancel(){
         Button cancelBut = (Button) findViewById((R.id.cancel_but));
-
-        cancelBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        cancelBut.setOnClickListener((View v) -> finish());
     }
 }

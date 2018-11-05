@@ -31,7 +31,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/TermsAndConditionsTitleView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="35sp"
@@ -40,7 +39,6 @@
                     android:textSize="30sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/TermsAndConditionsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="35sp"

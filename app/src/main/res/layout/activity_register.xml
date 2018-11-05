@@ -32,7 +32,6 @@
         />
 
         <AutoCompleteTextView
-            android:id="@+id/register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -53,7 +52,6 @@
             android:paddingBottom="10dp"
         />
         <EditText
-            android:id="@+id/register_password1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeActionId="6"
@@ -77,7 +75,6 @@
             android:paddingBottom="10dp"
         />
         <EditText
-            android:id="@+id/register_password2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeActionId="6"

@@ -64,7 +64,6 @@
             app:layout_constraintTop_toBottomOf="@+id/frameLayout_fav" />
 
         <TextView
-            android:id="@+id/Account"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_marginStart="8dp"
@@ -160,7 +159,6 @@
             app:layout_constraintTop_toBottomOf="@+id/modifyGen" />
 
         <TextView
-            android:id="@+id/Notifications"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_marginStart="8dp"
@@ -194,7 +192,6 @@
             app:layout_constraintTop_toBottomOf="@+id/lineNotification" />
 
         <Switch
-            android:id="@+id/appNotificationsSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/appNot"
@@ -211,7 +208,6 @@
             app:layout_constraintTop_toBottomOf="@+id/appNot" />
 
         <TextView
-            android:id="@+id/Privacity"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_marginStart="8dp"
@@ -245,7 +241,6 @@
             app:layout_constraintTop_toBottomOf="@+id/linePrivacity" />
 
         <Switch
-            android:id="@+id/offlineMSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/OfflineM"
