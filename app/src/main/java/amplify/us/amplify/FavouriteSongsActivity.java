@@ -11,32 +11,26 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import amplify.us.amplify.adapters.ListFavSongsAdapter;
+import amplify.us.amplify.adapters.FavouriteSongsAdapter;
 import amplify.us.amplify.entities.SongEntity;
 
-public class FavouriteSongListActivity extends AppCompatActivity {
+public class FavouriteSongsActivity extends AppCompatActivity {
 
     private ListView lvFavSongs;
-    private ListFavSongsAdapter adapter;
     private List<SongEntity> mSongList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_song_list);
+        mSongList = new ArrayList<>();
 
         //return activity
         ImageView img = (ImageView) findViewById(R.id.back_favlist_song);
-        img.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        img.setOnClickListener((View v) -> finish());
 
         //Preview list songs
-
         lvFavSongs = (ListView) findViewById(R.id.listViewSongsFav);
-        mSongList = new ArrayList<>();
 
         //Add sample data for list
         //We can get data form DB, webService here
@@ -52,15 +46,10 @@ public class FavouriteSongListActivity extends AppCompatActivity {
         mSongList.add(new SongEntity("Song 10","artist 10","album 10"));
 
         //Init Adapter
-        adapter = new ListFavSongsAdapter(getApplicationContext(),mSongList);
-        lvFavSongs.setAdapter(adapter);
+        lvFavSongs.setAdapter(new FavouriteSongsAdapter(getApplicationContext(), mSongList));
 
-        lvFavSongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
-                Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
-            }
+        lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+            Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
         });
 
     }

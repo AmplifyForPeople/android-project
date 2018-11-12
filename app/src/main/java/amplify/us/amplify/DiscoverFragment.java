@@ -24,11 +24,6 @@ import amplify.us.amplify.entities.EstablishmentEntity;
  */
 public class DiscoverFragment extends Fragment {
 
-    //RecyclerView establishments nearby
-    private RecyclerView rv_establishments_nearby;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView.Adapter mAdapter;
-
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -40,28 +35,32 @@ public class DiscoverFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_discover, container, false);
 
         //simulate Services info
-        rv_establishments_nearby = (RecyclerView) rootView.findViewById(R.id.rv_establishments_nearby);
-        rv_establishments_nearby.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        rv_establishments_nearby.setLayoutManager(mLayoutManager);
-        mAdapter = new EstablishmentAdapter(dataSet());
-        rv_establishments_nearby.setAdapter(mAdapter);
+        //RecyclerView establishments nearby
+        recyclerViewSetup(rootView);
 
         //Most voted song to -> song detail
-        CardView card_view = (CardView) rootView.findViewById(R.id.cardView); // creating a CardView and assigning a value.
-
-        card_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        setupListenerMostVotedSong(rootView);
 
         // Inflate the layout for this fragment
         return rootView;
 
+    }
 
+    private void setupListenerMostVotedSong(View rootView) {
+        CardView card_view = (CardView) rootView.findViewById(R.id.cardView); // creating a CardView and assigning a value.
+        card_view.setOnClickListener((View v) -> {
+                Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
+                v.getContext().startActivity(intent);
+        });
+    }
+
+    private void recyclerViewSetup(View rootView) {
+        RecyclerView rv_establishments_nearby = (RecyclerView) rootView.findViewById(R.id.rv_establishments_nearby);
+        rv_establishments_nearby.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rv_establishments_nearby.setLayoutManager(mLayoutManager);
+        RecyclerView.Adapter mAdapter = new EstablishmentAdapter(dataSet());
+        rv_establishments_nearby.setAdapter(mAdapter);
     }
 
     //Adding dataSet into RecyclerView Establishments Nearby

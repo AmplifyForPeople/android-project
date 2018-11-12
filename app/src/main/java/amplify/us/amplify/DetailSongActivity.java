@@ -13,10 +13,6 @@ public class DetailSongActivity extends AppCompatActivity {
         setContentView(R.layout.detail_song);
 
         ImageView img = findViewById(R.id.back_detail_song);
-        img.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        img.setOnClickListener((View v) -> finish());
     }
 }

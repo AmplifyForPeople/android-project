@@ -14,17 +14,14 @@ public class ModifyGenresActivitiy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_genres);
 
-        this.set_check_boxes(R.id.set_genres_genres, R.array.set_genres_genres);
-        this.save();
-        this.cancel();
-
+        setCheckBoxes(R.id.set_genres_genres, R.array.set_genres_genres);
+        setupListeners();
     }
 
-    private void set_check_boxes(int element_id, int array_id){
+    private void setCheckBoxes(int element_id, int array_id){
         LinearLayout rgp = (LinearLayout) findViewById(element_id);
         String[] genres = getResources().getStringArray(array_id);
         for (int i = 0; i < genres.length ; i++) {
-
             Switch cb = new Switch(this);
             cb.setId(i + 1000);
             cb.setText(genres[i]);
@@ -34,24 +31,19 @@ public class ModifyGenresActivitiy extends AppCompatActivity {
         }
     }
 
-    private void save(){
-        Button safeBut = (Button) findViewById((R.id.save_but));
-        safeBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    private void setupListeners() {
+        setListenerSave();
+        setListenerCancel();
     }
 
-    private void cancel(){
-        Button cancelBut = (Button) findViewById((R.id.cancel_but));
 
-        cancelBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    private void setListenerSave(){
+        Button safeBut = (Button) findViewById((R.id.save_but));
+        safeBut.setOnClickListener((View v) -> finish());
+    }
+
+    private void setListenerCancel(){
+        Button cancelBut = (Button) findViewById((R.id.cancel_but));
+        cancelBut.setOnClickListener((View v) -> finish());
     }
 }

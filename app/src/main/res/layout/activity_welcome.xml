@@ -7,7 +7,6 @@
     tools:context=".WelcomeActivity">
 
     <TextView
-        android:id="@+id/logoID"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"

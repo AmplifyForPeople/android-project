@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * {@link Fragment} subclass for profile in the dashboard.
  */
 public class ProfileFragment extends Fragment {
 
@@ -28,69 +28,71 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        setupListeners(rootView);
+        return rootView;
 
+    }
+
+    private void setupListeners(View rootView) {
         //Profile -> My Fav list Songs
-        FrameLayout favLayout = (FrameLayout) rootView.findViewById(R.id.frameLayout_fav);
-        favLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),FavouriteSongListActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        setListenerFavList(rootView);
 
         //Profile -> Edit Profile
-
-        TextView editProf = (TextView) rootView.findViewById((R.id.editProf));
-
-        editProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),EditProfileActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        setListenerEditProfile(rootView);
 
         //Profile -> Edit Password
-
-        TextView editPass = (TextView) rootView.findViewById((R.id.changePssw));
-
-        editPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ChangePasswordActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        setListenerEditPassword(rootView);
 
         //Profile -> Modify Genres
-
-        TextView modGen = (TextView) rootView.findViewById((R.id.modifyGen));
-
-        modGen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ModifyGenresActivitiy.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        setListenerModifyGenres(rootView);
 
         //Profile -> Log Out
+        setListenerLogOut(rootView);
+    }
+
+    private void setListenerLogOut(View rootView) {
         Button logUot = (Button) rootView.findViewById((R.id.button_logout));
 
-        logUot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        logUot.setOnClickListener((View v) -> {
                 Intent intent = new Intent(v.getContext(),LoginActivity.class);
                 v.getContext().startActivity(intent);
                 getActivity().finish();
-            }
         });
+    }
 
+    private void setListenerModifyGenres(View rootView) {
+        TextView modGen = (TextView) rootView.findViewById((R.id.modifyGen));
 
+        modGen.setOnClickListener((View v) -> {
+                Intent intent = new Intent(v.getContext(),ModifyGenresActivitiy.class);
+                v.getContext().startActivity(intent);
+        });
+    }
 
-        return rootView;
+    private void setListenerEditPassword(View rootView) {
+        TextView editPass = (TextView) rootView.findViewById((R.id.changePssw));
 
+        editPass.setOnClickListener((View v) -> {
+                Intent intent = new Intent(v.getContext(),ChangePasswordActivity.class);
+                v.getContext().startActivity(intent);
+        });
+    }
+
+    private void setListenerEditProfile(View rootView) {
+        TextView editProf = (TextView) rootView.findViewById((R.id.editProf));
+
+        editProf.setOnClickListener((View v) -> {
+                Intent intent = new Intent(v.getContext(),EditProfileActivity.class);
+                v.getContext().startActivity(intent);
+        });
+    }
+
+    private void setListenerFavList(View rootView) {
+        FrameLayout favLayout = (FrameLayout) rootView.findViewById(R.id.frameLayout_fav);
+        favLayout.setOnClickListener((View v) -> {
+                Intent intent = new Intent(v.getContext(),FavouriteSongsActivity.class);
+                v.getContext().startActivity(intent);
+        });
     }
 
 

@@ -21,13 +21,10 @@ public class SetSelfDataActivity extends AppCompatActivity {
 
     private void set_button_next(){
         Button mEmailSignInButton = (Button) findViewById(R.id.set_self_data_next_button);
-        mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mEmailSignInButton.setOnClickListener((View view) -> {
                 Intent intent = new Intent(SetSelfDataActivity.this, SetGenresActivity.class);
                 startActivity(intent);
                 finish();
-            }
         });
     }
     private void set_spinner_data(int element_id, int array_id){

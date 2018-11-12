@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/titleDiscover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_discover"
@@ -18,22 +17,19 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nearbyEstablishments"
             android:layout_marginTop="@dimen/space_framesLayouts">
             <include layout="@layout/nearby_establishments"/>
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/fav_genres">
+            android:layout_height="wrap_content">
             <include layout="@layout/fav_genres_in_your_city"/>
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/most_voted_songs"
             android:paddingBottom="@dimen/space_framesLayouts">
             <include layout="@layout/most_voted_songs"/>
         </FrameLayout>
