@@ -1,4 +1,4 @@
-package amplify.us.amplify;
+package amplify.us.amplify.register;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import amplify.us.amplify.bottom_menu.MainActivity;
+import amplify.us.amplify.R;
 
 public class SetGenresActivity extends AppCompatActivity {
 

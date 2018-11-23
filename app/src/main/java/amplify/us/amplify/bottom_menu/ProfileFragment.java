@@ -1,4 +1,4 @@
-package amplify.us.amplify;
+package amplify.us.amplify.bottom_menu;
 
 
 import android.content.Intent;
@@ -10,6 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import amplify.us.amplify.LoginActivity;
+import amplify.us.amplify.R;
+import amplify.us.amplify.profile.ChangePasswordActivity;
+import amplify.us.amplify.profile.EditProfileActivity;
+import amplify.us.amplify.profile.FavouriteSongsActivity;
+import amplify.us.amplify.profile.ModifyGenresActivitiy;
 
 
 /**

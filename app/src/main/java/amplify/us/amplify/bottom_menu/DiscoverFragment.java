@@ -1,11 +1,10 @@
-package amplify.us.amplify;
+package amplify.us.amplify.bottom_menu;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.EstablishmentAdapter;
+import amplify.us.amplify.details.DetailSongActivity;
 import amplify.us.amplify.entities.EstablishmentEntity;
 
 

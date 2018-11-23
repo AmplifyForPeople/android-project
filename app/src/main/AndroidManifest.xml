@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".bottom_menu.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
@@ -33,34 +33,34 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".register.RegisterActivity"
             android:label="@string/register"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".SetSelfDataActivity"
+            android:name=".register.SetSelfDataActivity"
             android:label="SetSelfData"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".SetGenresActivity"
+            android:name=".register.SetGenresActivity"
             android:label="SetGenres"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".DetailEstablishmentActivity"
+            android:name=".details.DetailEstablishmentActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".DetailSongActivity"
+            android:name=".details.DetailSongActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".FavouriteSongsActivity"
+            android:name=".profile.FavouriteSongsActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".profile.EditProfileActivity"
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".profile.ChangePasswordActivity"
             android:theme="@style/AppTheme.FullScreenTheme"></activity>
         <activity
-            android:name=".ModifyGenresActivitiy"
+            android:name=".profile.ModifyGenresActivitiy"
             android:theme="@style/AppTheme.FullScreenTheme"></activity>
         <activity android:name=".TermsAndConditionsActivity"
             android:theme="@style/AppTheme.FullScreenTheme"/>

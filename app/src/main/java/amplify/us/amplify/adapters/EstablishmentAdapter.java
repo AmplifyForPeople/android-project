@@ -1,20 +1,16 @@
 package amplify.us.amplify.adapters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import amplify.us.amplify.DetailEstablishmentActivity;
-import amplify.us.amplify.DiscoverFragment;
-import amplify.us.amplify.MainActivity;
+import amplify.us.amplify.details.DetailEstablishmentActivity;
 import amplify.us.amplify.R;
 import amplify.us.amplify.entities.EstablishmentEntity;
 

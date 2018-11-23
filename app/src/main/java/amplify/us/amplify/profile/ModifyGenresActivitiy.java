@@ -1,4 +1,4 @@
-package amplify.us.amplify;
+package amplify.us.amplify.profile;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+
+import amplify.us.amplify.R;
 
 public class ModifyGenresActivitiy extends AppCompatActivity {
 

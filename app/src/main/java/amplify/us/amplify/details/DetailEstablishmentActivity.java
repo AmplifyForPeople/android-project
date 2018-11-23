@@ -1,4 +1,4 @@
-package amplify.us.amplify;
+package amplify.us.amplify.details;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import amplify.us.amplify.R;
 
 public class DetailEstablishmentActivity extends AppCompatActivity {
 

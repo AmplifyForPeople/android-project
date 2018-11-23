@@ -1,9 +1,11 @@
-package amplify.us.amplify;
+package amplify.us.amplify.profile;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import amplify.us.amplify.R;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package amplify.us.amplify;
+package amplify.us.amplify.profile;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.FavouriteSongsAdapter;
 import amplify.us.amplify.entities.SongEntity;
 

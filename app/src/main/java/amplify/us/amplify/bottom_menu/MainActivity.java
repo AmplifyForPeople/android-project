@@ -1,4 +1,4 @@
-package amplify.us.amplify;
+package amplify.us.amplify.bottom_menu;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import amplify.us.amplify.R;
 
 public class MainActivity extends AppCompatActivity {
 

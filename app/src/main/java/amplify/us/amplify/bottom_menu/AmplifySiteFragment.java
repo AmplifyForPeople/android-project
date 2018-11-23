@@ -1,4 +1,4 @@
-package amplify.us.amplify;
+package amplify.us.amplify.bottom_menu;
 
 
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import amplify.us.amplify.R;
+import amplify.us.amplify.details.DetailSongActivity;
 
 
 /**
