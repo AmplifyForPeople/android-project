@@ -38,4 +38,7 @@ public class EstablishmentService {
         EstablishmentService.getEstablishmentInfo("id");
     }
 
+    public static void getAllEstablishments() {
+
+    }
 }

@@ -18,6 +18,7 @@ import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.EstablishmentAdapter;
 import amplify.us.amplify.details.DetailSongActivity;
 import amplify.us.amplify.entities.EstablishmentEntity;
+import amplify.us.amplify.services.EstablishmentService;
 
 
 /**
@@ -66,6 +67,7 @@ public class DiscoverFragment extends Fragment {
 
     //Adding dataSet into RecyclerView Establishments Nearby
     private ArrayList<EstablishmentEntity> dataSet(){
+        EstablishmentService.getAllEstablishments();
         ArrayList<EstablishmentEntity> data = new ArrayList<>();
         data.add(new EstablishmentEntity("Establishment 1","Info Establishment 1"));
         data.add(new EstablishmentEntity("Establishment 2","Info Establishment 2"));
