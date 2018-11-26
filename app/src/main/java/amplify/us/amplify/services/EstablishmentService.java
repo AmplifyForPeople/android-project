@@ -7,7 +7,7 @@ import java.net.URL;
 
 public class EstablishmentService {
 
-    public static void getEstablishmentInfo(String id) {
+    public static void getEstablishment(String id) {
         try {
 
             URL urlForGetRequest = new URL("https://jsonplaceholder.typicode.com/posts/1");
@@ -34,11 +34,20 @@ public class EstablishmentService {
         }
     }
 
-    public static void main(String[] args) {
-        EstablishmentService.getEstablishmentInfo("id");
-    }
-
     public static void getAllEstablishments() {
 
     }
+
+    public static void getMostVoted(String id) {
+
+    }
+
+    public static void getCurrentlyPlaying(String id) {
+
+    }
+
+    public static void getFavGenres(String id) {
+
+    }
+
 }
