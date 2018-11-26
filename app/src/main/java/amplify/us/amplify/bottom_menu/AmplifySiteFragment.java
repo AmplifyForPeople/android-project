@@ -34,12 +34,9 @@ public class AmplifySiteFragment extends Fragment {
         //Similar song to -> song detail (simple)
         CardView card_view = rootView.findViewById(R.id.similar_amp); // creating a CardView and assigning a value.
 
-        card_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        card_view.setOnClickListener((View v) -> {
                 Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
                 v.getContext().startActivity(intent);
-            }
         });
 
         return rootView;

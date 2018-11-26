@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import amplify.us.amplify.bottom_menu.MainActivity;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     private final int TRANSITION_TIME = 3500;
@@ -37,8 +39,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void showNextScreen() {
 
-        // Class activity = MainActivity.class;
-        Class activity = LoginActivity.class;
+        Class activity = MainActivity.class;
+        // Class activity = LoginActivity.class;
 
         startActivity(new Intent(WelcomeActivity.this, activity));
         finish();
