@@ -8,7 +8,7 @@ app:cardCornerRadius="15dp"
 app:cardElevation="2dp"
 app:cardBackgroundColor="@color/clearGrey"
 android:layout_marginStart="@dimen/space_framesLayouts"
-android:id="@+id/card_establishment">
+android:id="@+id/card_votedSongs">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@ android:id="@+id/card_establishment">
             android:contentDescription="@string/image_desc"
             android:scaleType="centerCrop" />
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/name_fav_song"
             android:text="@string/song_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

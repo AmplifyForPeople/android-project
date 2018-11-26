@@ -16,8 +16,10 @@ import java.util.ArrayList;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.EstablishmentAdapter;
+import amplify.us.amplify.adapters.VotedSongsAdapter;
 import amplify.us.amplify.details.DetailSongActivity;
 import amplify.us.amplify.entities.EstablishmentEntity;
+import amplify.us.amplify.entities.SongEntity;
 import amplify.us.amplify.services.EstablishmentService;
 
 
@@ -38,35 +40,39 @@ public class DiscoverFragment extends Fragment {
 
         //simulate Services info
         //RecyclerView establishments nearby
-        recyclerViewSetup(rootView);
+        recyclerViewSetupEstablishment(rootView);
+        //RecyclerView most voted songs
+        recyclerViewSetupVotedSongs(rootView);
 
-        //Most voted song to -> song detail
-        setupListenerMostVotedSong(rootView);
 
         // Inflate the layout for this fragment
         return rootView;
 
     }
 
-    private void setupListenerMostVotedSong(View rootView) {
-        CardView card_view = (CardView) rootView.findViewById(R.id.cardView); // creating a CardView and assigning a value.
-        card_view.setOnClickListener((View v) -> {
-                Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
-                v.getContext().startActivity(intent);
-        });
-    }
 
-    private void recyclerViewSetup(View rootView) {
+    private void recyclerViewSetupEstablishment(View rootView) {
+        //ESTABLISHMENT NEARBY
         RecyclerView rv_establishments_nearby = (RecyclerView) rootView.findViewById(R.id.rv_establishments_nearby);
         rv_establishments_nearby.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv_establishments_nearby.setLayoutManager(mLayoutManager);
-        RecyclerView.Adapter mAdapter = new EstablishmentAdapter(dataSet());
+        RecyclerView.Adapter mAdapter = new EstablishmentAdapter(dataSetEstablishment());
         rv_establishments_nearby.setAdapter(mAdapter);
     }
 
+    private void recyclerViewSetupVotedSongs(View rootView) {
+        //ESTABLISHMENT NEARBY
+        RecyclerView rv_most_voted_songs = (RecyclerView) rootView.findViewById(R.id.rv_most_voted_songs);
+        rv_most_voted_songs.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rv_most_voted_songs.setLayoutManager(mLayoutManager);
+        RecyclerView.Adapter mAdapter = new VotedSongsAdapter(dataSetSong());
+        rv_most_voted_songs.setAdapter(mAdapter);
+    }
+
     //Adding dataSet into RecyclerView Establishments Nearby
-    private ArrayList<EstablishmentEntity> dataSet(){
+    private ArrayList<EstablishmentEntity> dataSetEstablishment(){
         EstablishmentService.getAllEstablishments();
         ArrayList<EstablishmentEntity> data = new ArrayList<>();
         data.add(new EstablishmentEntity("Establishment 1","Info Establishment 1"));
@@ -74,6 +80,18 @@ public class DiscoverFragment extends Fragment {
         data.add(new EstablishmentEntity("Establishment 3","Info Establishment 3"));
         data.add(new EstablishmentEntity("Establishment 4","Info Establishment 4"));
         data.add(new EstablishmentEntity("Establishment 5","Info Establishment 5"));
+        return data;
+    }
+
+    //Adding dataSet into RecyclerView Establishments Nearby
+    private ArrayList<SongEntity> dataSetSong(){
+        //EstablishmentService.getMostVoted();
+        ArrayList<SongEntity> data = new ArrayList<>();
+        data.add(new SongEntity("song 1","artist1","album1"));
+        data.add(new SongEntity("song 2","artist2","album2"));
+        data.add(new SongEntity("song 3","artist3","album3"));
+        data.add(new SongEntity("song 4","artist4","album4"));
+        data.add(new SongEntity("song 5","artist5","album5"));
         return data;
     }
 
