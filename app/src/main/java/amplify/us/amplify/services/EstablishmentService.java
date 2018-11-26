@@ -1,17 +1,13 @@
-package amplify.us.amplify;
-
-import android.os.AsyncTask;
+package amplify.us.amplify.services;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import amplify.us.amplify.entities.EstablishmentEntity;
+public class EstablishmentService {
 
-public class AmplifyService {
-
-    public static EstablishmentEntity getEstablishmentInfo(String id) {
+    public static void getEstablishmentInfo(String id) {
         try {
 
             URL urlForGetRequest = new URL("https://jsonplaceholder.typicode.com/posts/1");
@@ -36,7 +32,10 @@ public class AmplifyService {
         }catch (Exception e) {
 
         }
-        return null;
+    }
+
+    public static void main(String[] args) {
+        EstablishmentService.getEstablishmentInfo("id");
     }
 
 }
