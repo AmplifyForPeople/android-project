@@ -75,11 +75,10 @@ public class DiscoverFragment extends Fragment {
     private ArrayList<EstablishmentEntity> dataSetEstablishment(){
         EstablishmentService.getAllEstablishments();
         ArrayList<EstablishmentEntity> data = new ArrayList<>();
-        data.add(new EstablishmentEntity("Establishment 1","Info Establishment 1"));
-        data.add(new EstablishmentEntity("Establishment 2","Info Establishment 2"));
-        data.add(new EstablishmentEntity("Establishment 3","Info Establishment 3"));
-        data.add(new EstablishmentEntity("Establishment 4","Info Establishment 4"));
-        data.add(new EstablishmentEntity("Establishment 5","Info Establishment 5"));
+        data.add(new EstablishmentEntity(1,"Establishment 1","a", "mail@mail.com","Info Establishment 1"," ", new String[]{"genre1","genre2"}));
+        data.add(new EstablishmentEntity(2,"Establishment 2","a", "mail@mail.com","Info Establishment 2"," ", new String[]{"genre1","genre2"}));
+        data.add(new EstablishmentEntity(3,"Establishment 3","a", "mail@mail.com","Info Establishment 3"," ", new String[]{"genre1","genre2"}));
+        data.add(new EstablishmentEntity(4,"Establishment 4","a", "mail@mail.com","Info Establishment 4"," ", new String[]{"genre1","genre2"}));
         return data;
     }
 

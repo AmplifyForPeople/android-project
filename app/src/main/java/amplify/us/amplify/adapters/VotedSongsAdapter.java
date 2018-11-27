@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import amplify.us.amplify.R;
-import amplify.us.amplify.details.DetailEstablishmentActivity;
+//import amplify.us.amplify.details.DetailEstablishmentActivity;
 import amplify.us.amplify.details.DetailSongActivity;
 import amplify.us.amplify.entities.SongEntity;
 
