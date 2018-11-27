@@ -39,7 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void showNextScreen() {
 
-        Class activity = MainActivity.class;
+        Class activity = LoginActivity.class;
         // Class activity = LoginActivity.class;
 
         startActivity(new Intent(WelcomeActivity.this, activity));
