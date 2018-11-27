@@ -96,7 +96,7 @@
                 android:text="@string/login_sign_in"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:layout_margin="70dp"
+                android:layout_margin="50dp"
 
                 android:background="@drawable/shape"
             />

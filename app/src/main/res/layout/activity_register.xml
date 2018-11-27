@@ -48,7 +48,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:paddingTop="30dp"
+            android:paddingTop="20dp"
             android:paddingBottom="10dp"
         />
         <EditText
@@ -71,7 +71,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:paddingTop="30dp"
+            android:paddingTop="20dp"
             android:paddingBottom="10dp"
         />
         <EditText
@@ -92,7 +92,7 @@
             style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:text="@string/register_next_button"
             android:textStyle="bold"
             android:layout_gravity="end"
