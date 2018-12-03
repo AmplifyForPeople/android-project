@@ -12,7 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.EstablishmentAdapter;
@@ -25,6 +38,9 @@ import amplify.us.amplify.services.EstablishmentService;
  * A simple {@link Fragment} subclass.
  */
 public class DiscoverFragment extends Fragment {
+
+    String kekek = "SOME KEK";
+
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -67,11 +83,45 @@ public class DiscoverFragment extends Fragment {
 
     //Adding dataSet into RecyclerView Establishments Nearby
     private ArrayList<EstablishmentEntity> dataSet(){
-        EstablishmentService.getAllEstablishments();
+        // is, of course, getActivity() because you are subclassing Fragment
+        RequestQueue queue = Volley.newRequestQueue(this.getActivity().getApplicationContext());
+        String url ="http://172.16.109.74:8080/AmplifyWeb/rest/clients/2";
+        queue.start();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Success Callback
+                        System.out.println("HERE");
+                        System.out.println(response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Failure Callback
+                        System.out.println(error.toString());
+                    }
+                })
+
+        { //no semicolon or coma
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                return params;
+            }
+        };
+// Add the request to the RequestQueue.
+        queue.add(jsonObjReq);
+
+        System.out.println(kekek);
+
         ArrayList<EstablishmentEntity> data = new ArrayList<>();
-        data.add(new EstablishmentEntity("Establishment 1","Info Establishment 1"));
-        data.add(new EstablishmentEntity("Establishment 2","Info Establishment 2"));
-        data.add(new EstablishmentEntity("Establishment 3","Info Establishment 3"));
+        data.add(new EstablishmentEntity(kekek,"Info Establishment 1"));
+        data.add(new EstablishmentEntity(kekek,"Info Establishment 2"));
+        data.add(new EstablishmentEntity(kekek,"Info Establishment 3"));
         data.add(new EstablishmentEntity("Establishment 4","Info Establishment 4"));
         data.add(new EstablishmentEntity("Establishment 5","Info Establishment 5"));
         return data;
