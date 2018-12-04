@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".bottom_menu.ProfileFragment">
+    tools:context=".bottom_menu.ProfileFragment"
+    android:background="@drawable/gradient_bg">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -90,9 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/edit_profile"
-            android:textColor="@color/grey"
+            android:textColor="@color/darkGrey"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/lineAccount"
             app:layout_constraintTop_toBottomOf="@+id/lineAccount" />
 
@@ -112,9 +112,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/change_password"
-            android:textColor="@color/grey"
+            android:textColor="@color/darkGrey"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/editProf"
             app:layout_constraintTop_toBottomOf="@+id/editProf" />
 
@@ -134,9 +133,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/modify_gen"
-            android:textColor="@color/grey"
+            android:textColor="@color/darkGrey"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/changePssw"
             app:layout_constraintTop_toBottomOf="@+id/changePssw" />
 
@@ -185,9 +183,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/app_notifications"
-            android:textColor="@color/grey"
+            android:textColor="@color/darkGrey"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/lineNotification"
             app:layout_constraintTop_toBottomOf="@+id/lineNotification" />
 
@@ -234,9 +231,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/offline_mode"
-            android:textColor="@color/grey"
+            android:textColor="@color/darkGrey"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/linePrivacity"
             app:layout_constraintTop_toBottomOf="@+id/linePrivacity" />
 
