@@ -32,17 +32,41 @@
             app:layout_constraintStart_toStartOf="@+id/amplifySiteTitle"
             app:layout_constraintTop_toBottomOf="@+id/amplifySiteTitle" />
 
-        <TextView
+
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:text="@string/active"
-            android:textColor="@color/active"
-            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/amplifySiteTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/amplifySiteTitle">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:text="@string/active"
+                android:textStyle="bold"
+                android:textColor="@color/active"
+                android:textSize="18sp" />
+
+            <pl.bclogic.pulsator4droid.library.PulsatorLayout
+                android:id="@+id/pulsator"
+                android:layout_marginStart="125dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:pulse_color="@color/active"
+                app:pulse_count="4"
+                app:pulse_duration="4500"
+                app:pulse_interpolator="Linear"
+                app:pulse_repeat="0"></pl.bclogic.pulsator4droid.library.PulsatorLayout>
+
+        </FrameLayout>
+
+
+        
         <TextView
             android:id="@+id/listening"
             android:layout_width="wrap_content"

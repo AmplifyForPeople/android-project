@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.details.DetailSongActivity;
+import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
 
 /**
@@ -29,6 +30,11 @@ public class AmplifySiteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_amplify_site, container, false);
+
+
+        // Pulsator
+        PulsatorLayout pulsator = (PulsatorLayout) rootView.findViewById(R.id.pulsator);
+        pulsator.start();
 
 
         //Similar song to -> song detail (simple)
