@@ -2,10 +2,12 @@ package amplify.us.amplify.profile;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,16 +17,21 @@ import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.FavouriteSongsAdapter;
 import amplify.us.amplify.entities.SongEntity;
 
-public class FavouriteSongsActivity extends AppCompatActivity {
+public class FavouriteSongsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private ListView lvFavSongs;
-    private List<SongEntity> mSongList;
+    private ArrayList<SongEntity> mSongList;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_song_list);
+
         mSongList = new ArrayList<>();
+        mSearchView=(SearchView) findViewById(R.id.searchView);
+
+        setupSearchView();
 
         //return activity
         ImageView img = (ImageView) findViewById(R.id.back_favlist_song);
@@ -54,4 +61,31 @@ public class FavouriteSongsActivity extends AppCompatActivity {
         });
 
     }
+
+    private void setupSearchView()
+    {
+        mSearchView.setIconifiedByDefault(false);
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setSubmitButtonEnabled(true);
+        mSearchView.setQueryHint("Search your favourite song");
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText)
+    {
+        if (TextUtils.isEmpty(newText)) {
+            lvFavSongs.clearTextFilter();
+        } else {
+            lvFavSongs.setFilterText(newText);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query)
+    {
+        return false;
+    }
+
+
 }
