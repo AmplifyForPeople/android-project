@@ -20,8 +20,9 @@ import amplify.us.amplify.entities.SongEntity;
 public class FavouriteSongsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private ListView lvFavSongs;
-    private ArrayList<SongEntity> mSongList;
+    private List<SongEntity> mSongList;
     private SearchView mSearchView;
+    FavouriteSongsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,6 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         setContentView(R.layout.activity_favourite_song_list);
 
         mSongList = new ArrayList<>();
-        mSearchView=(SearchView) findViewById(R.id.searchView);
 
         setupSearchView();
 
@@ -53,8 +53,11 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         mSongList.add(new SongEntity("Song 9","artist 9","album 9"));
         mSongList.add(new SongEntity("Song 10","artist 10","album 10"));
 
+
+
         //Init Adapter
-        lvFavSongs.setAdapter(new FavouriteSongsAdapter(getApplicationContext(), mSongList));
+        adapter = new FavouriteSongsAdapter(this,mSongList);
+        lvFavSongs.setAdapter(adapter);
 
         lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
@@ -64,6 +67,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
     private void setupSearchView()
     {
+        mSearchView=(SearchView) findViewById(R.id.searchView);
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setSubmitButtonEnabled(true);
@@ -73,12 +77,9 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     @Override
     public boolean onQueryTextChange(String newText)
     {
-        if (TextUtils.isEmpty(newText)) {
-            lvFavSongs.clearTextFilter();
-        } else {
-            lvFavSongs.setFilterText(newText);
-        }
-        return true;
+        String text = newText;
+        adapter.filter(text);
+        return false;
     }
 
     @Override

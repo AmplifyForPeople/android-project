@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,18 +15,18 @@ import amplify.us.amplify.R;
 import amplify.us.amplify.bottom_menu.AmplifySiteFragment;
 import amplify.us.amplify.entities.SongEntity;
 
-public class FavouriteSongsAdapter extends BaseAdapter implements Filterable {
+public class FavouriteSongsAdapter extends BaseAdapter  {
 
     private Context mContext;
+    private List<SongEntity> mSongList = null;
+    private ArrayList<SongEntity> arraylist;
 
-    public FavouriteSongsAdapter(Context mContext, ArrayList<SongEntity> mSongList) {
-        super();
+    public FavouriteSongsAdapter(Context mContext, List<SongEntity> mSongList) {
         this.mContext = mContext;
         this.mSongList = mSongList;
+        this.arraylist = new ArrayList<SongEntity>();
+        this.arraylist.addAll(mSongList);
     }
-
-    private ArrayList<SongEntity> mSongList;
-    private ArrayList<SongEntity> songs;
 
 
     @Override
@@ -36,7 +35,7 @@ public class FavouriteSongsAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public Object getItem(int position) {
+    public SongEntity getItem(int position) {
         return mSongList.get(position);
     }
 
@@ -62,40 +61,18 @@ public class FavouriteSongsAdapter extends BaseAdapter implements Filterable {
         return view;
     }
 
-    public Filter getFilter() {
-        return new Filter() {
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                final FilterResults oReturn = new FilterResults();
-                final ArrayList<SongEntity> results = new ArrayList<>();
-                if (songs == null)
-                    songs = mSongList;
-                if (constraint != null) {
-                    if (songs != null && songs.size() > 0) {
-                        for (final SongEntity g : songs) {
-                            if (g.getName().toLowerCase()
-                                    .contains(constraint.toString()))
-                                results.add(g);
-                        }
-                    }
-                    oReturn.values = results;
+    public void filter (String charText){
+        charText = charText.toLowerCase(Locale.getDefault());
+        mSongList.clear();
+        if(charText.length() == 0){
+            mSongList.addAll(arraylist);
+        } else {
+            for (SongEntity wp : arraylist){
+                if(wp.getName().toLowerCase(Locale.getDefault()).contains(charText)){
+                    mSongList.add(wp);
                 }
-                return oReturn;
             }
-
-            @SuppressWarnings("unchecked")
-            @Override
-            protected void publishResults(CharSequence constraint,
-                                          FilterResults results) {
-                mSongList = (ArrayList<SongEntity>) results.values;
-                notifyDataSetChanged();
-            }
-        };
+        }
+        notifyDataSetChanged();
     }
-
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-    }
-
 }
