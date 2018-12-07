@@ -3,7 +3,7 @@ package amplify.us.amplify.entities;
 public class EstablishmentEntity {
     private int id;
     private String name;
-    private String ur_image;
+    private String url_image;
     private String email;
     private String info;
     private String distance;
@@ -12,7 +12,7 @@ public class EstablishmentEntity {
     public EstablishmentEntity(int id, String name, String ur_image, String email, String info, String distance, String[] genres) {
         this.id = id;
         this.name = name;
-        this.ur_image = ur_image;
+        this.url_image = ur_image;
         this.email = email;
         this.info = info;
         this.distance = distance;
@@ -36,11 +36,11 @@ public class EstablishmentEntity {
     }
 
     public String getUr_image() {
-        return ur_image;
+        return url_image;
     }
 
     public void setUr_image(String ur_image) {
-        this.ur_image = ur_image;
+        this.url_image = ur_image;
     }
 
     public String getEmail() {
