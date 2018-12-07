@@ -65,8 +65,6 @@
                 app:pulse_repeat="0"></pl.bclogic.pulsator4droid.library.PulsatorLayout>
 
         </FrameLayout>
-
-
         
         <TextView
             android:id="@+id/listening"

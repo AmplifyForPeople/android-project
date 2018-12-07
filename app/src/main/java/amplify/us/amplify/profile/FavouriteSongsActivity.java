@@ -3,6 +3,8 @@ package amplify.us.amplify.profile;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -59,9 +61,12 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         adapter = new FavouriteSongsAdapter(this,mSongList);
         lvFavSongs.setAdapter(adapter);
 
+        registerForContextMenu(lvFavSongs);
+
         lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
         });
+        
 
     }
 
@@ -86,6 +91,24 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     public boolean onQueryTextSubmit(String query)
     {
         return false;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu,v,menuInfo);
+        getMenuInflater().inflate(R.menu.options_fav_songs,menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.option_delete:
+                Toast.makeText(this,"optionDelete",Toast.LENGTH_SHORT).show();
+            case R.id.option_copy:
+                Toast.makeText(this,"optionCopy",Toast.LENGTH_SHORT).show();
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
 
