@@ -35,11 +35,11 @@ public class EstablishmentEntity {
         this.name = name;
     }
 
-    public String getUr_image() {
+    public String getUrl_image() {
         return url_image;
     }
 
-    public void setUr_image(String ur_image) {
+    public void setUrl_image(String ur_image) {
         this.url_image = ur_image;
     }
 
