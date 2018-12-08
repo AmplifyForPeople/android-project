@@ -28,7 +28,7 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
     }
 
     private  void getIncomingIntent(){
-        Log.d(TAG,"getImcoming");
+        Log.d(TAG,"getIncoming");
         if(getIntent().hasExtra("establishment_title") && getIntent().hasExtra(("info_title"))){
             String title = getIntent().getStringExtra("establishment_title");
             String info = getIntent().getStringExtra("info_title");

@@ -60,12 +60,17 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         mSongList.add(new SongEntity("Song 9","artist 9","album 9"));
         mSongList.add(new SongEntity("Song 10","artist 10","album 10"));
 
+        //Update Data
+        SongEntity favSong = new SongEntity(getIntent().getStringExtra("nameSong")
+                ,getIntent().getStringExtra("nameArtist"),getIntent().getStringExtra("nameAlbum"));
 
+        mSongList.add(favSong);
 
         //Init Adapter
         adapter = new FavouriteSongsAdapter(this,mSongList);
         lvFavSongs.setAdapter(adapter);
 
+        //Init ContextMenu
         registerForContextMenu(lvFavSongs);
 
         lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
@@ -74,6 +79,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         
 
     }
+
 
     private void setupSearchView()
     {
@@ -107,7 +113,6 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
 
         switch (item.getItemId()){
             //Delete Item
