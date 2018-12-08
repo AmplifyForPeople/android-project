@@ -1,5 +1,8 @@
 package amplify.us.amplify.profile;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +28,8 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     private List<SongEntity> mSongList;
     private SearchView mSearchView;
     FavouriteSongsAdapter adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,11 +106,33 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
     @Override
     public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+
         switch (item.getItemId()){
+            //Delete Item
             case R.id.option_delete:
-                Toast.makeText(this,"optionDelete",Toast.LENGTH_SHORT).show();
+
+                // Remove Song from My Favourite Songs
+                SongEntity song = mSongList.get(info.position);
+                mSongList.remove(song);
+                adapter = new FavouriteSongsAdapter(this,mSongList);
+                lvFavSongs.setAdapter(adapter);
+
+                // Toast -> NameSong deleted
+                Toast.makeText(this,mSongList.get(info.position).getName()+" Deleted",Toast.LENGTH_SHORT).show();
+
+            //Copy Name of song
             case R.id.option_copy:
-                Toast.makeText(this,"optionCopy",Toast.LENGTH_SHORT).show();
+
+                ClipboardManager clipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                String nameSong = mSongList.get(info.position).getName();
+                ClipData clip = ClipData.newPlainText("text", nameSong);
+                clipboard.setPrimaryClip(clip);
+
+                // Toast -> NameSong Copied
+                Toast.makeText(this,mSongList.get(info.position).getName()+" Copied",Toast.LENGTH_SHORT).show();
+
             default:
                 return super.onContextItemSelected(item);
         }
