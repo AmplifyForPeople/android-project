@@ -49,23 +49,25 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
         //Add sample data for list
         //We can get data form DB, webService here
-        mSongList.add(new SongEntity("Song 1","artist 1","album 1"));
-        mSongList.add(new SongEntity("Song 2","artist 2","album 2"));
-        mSongList.add(new SongEntity("Song 3","artist 3","album 3"));
-        mSongList.add(new SongEntity("Song 4","artist 4","album 4"));
-        mSongList.add(new SongEntity("Song 5","artist 5","album 5"));
-        mSongList.add(new SongEntity("Song 6","artist 6","album 6"));
-        mSongList.add(new SongEntity("Song 7","artist 7","album 7"));
-        mSongList.add(new SongEntity("Song 8","artist 8","album 8"));
-        mSongList.add(new SongEntity("Song 9","artist 9","album 9"));
-        mSongList.add(new SongEntity("Song 10","artist 10","album 10"));
+        mSongList.add(new SongEntity("Song 1", "artist 1", "album 1"));
+        mSongList.add(new SongEntity("Song 2", "artist 2", "album 2"));
+        mSongList.add(new SongEntity("Song 3", "artist 3", "album 3"));
+        mSongList.add(new SongEntity("Song 4", "artist 4", "album 4"));
+        mSongList.add(new SongEntity("Song 5", "artist 5", "album 5"));
+        mSongList.add(new SongEntity("Song 6", "artist 6", "album 6"));
+        mSongList.add(new SongEntity("Song 7", "artist 7", "album 7"));
+        mSongList.add(new SongEntity("Song 8", "artist 8", "album 8"));
+        mSongList.add(new SongEntity("Song 9", "artist 9", "album 9"));
+        mSongList.add(new SongEntity("Song 10", "artist 10", "album 10"));
 
         //Update Data
-        SongEntity favSong = new SongEntity(getIntent().getStringExtra("nameSong")
-                ,getIntent().getStringExtra("nameArtist"),getIntent().getStringExtra("nameAlbum"));
+        if (getIntent().hasExtra("nameSong") && getIntent().hasExtra(("nameArtist"))
+                && getIntent().hasExtra(("nameAlbum"))) {
+            SongEntity favSong = new SongEntity(getIntent().getStringExtra("nameSong")
+                    , getIntent().getStringExtra("nameArtist"), getIntent().getStringExtra("nameAlbum"));
 
-        mSongList.add(favSong);
-
+            mSongList.add(favSong);
+        }
         //Init Adapter
         adapter = new FavouriteSongsAdapter(this,mSongList);
         lvFavSongs.setAdapter(adapter);
@@ -76,8 +78,6 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
         });
-        
-
     }
 
 
@@ -119,8 +119,8 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
             case R.id.option_delete:
 
                 // Remove Song from My Favourite Songs
-                SongEntity song = mSongList.get(info.position);
-                mSongList.remove(song);
+                //TODO:ALGUN ERROR QUE FA QUE L'ULTIM NO ES PUGUI ELIMINAR (I CLICA A COPIED TAMBE)
+                mSongList.remove(mSongList.get(info.position));
                 adapter = new FavouriteSongsAdapter(this,mSongList);
                 lvFavSongs.setAdapter(adapter);
 
