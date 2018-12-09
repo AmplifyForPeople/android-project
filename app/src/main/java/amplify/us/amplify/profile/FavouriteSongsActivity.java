@@ -75,9 +75,9 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         //Init ContextMenu
         registerForContextMenu(lvFavSongs);
 
-        lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+        /*lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
-        });
+        });*/
     }
 
 
@@ -107,7 +107,9 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu,v,menuInfo);
-        getMenuInflater().inflate(R.menu.options_fav_songs,menu);
+        if(v.getId()==R.id.listViewSongsFav){
+            getMenuInflater().inflate(R.menu.options_fav_songs,menu);
+        }
     }
 
     @Override
@@ -115,28 +117,36 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         switch (item.getItemId()){
+
+
             //Delete Item
             case R.id.option_delete:
 
                 // Remove Song from My Favourite Songs
-                //TODO:ALGUN ERROR QUE FA QUE L'ULTIM NO ES PUGUI ELIMINAR (I CLICA A COPIED TAMBE)
+
                 mSongList.remove(mSongList.get(info.position));
                 adapter = new FavouriteSongsAdapter(this,mSongList);
                 lvFavSongs.setAdapter(adapter);
 
                 // Toast -> NameSong deleted
-                Toast.makeText(this,mSongList.get(info.position).getName()+" Deleted",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,mSongList.get(info.position).getName()+" Deleted",Toast.LENGTH_SHORT).show();
 
-            //Copy Name of song
+                //Copy Name of song
             case R.id.option_copy:
+                if(item.getTitle().equals("Copy")){
+                    ClipboardManager clipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
 
-                ClipboardManager clipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-                String nameSong = mSongList.get(info.position).getName();
-                ClipData clip = ClipData.newPlainText("text", nameSong);
-                clipboard.setPrimaryClip(clip);
+                    String nameSong = mSongList.get(info.position).getName();
+                    ClipData clip = ClipData.newPlainText("text", nameSong);
 
-                // Toast -> NameSong Copied
-                Toast.makeText(this,mSongList.get(info.position).getName()+" Copied",Toast.LENGTH_SHORT).show();
+                    clipboard.setPrimaryClip(clip);
+
+                    // Toast -> NameSong Copied
+                    Toast.makeText(this,mSongList.get(info.position).getName()+" Copied",Toast.LENGTH_SHORT).show();
+                }
+
+
+
 
             default:
                 return super.onContextItemSelected(item);
