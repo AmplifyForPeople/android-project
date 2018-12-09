@@ -6,10 +6,27 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.details.DetailSongActivity;
@@ -23,6 +40,7 @@ import pl.bclogic.pulsator4droid.library.PulsatorLayout;
  */
 public class AmplifySiteFragment extends Fragment {
 
+    SongEntity songAmplify;
 
     public AmplifySiteFragment() {
         // Required empty public constructor
@@ -32,17 +50,64 @@ public class AmplifySiteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Initialize the Data
-        SongEntity songAmplify = new SongEntity("SongAmplify","amplify","amplify Album");
-        //TODO: Afegir la canço a la Representacio de la layout
-
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_amplify_site, container, false);
 
+        // Pulse Animation (Amplify Active)
+        PulsatorLayout pulse = rootView.findViewById(R.id.pulsator);
+        pulse.start();
 
-        // Pulsator
-        PulsatorLayout pulsator = (PulsatorLayout) rootView.findViewById(R.id.pulsator);
-        pulsator.start();
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String url = "http://192.168.1.40:8080/music/songs/4";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("RESPONSE", response.toString());
+                        Toast.makeText(getActivity().getApplicationContext(),response.toString(),Toast.LENGTH_SHORT).show();
+                        try{
+                            songAmplify =
+                                    new SongEntity(response.getString("name")
+                                            ,response.getString("author")
+                                            ,response.getString("album"));
+                            //response.getString("image");
+                            updateInfoAmplify(rootView,songAmplify);
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        });
+        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        queue.add(jsonObjectRequest);
+
+
+        //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
 
         // Add to fav song
         Button addToFav = (Button) rootView.findViewById(R.id.addToFav);
@@ -52,7 +117,6 @@ public class AmplifySiteFragment extends Fragment {
                 addToFavSong(v,songAmplify);
             }
         });
-
 
         //Similar song to -> song detail (simple)
         CardView card_view = rootView.findViewById(R.id.similar_amp); // creating a CardView and assigning a value.
@@ -65,6 +129,24 @@ public class AmplifySiteFragment extends Fragment {
         return rootView;
     }
 
+
+
+    public void updateInfoAmplify(View rootView, SongEntity song){
+        TextView nameEstablishment = rootView.findViewById(R.id.name_local);
+        ImageView imageSong = rootView.findViewById(R.id.cardSong);
+        TextView nameSong = rootView.findViewById(R.id.name_song_amp);
+        TextView nameArtist = rootView.findViewById(R.id.artist_song_amp);
+        TextView nameAlbum = rootView.findViewById(R.id.album_song_amp);
+        TextView listOfGenres = rootView.findViewById(R.id.genres_song_amp);
+
+        nameSong.setText(song.getName());
+        nameAlbum.setText(song.getAlbum());
+        nameArtist.setText(song.getArtist());
+
+
+    }
+
+
     public void addToFavSong(View v, SongEntity song){
         Intent intent = new Intent(v.getContext(),FavouriteSongsActivity.class);
         intent.putExtra("nameSong", song.getName());
@@ -72,5 +154,9 @@ public class AmplifySiteFragment extends Fragment {
         intent.putExtra("nameAlbum", song.getAlbum());
         startActivity(intent);
     }
+
+
+
+
 
 }

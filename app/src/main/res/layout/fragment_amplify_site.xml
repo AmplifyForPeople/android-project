@@ -77,13 +77,13 @@
             app:layout_constraintStart_toStartOf="@+id/name_local"
             app:layout_constraintTop_toBottomOf="@+id/name_local" />
 
-        <android.support.v7.widget.CardView
+
+        <ImageView
             android:id="@+id/cardSong"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@color/darkGrey"
-            app:cardCornerRadius="@dimen/space_framesLayouts"
+            android:background="@color/darkGrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listening" />
