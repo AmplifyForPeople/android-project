@@ -28,6 +28,7 @@ import java.util.List;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.FavouriteSongsAdapter;
+import amplify.us.amplify.database.Dao.SongDao;
 import amplify.us.amplify.entities.SongEntity;
 
 public class FavouriteSongsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -36,6 +37,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     private List<SongEntity> mSongList;
     private SearchView mSearchView;
     FavouriteSongsAdapter adapter;
+    SongDao songDao;
     //SharedPreferences sharedPreferences;
 
 
@@ -44,6 +46,9 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_song_list);
+
+
+        songDao = new SongDao(this);
 
         mSongList = new ArrayList<>();
 
@@ -77,9 +82,12 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
                     , getIntent().getStringExtra("nameArtist"), getIntent().getStringExtra("nameAlbum"));
 
             mSongList.add(favSong);
+            //songDao.insert(favSong);
             //saveList();
         }
+
         //Init Adapter
+        //mSongList = songDao.getAllSong("");
         adapter = new FavouriteSongsAdapter(this,mSongList);
         lvFavSongs.setAdapter(adapter);
 
