@@ -64,9 +64,9 @@ public class AmplifySiteFragment extends Fragment {
         pulse.start();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url = "http://192.168.1.40:8080/music/songs/4";
-        String url_similar = "http://192.168.1.40:8080/music/songs/similar/4";
-        String url_similar2 = "http://192.168.1.40:8080/music/songs/similar/4";
+        String url = "http://172.25.120.21:8080/music/songs/4";
+        String url_similar = "http://172.25.120.21:8080/music/songs/similar/4";
+        String url_similar2 = "http://172.25.120.21:8080/music/songs/similar/4";
 
 
         //AMPLIFY SITE SONG
