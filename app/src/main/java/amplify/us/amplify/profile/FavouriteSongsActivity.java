@@ -3,6 +3,10 @@ package amplify.us.amplify.profile;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.icu.text.UnicodeSetSpanner;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +19,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +36,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     private List<SongEntity> mSongList;
     private SearchView mSearchView;
     FavouriteSongsAdapter adapter;
+    //SharedPreferences sharedPreferences;
 
 
 
@@ -60,6 +69,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         mSongList.add(new SongEntity("Song 9", "artist 9", "album 9"));
         mSongList.add(new SongEntity("Song 10", "artist 10", "album 10"));
 
+
         //Update Data
         if (getIntent().hasExtra("nameSong") && getIntent().hasExtra(("nameArtist"))
                 && getIntent().hasExtra(("nameAlbum"))) {
@@ -67,6 +77,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
                     , getIntent().getStringExtra("nameArtist"), getIntent().getStringExtra("nameAlbum"));
 
             mSongList.add(favSong);
+            //saveList();
         }
         //Init Adapter
         adapter = new FavouriteSongsAdapter(this,mSongList);
@@ -79,6 +90,36 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
         });*/
     }
+
+    /*private void saveList(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mSongList);
+        prefsEditor.putString("ListSong",json);
+        prefsEditor.commit();
+    }*/
+
+    /*public void onResume(){
+        super.onResume();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("ListSong", "");
+        Toast.makeText(getApplicationContext(),"Retorno "+json,Toast.LENGTH_LONG).show();
+        Type type = new TypeToken<ArrayList<SongEntity>>(){}.getType();
+        mSongList = gson.fromJson(json,type);
+
+        //UPDATING
+        adapter = new FavouriteSongsAdapter(this,mSongList);
+        lvFavSongs.setAdapter(adapter);
+
+        //Init ContextMenu
+        registerForContextMenu(lvFavSongs);
+
+        /*String json = sharedPreferences.getString("ListSong", "");
+        Type type = new TypeToken<ArrayList<SongEntity>>(){}.getType();
+        mSongList = gson.fromJson(json,type);*/
+    //}
 
 
     private void setupSearchView()

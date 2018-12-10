@@ -3,6 +3,8 @@ package amplify.us.amplify.bottom_menu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +43,10 @@ import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 public class AmplifySiteFragment extends Fragment {
 
     SongEntity songAmplify;
+    private Handler handler;
+    MyRunnable runnable;
+    SongEntity songAmplifySimilar;
+    SongEntity songAmplifySimilar2;
 
     public AmplifySiteFragment() {
         // Required empty public constructor
@@ -59,13 +65,74 @@ public class AmplifySiteFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url = "http://192.168.1.40:8080/music/songs/4";
+        String url_similar = "http://192.168.1.40:8080/music/songs/similar/4";
+        String url_similar2 = "http://192.168.1.40:8080/music/songs/similar/4";
+
+
+        //AMPLIFY SITE SONG
+        JsonObjectRequest firstRequest = volleyRequest(rootView,url);
+        queue.add(firstRequest);
+
+        handler = new Handler();
+        runnable = new MyRunnable(url,rootView,queue);
+        handler.post(runnable);
+
+        //AMPLIFY SIMILAR SONGS
+        JsonObjectRequest similarRequest = volleyRequestSimilar(rootView,url_similar);
+        JsonObjectRequest similarRequest2 = volleyRequestSimilar2(rootView,url_similar2);
+        queue.add(similarRequest);
+        queue.add(similarRequest2);
+
+
+
+        //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
+
+        // Add to fav song
+        Button addToFav = (Button) rootView.findViewById(R.id.addToFav);
+        addToFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToFavSong(v,songAmplify);
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        //Similar song to -> song detail (simple)
+        CardView card_view = rootView.findViewById(R.id.similar_amp); // creating a CardView and assigning a value.
+
+        card_view.setOnClickListener((View v) -> {
+                Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
+                intent.putExtra("song",songAmplifySimilar.getName());
+                intent.putExtra("album",songAmplifySimilar.getAlbum());
+                intent.putExtra("artist",songAmplifySimilar.getArtist());
+                //IMAGE -> intent.putExtra("info_title",data.get(position).getInfo());
+                v.getContext().startActivity(intent);
+        });
+
+        //Similar song to -> song detail2 (simple)
+        CardView card_view2 = rootView.findViewById(R.id.similar_amp2); // creating a CardView and assigning a value.
+
+        card_view2.setOnClickListener((View v) -> {
+            Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
+            intent.putExtra("song",songAmplifySimilar2.getName());
+            intent.putExtra("album",songAmplifySimilar2.getAlbum());
+            intent.putExtra("artist",songAmplifySimilar2.getArtist());
+            v.getContext().startActivity(intent);
+        });
+
+
+
+        return rootView;
+    }
+
+
+    public JsonObjectRequest volleyRequest(View rootView,String url){
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("RESPONSE", response.toString());
-                        Toast.makeText(getActivity().getApplicationContext(),response.toString(),Toast.LENGTH_SHORT).show();
                         try{
                             songAmplify =
                                     new SongEntity(response.getString("name")
@@ -104,31 +171,125 @@ public class AmplifySiteFragment extends Fragment {
             }
         });
 
-        queue.add(jsonObjectRequest);
+        return jsonObjectRequest;
+    }
 
 
-        //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
+    public JsonObjectRequest volleyRequestSimilar(View rootView,String url){
 
-        // Add to fav song
-        Button addToFav = (Button) rootView.findViewById(R.id.addToFav);
-        addToFav.setOnClickListener(new View.OnClickListener() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("RESPONSE", response.toString());
+                        try{
+                            songAmplifySimilar =
+                                    new SongEntity(response.getString("name")
+                                            ,response.getString("author")
+                                            ,response.getString("album"));
+                            //response.getString("image");
+                            updateInfoAmplify(rootView,songAmplify);
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            public void onClick(View v) {
-                addToFavSong(v,songAmplify);
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        });
+        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
             }
         });
 
-        //Similar song to -> song detail (simple)
-        CardView card_view = rootView.findViewById(R.id.similar_amp); // creating a CardView and assigning a value.
-
-        card_view.setOnClickListener((View v) -> {
-                Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
-                v.getContext().startActivity(intent);
-        });
-
-        return rootView;
+        return jsonObjectRequest;
     }
 
+    public JsonObjectRequest volleyRequestSimilar2(View rootView,String url){
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("RESPONSE", response.toString());
+                        try{
+                            songAmplifySimilar2 =
+                                    new SongEntity(response.getString("name")
+                                            ,response.getString("author")
+                                            ,response.getString("album"));
+                            //response.getString("image");
+                            updateInfoAmplify(rootView,songAmplify);
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        });
+        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        return jsonObjectRequest;
+    }
+
+
+
+    class MyRunnable implements Runnable{
+        String url;
+        View rootView;
+        RequestQueue queue;
+        MyRunnable(String url, View rootView, RequestQueue queue){
+            this.url = url;
+            this.rootView = rootView;
+            this.queue = queue;
+        }
+        @Override
+        public void run() {
+            JsonObjectRequest firstRequest = volleyRequest(rootView,url);
+            queue.add(firstRequest);
+            handler.postDelayed(this::run,30000);
+        }
+
+    }
 
 
     public void updateInfoAmplify(View rootView, SongEntity song){
@@ -154,9 +315,5 @@ public class AmplifySiteFragment extends Fragment {
         intent.putExtra("nameAlbum", song.getAlbum());
         startActivity(intent);
     }
-
-
-
-
 
 }
