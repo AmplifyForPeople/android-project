@@ -1,5 +1,7 @@
 package amplify.us.amplify.entities;
 
+import org.json.JSONObject;
+
 public class EstablishmentEntity {
     private int id;
     private String name;
@@ -18,6 +20,17 @@ public class EstablishmentEntity {
         this.distance = distance;
         this.genres = genres;
     }
+    /* PER EMMAGATZAMAR JSON
+    public EstablishmentEntity(JSONObject data) {
+        this.name = data.getString("name");
+        this.id = id;
+        this.name = name;
+        this.url_image = ur_image;
+        this.email = email;
+        this.info = info;
+        this.distance = distance;
+        this.genres = genres;
+    }*/
 
     public int getId() {
         return id;

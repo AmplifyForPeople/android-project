@@ -49,7 +49,7 @@ public class AmplifySiteFragment extends Fragment {
     MyRunnable runnable;
     SongEntity songAmplifySimilar;
     SongEntity songAmplifySimilar2;
-    String url_major = "http://172.16.130.143:8080";
+    String url_major = "http://172.16.110.175:8080";
     private TextView nameSong;
     private TextView nameArtist;
     private TextView nameAlbum;

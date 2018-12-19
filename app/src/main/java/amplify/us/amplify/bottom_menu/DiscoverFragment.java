@@ -44,7 +44,7 @@ import amplify.us.amplify.services.EstablishmentService;
  */
 public class DiscoverFragment extends Fragment {
 
-    String url_major = "http://172.16.130.143:8080";
+    String url_major = "http://172.16.110.175:8080";
 
     ArrayList<EstablishmentEntity> data;
     ArrayList<SongEntity> dataSong;
@@ -98,7 +98,9 @@ public class DiscoverFragment extends Fragment {
                                 JSONObject result = response.getJSONObject(i);
                                 String name = result.getString("name");
                                 String info = result.getString("info");
-                                data.add(new EstablishmentEntity(1,name,"a", "mail@mail.com",info," ", new String[]{"genre1","genre2"}));
+                                data.add(new EstablishmentEntity(1,name,"a",
+                                        "mail@mail.com",info," ",
+                                        new String[]{"genre1","genre2"}));
                             }
                             recyclerViewSetupEstablishment(rootView);
                         }catch (JSONException arg){
