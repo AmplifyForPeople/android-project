@@ -7,7 +7,7 @@ public class SongEntity {
     private  String album;
     private  String url_image;
 
-    public SongEntity(int id,String name, String artist, String album, String url_image) {
+    public SongEntity(int id, String name, String artist, String album, String url_image) {
         this.id = id;
         this.name = name;
         this.artist = artist;
