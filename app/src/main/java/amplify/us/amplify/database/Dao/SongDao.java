@@ -65,11 +65,12 @@ public class SongDao {
     }
 
     private SongEntity build(Cursor cursor) {
-        SongEntity entity = new SongEntity("","","");
+        SongEntity entity = new SongEntity("","","","");
 
         entity.setName(cursor.getString(cursor.getColumnIndex(Song.Columns.NAME)));
         entity.setArtist(cursor.getString(cursor.getColumnIndex(Song.Columns.ARTIST)));
         entity.setAlbum(cursor.getString(cursor.getColumnIndex(Song.Columns.ALBUM)));
+        entity.setUrl_image(cursor.getString(cursor.getColumnIndex(Song.Columns.IMAGE_URL)));
 
         return entity;
     }
