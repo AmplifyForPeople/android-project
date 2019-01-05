@@ -192,9 +192,12 @@ public class AmplifySiteFragment extends Fragment {
                         Log.d("RESPONSE", response.toString());
                         try{
                             songAmplifySimilar =
-                                    new SongEntity(response.getString("name")
+                                    new SongEntity(
+                                            response.getInt("id")
+                                            ,response.getString("name")
                                             ,response.getString("author")
-                                            ,response.getString("album"));
+                                            ,response.getString("album")
+                                            ,response.getString("image"));
                             Log.d("RESPONSE", response.toString());
                             //response.getString("image");
                             //updateInfoAmplify(rootView,songAmplify);
@@ -242,9 +245,12 @@ public class AmplifySiteFragment extends Fragment {
                         Log.d("RESPONSE", response.toString());
                         try{
                             songAmplifySimilar2 =
-                                    new SongEntity(response.getString("name")
+                                    new SongEntity(
+                                            response.getInt("id")
+                                            ,response.getString("name")
                                             ,response.getString("author")
-                                            ,response.getString("album"));
+                                            ,response.getString("album")
+                                            ,response.getString("image"));
                             //response.getString("image");
                             updateInfoAmplify(rootView,songAmplify);
 
@@ -330,9 +336,12 @@ public class AmplifySiteFragment extends Fragment {
 
         try {
             songAmplify =
-                    new SongEntity(response.getString("name")
+                    new SongEntity(
+                            response.getInt("id")
+                            ,response.getString("name")
                             ,response.getString("author")
-                            ,response.getString("album"));
+                            ,response.getString("album")
+                            ,response.getString("image"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

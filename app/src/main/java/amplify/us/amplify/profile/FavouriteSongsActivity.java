@@ -63,23 +63,23 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
         //Add sample data for list
         //We can get data form DB, webService here
-        mSongList.add(new SongEntity("Song 1", "artist 1", "album 1"));
-        mSongList.add(new SongEntity("Song 2", "artist 2", "album 2"));
-        mSongList.add(new SongEntity("Song 3", "artist 3", "album 3"));
-        mSongList.add(new SongEntity("Song 4", "artist 4", "album 4"));
-        mSongList.add(new SongEntity("Song 5", "artist 5", "album 5"));
-        mSongList.add(new SongEntity("Song 6", "artist 6", "album 6"));
-        mSongList.add(new SongEntity("Song 7", "artist 7", "album 7"));
-        mSongList.add(new SongEntity("Song 8", "artist 8", "album 8"));
-        mSongList.add(new SongEntity("Song 9", "artist 9", "album 9"));
-        mSongList.add(new SongEntity("Song 10", "artist 10", "album 10"));
+        mSongList.add(new SongEntity(1,"Song 1", "artist 1", "album 1","url"));
+        mSongList.add(new SongEntity(2,"Song 2", "artist 2", "album 2","url"));
+        mSongList.add(new SongEntity(3,"Song 3", "artist 3", "album 3","url"));
+        mSongList.add(new SongEntity(4,"Song 4", "artist 4", "album 4","url"));
+        mSongList.add(new SongEntity(5,"Song 5", "artist 5", "album 5","url"));
+        mSongList.add(new SongEntity(6,"Song 6", "artist 6", "album 6","url"));
+        mSongList.add(new SongEntity(7,"Song 7", "artist 7", "album 7","url"));
+        mSongList.add(new SongEntity(8,"Song 8", "artist 8", "album 8","url"));
+        mSongList.add(new SongEntity(9,"Song 9", "artist 9", "album 9","url"));
+        mSongList.add(new SongEntity(10,"Song 10", "artist 10", "album 10","url"));
 
 
         //Update Data
         if (getIntent().hasExtra("nameSong") && getIntent().hasExtra(("nameArtist"))
                 && getIntent().hasExtra(("nameAlbum"))) {
-            SongEntity favSong = new SongEntity(getIntent().getStringExtra("nameSong")
-                    , getIntent().getStringExtra("nameArtist"), getIntent().getStringExtra("nameAlbum"));
+            SongEntity favSong = new SongEntity(1,getIntent().getStringExtra("nameSong")
+                    , getIntent().getStringExtra("nameArtist"), getIntent().getStringExtra("nameAlbum"),"url");
 
             mSongList.add(favSong);
             //songDao.insert(favSong);
