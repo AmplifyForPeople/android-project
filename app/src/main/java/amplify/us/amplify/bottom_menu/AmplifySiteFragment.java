@@ -1,6 +1,8 @@
 package amplify.us.amplify.bottom_menu;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,11 +11,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +57,9 @@ public class AmplifySiteFragment extends Fragment {
     private TextView nameSong;
     private TextView nameArtist;
     private TextView nameAlbum;
+    private String m_Text="";
+
+    private Boolean flag = false;
 
 
     public AmplifySiteFragment() {
@@ -69,6 +76,33 @@ public class AmplifySiteFragment extends Fragment {
         nameSong = rootView.findViewById(R.id.name_song_amp);
         nameArtist = rootView.findViewById(R.id.artist_song_amp);
         nameAlbum = rootView.findViewById(R.id.album_song_amp);
+
+        if(!flag){
+            AlertDialog.Builder builder = new AlertDialog.Builder(rootView.getContext());
+            builder.setTitle("Add the Local Code");
+
+            // Set up the input
+            final EditText input = new EditText(rootView.getContext());
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    m_Text = input.getText().toString();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+        }
 
 
 

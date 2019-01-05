@@ -21,7 +21,6 @@
     <string name="description_button_next">Start using Amplify!</string>
 
 
-
     <!-- Strings related to login -->
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -41,8 +40,6 @@
     <string name="login_sign_in">Sign in</string>
     <string name="login_new">Create acount</string>
     <string name="login_terms">Terms &amp; Conditions</string>
-
-
 
 
     <!-- SetSelfDataActivity -->
@@ -120,7 +117,6 @@
     <!--/////////////////////////////////////////////////////////////-->
 
 
-
     <!-- Main Activity - General -->
     <string name="title_discover">Discover</string>
     <string name="title_amplify_site">Amplify Site</string>
@@ -147,7 +143,6 @@
     <string name="genre_fav_1">Genre 1</string>
     <string name="genre_fav_2">Genre 2</string>
     <string name="genre_fav_3">Genre 3</string>
-
 
 
     <!-- Most voted songs -->

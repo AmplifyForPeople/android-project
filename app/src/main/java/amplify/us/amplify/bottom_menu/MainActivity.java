@@ -1,5 +1,6 @@
 package amplify.us.amplify.bottom_menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private DiscoverFragment discoverFragment;
     private AmplifySiteFragment amplifySiteFragment;
     private ProfileFragment profileFragment;
+    private Boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent in;
             switch (item.getItemId()) {
                 case R.id.navigation_discover:
                     setFragment(discoverFragment);
