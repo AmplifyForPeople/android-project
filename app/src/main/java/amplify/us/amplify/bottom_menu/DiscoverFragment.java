@@ -2,6 +2,8 @@ package amplify.us.amplify.bottom_menu;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -28,6 +30,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import amplify.us.amplify.R;
@@ -100,7 +107,7 @@ public class DiscoverFragment extends Fragment {
                                 String info = result.getString("info");
                                 data.add(new EstablishmentEntity(1,name,"a",
                                         "mail@mail.com",info," ",
-                                        new String[]{"genre1","genre2"}));
+                                        "Genre 1, Genre 2"));
                             }
                             recyclerViewSetupEstablishment(rootView);
                         }catch (JSONException arg){
@@ -152,10 +159,12 @@ public class DiscoverFragment extends Fragment {
                         try{
                             for(int i = 0;i<response.length();i++){
                                 JSONObject result = response.getJSONObject(i);
+                                int id = result.getInt("id");
                                 String name = result.getString("name");
                                 String album = result.getString("album");
                                 String author = result.getString("author");
-                                dataSong.add(new SongEntity(name,author,album));
+                                String url_image = result.getString("image");
+                                dataSong.add(new SongEntity(id,name,author,album,url_image));
                             }
                             recyclerViewSetupVotedSongs(rootView);
                         }catch (JSONException arg){
@@ -242,5 +251,17 @@ public class DiscoverFragment extends Fragment {
         data.add(new SongEntity("song 5","artist5","album5"));
         return data;
     }*/
+
+    private void displayImageFromUrl(String url){
+        try {
+            URI uri = new URI(url);
+            URL link = uri.toURL();
+            Bitmap bmp = BitmapFactory.decodeStream(link.openConnection().getInputStream());
+            //imageView.setImageBitmap(bmp);
+
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

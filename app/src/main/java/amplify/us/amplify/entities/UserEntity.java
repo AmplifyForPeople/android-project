@@ -1,5 +1,8 @@
 package amplify.us.amplify.entities;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UserEntity {
     private  int    id;
     private  String name;
@@ -15,6 +18,20 @@ public class UserEntity {
         this.sex = sex;
         this.location = location;
         this.favGenres = favGenres;
+    }
+
+    //PER EMMAGATZAMAR JSON
+    public UserEntity(JSONObject data) {
+        try {
+            this.id = data.getInt("id");
+            this.name = data.getString("name");
+            this.age = data.getString("artist");
+            this.sex = data.getString("album");
+            this.location = data.getString("image");
+            this.favGenres = data.getString("genres");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getId() {

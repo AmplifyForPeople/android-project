@@ -1,5 +1,8 @@
 package amplify.us.amplify.entities;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class SongEntity {
     private  int    id;
     private  String name;
@@ -13,6 +16,19 @@ public class SongEntity {
         this.artist = artist;
         this.album = album;
         this.url_image = url_image;
+    }
+
+    //PER EMMAGATZAMAR JSON
+    public SongEntity(JSONObject data) {
+        try {
+            this.id = data.getInt("id");
+            this.name = data.getString("name");
+            this.artist = data.getString("artist");
+            this.album = data.getString("album");
+            this.url_image = data.getString("image");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getId() { return id; }
