@@ -79,19 +79,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16sp"
         android:text="@string/genre"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/establishment_genres"
         app:layout_constraintTop_toBottomOf="@+id/establishment_genres" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/genre_2"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/genre1"
-        app:layout_constraintTop_toBottomOf="@+id/establishment_genres" />
 
     <TextView
         android:id="@+id/voted_songs"

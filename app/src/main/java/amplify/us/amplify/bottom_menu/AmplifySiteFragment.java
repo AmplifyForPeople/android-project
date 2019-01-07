@@ -53,7 +53,7 @@ public class AmplifySiteFragment extends Fragment {
     MyRunnable runnable;
     SongEntity songAmplifySimilar;
     SongEntity songAmplifySimilar2;
-    String url_major = "http://172.16.110.175:8080";
+    String url_major = "http://172.16.110.210:8080/AmplifyWeb/rest/";
     private TextView nameSong;
     private TextView nameArtist;
     private TextView nameAlbum;
@@ -111,7 +111,7 @@ public class AmplifySiteFragment extends Fragment {
         pulse.start();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url = url_major+"/music/songs/4";
+        String url = url_major+"establishments/1";
         String url_similar = url_major+"/music/songs/similar/4";
         String url_similar2 = url_major+"/music/songs/similar/4";
 
