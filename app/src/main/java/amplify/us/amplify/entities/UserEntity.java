@@ -3,21 +3,27 @@ package amplify.us.amplify.entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserEntity {
     private  int    id;
     private  String name;
     private  String age;
-    private  String sex;
-    private  String location;
-    private  String favGenres;
+    private  String email;
+    private  String password;
+    private  List<GenreEntity> genres = new ArrayList <>();
+    private  List<SongEntity> favSongs = new ArrayList<>();
 
-    public UserEntity(int id,String name, String age, String sex, String location, String favGenres) {
+
+    public UserEntity(int id, String name, String age, String email, String password, List<GenreEntity> genres, List<SongEntity> favSongs) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.sex = sex;
-        this.location = location;
-        this.favGenres = favGenres;
+        this.email = email;
+        this.password = password;
+        this.genres = genres;
+        this.favSongs = favSongs;
     }
 
     //PER EMMAGATZAMAR JSON
@@ -25,10 +31,19 @@ public class UserEntity {
         try {
             this.id = data.getInt("id");
             this.name = data.getString("name");
-            this.age = data.getString("artist");
-            this.sex = data.getString("album");
-            this.location = data.getString("image");
-            this.favGenres = data.getString("genres");
+            this.age = data.getString("author");
+            this.email = data.getString("album");
+            this.password = data.getString("password");
+            if(data.getJSONArray("genres") != null && data.getJSONArray("genres").length()>0){
+                for (int i=0;i<data.getJSONArray("genres").length();i++){
+                    this.genres.add(new GenreEntity((JSONObject) data.getJSONArray("genres").get(i)));
+                }
+            }
+            if(data.getJSONArray("songs") != null && data.getJSONArray("songs").length()>0){
+                for (int i=0;i<data.getJSONArray("songs").length();i++){
+                    this.favSongs.add(new SongEntity((JSONObject) data.getJSONArray("songs").get(i)));
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -36,6 +51,10 @@ public class UserEntity {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -54,31 +73,35 @@ public class UserEntity {
         this.age = age;
     }
 
-    public String getSex() {
-        return sex;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public String getPassword() {
+        return password;
     }
 
-    public String getLocation() {
-        return location;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public List<GenreEntity> getGenres() {
+        return genres;
     }
 
-    public String getFavGenres() {
-        return favGenres;
+    public void setGenres(List<GenreEntity> genres) {
+        this.genres = genres;
     }
 
-    public void setFavGenres(String favGenres) {
-        this.favGenres = favGenres;
+    public List<SongEntity> getFavSongs() {
+        return favSongs;
+    }
+
+    public void setFavSongs(List<SongEntity> favSongs) {
+        this.favSongs = favSongs;
     }
 }

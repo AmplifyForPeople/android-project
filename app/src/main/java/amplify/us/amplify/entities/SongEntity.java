@@ -23,7 +23,7 @@ public class SongEntity {
         try {
             this.id = data.getInt("id");
             this.name = data.getString("name");
-            this.artist = data.getString("artist");
+            this.artist = data.getString("author");
             this.album = data.getString("album");
             this.url_image = data.getString("image");
         } catch (JSONException e) {
