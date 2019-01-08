@@ -4,6 +4,7 @@
     <string name="title_description">Description</string>
 
     <!-- Welcome Activity (Hero Page) -->
+    <string name="logoImage">LogoImage</string>
     <string name="logo">"\"Logo\""</string>
     <string name="banner">"for people"</string>
     <string name="develop">"Develop by"</string>
@@ -205,6 +206,7 @@
 
     <!--Modify Genres-->
     <string name="mod_genres">Modify genres of music</string>
+    <string name="beta_edition">Beta Edition</string>
 
 
 </resources>

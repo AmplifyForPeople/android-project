@@ -20,7 +20,7 @@
             android:id="@+id/img_establishment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="3.1"
             android:background="@color/darkGrey"
             android:contentDescription="@string/image_desc"
             android:scaleType="centerCrop" />
@@ -35,7 +35,7 @@
                 android:id="@+id/name_establishment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="@string/name_establishment"
                 android:textSize="15sp"
@@ -45,7 +45,7 @@
                 android:id="@+id/info_establishment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="@string/info_establishment"
                 android:textSize="13sp" />
