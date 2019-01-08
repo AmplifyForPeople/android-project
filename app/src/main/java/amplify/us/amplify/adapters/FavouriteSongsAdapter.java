@@ -1,11 +1,15 @@
 package amplify.us.amplify.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +55,15 @@ public class FavouriteSongsAdapter extends BaseAdapter  {
         TextView tvSong = (TextView) view.findViewById(R.id.name_song_unique);
         TextView tvArtist = (TextView) view.findViewById(R.id.artist_name_unique);
         TextView tvAlbum = (TextView) view.findViewById(R.id.album_name_unique);
+        ImageView tvImage = (ImageView) view.findViewById(R.id.image_song);
 
         tvSong.setText(mSongList.get(position).getName());
         tvArtist.setText(mSongList.get(position).getArtist());
         tvAlbum.setText(mSongList.get(position).getAlbum());
-
+        Picasso.get().load(mSongList.get(position).getUrl_image())
+                .centerCrop()
+                .fit()
+                .into(tvImage);
         view.setTag(mSongList.get(position).getName());
 
         return view;

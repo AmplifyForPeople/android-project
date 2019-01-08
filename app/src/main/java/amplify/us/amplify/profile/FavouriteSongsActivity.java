@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,27 +20,44 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.adapters.FavouriteSongsAdapter;
 import amplify.us.amplify.database.Dao.SongDao;
 import amplify.us.amplify.entities.SongEntity;
+import amplify.us.amplify.entities.UserEntity;
 
 public class FavouriteSongsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private ListView lvFavSongs;
     private List<SongEntity> mSongList;
     private SearchView mSearchView;
+
     FavouriteSongsAdapter adapter;
     SongDao songDao;
     //SharedPreferences sharedPreferences;
 
+    String url_major = "http://brain.3utilities.com/AmplifyWeb/rest";
+    UserEntity user;
 
 
     @Override
@@ -47,9 +65,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_song_list);
 
-
         songDao = new SongDao(this);
-
         mSongList = new ArrayList<>();
 
         setupSearchView();
@@ -63,20 +79,11 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
         //Add sample data for list
         //We can get data form DB, webService here
-        mSongList.add(new SongEntity(1,"Song 1", "artist 1", "album 1","url"));
-        mSongList.add(new SongEntity(2,"Song 2", "artist 2", "album 2","url"));
-        mSongList.add(new SongEntity(3,"Song 3", "artist 3", "album 3","url"));
-        mSongList.add(new SongEntity(4,"Song 4", "artist 4", "album 4","url"));
-        mSongList.add(new SongEntity(5,"Song 5", "artist 5", "album 5","url"));
-        mSongList.add(new SongEntity(6,"Song 6", "artist 6", "album 6","url"));
-        mSongList.add(new SongEntity(7,"Song 7", "artist 7", "album 7","url"));
-        mSongList.add(new SongEntity(8,"Song 8", "artist 8", "album 8","url"));
-        mSongList.add(new SongEntity(9,"Song 9", "artist 9", "album 9","url"));
-        mSongList.add(new SongEntity(10,"Song 10", "artist 10", "album 10","url"));
+        //mSongList.add(new SongEntity(1,"Song 1", "artist 1", "album 1","url"));
 
 
         //Update Data
-        if (getIntent().hasExtra("nameSong") && getIntent().hasExtra(("nameArtist"))
+        /*if (getIntent().hasExtra("nameSong") && getIntent().hasExtra(("nameArtist"))
                 && getIntent().hasExtra(("nameAlbum"))) {
             SongEntity favSong = new SongEntity(1,getIntent().getStringExtra("nameSong")
                     , getIntent().getStringExtra("nameArtist"), getIntent().getStringExtra("nameAlbum"),"url");
@@ -84,19 +91,26 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
             mSongList.add(favSong);
             //songDao.insert(favSong);
             //saveList();
-        }
+        }*/
 
         //Init Adapter
         //mSongList = songDao.getAllSong("");
+
+
+        /*lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+            Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
+        });*/
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String url_user = url_major+"/users/1";
+        JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
+        queue.add(requestUser);
+
         adapter = new FavouriteSongsAdapter(this,mSongList);
         lvFavSongs.setAdapter(adapter);
 
         //Init ContextMenu
         registerForContextMenu(lvFavSongs);
-
-        /*lvFavSongs.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
-            Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
-        });*/
     }
 
     /*private void saveList(){
@@ -128,6 +142,56 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         Type type = new TypeToken<ArrayList<SongEntity>>(){}.getType();
         mSongList = gson.fromJson(json,type);*/
     //}
+
+
+    public JsonObjectRequest volleyRequest_rvUser(String url) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("RESPONSE", response.toString());
+
+                        //response.getString("image");
+                        //updateInfoAmplifyJSON(rootView,response);
+                        user = new UserEntity(response);
+                        setListFavourites();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        })
+        {
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        return jsonObjectRequest;
+    }
 
 
     private void setupSearchView()
@@ -199,6 +263,13 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
             default:
                 return super.onContextItemSelected(item);
+        }
+    }
+
+    public void setListFavourites(){
+        for (SongEntity s: user.getFavSongs()
+             ) {
+            mSongList.add(s);
         }
     }
 

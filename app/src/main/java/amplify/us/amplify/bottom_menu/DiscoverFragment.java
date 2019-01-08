@@ -70,7 +70,7 @@ public class DiscoverFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url_establishment = url_major+"/establishments";
-        String url_song = url_major+"/music/songs/all";
+        String url_song = url_major+"/songs/most_voted";
 
         data = new ArrayList<>();
         dataSong = new ArrayList<>();
@@ -170,6 +170,10 @@ public class DiscoverFragment extends Fragment {
                         try{
                             for(int i = 0;i<response.length();i++){
                                 JSONObject result = response.getJSONObject(i);
+                                dataSong.add(new SongEntity(result));
+                            }
+                            for(int i = 0;i<response.length();i++){
+                                JSONObject result = response.getJSONObject(i);
                                 int id = result.getInt("id");
                                 String name = result.getString("name");
                                 String album = result.getString("album");
@@ -196,7 +200,16 @@ public class DiscoverFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
                 Log.d("RESPONSE", error.toString());
             }
-        });
+        })
+        {
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
         jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {

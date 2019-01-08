@@ -3,11 +3,15 @@ package amplify.us.amplify.adapters;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 //import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -21,13 +25,13 @@ public class VotedSongsAdapter extends RecyclerView.Adapter<VotedSongsAdapter.Vo
     class VotedSongsViewHolder extends RecyclerView.ViewHolder {
 
         TextView name_song;
-        //ImageView image_song;
+        ImageView image_song;
         CardView parentLayout;
 
         public VotedSongsViewHolder (View itemView){
             super(itemView);
             name_song = (TextView) itemView.findViewById(R.id.name_fav_song);
-            //image_song = (TextView) itemView.findViewById(R.id.info_establishment);
+            image_song = (ImageView) itemView.findViewById(R.id.img_song);
             parentLayout = (CardView) itemView.findViewById(R.id.card_votedSongs);
         }
 
@@ -48,7 +52,12 @@ public class VotedSongsAdapter extends RecyclerView.Adapter<VotedSongsAdapter.Vo
     public void onBindViewHolder(VotedSongsAdapter.VotedSongsViewHolder holder, int position){
         SongEntity songEntity = data.get(position);
         holder.name_song.setText(songEntity.getName());
-        //IMAGE -> holder.info_establishment.setText(songEntity.getInfo());
+        Log.d("RIPARNAU", songEntity.getUrl_image());
+        Picasso.get()
+                .load(songEntity.getUrl_image())
+                .centerCrop()
+                .fit()
+                .into(holder.image_song);
 
         holder.parentLayout.setOnClickListener((View v) -> {
             Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
