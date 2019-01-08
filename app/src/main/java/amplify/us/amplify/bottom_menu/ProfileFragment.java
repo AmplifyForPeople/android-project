@@ -24,7 +24,6 @@ import amplify.us.amplify.profile.ModifyGenresActivitiy;
  */
 public class ProfileFragment extends Fragment {
 
-
     public ProfileFragment() {
         // Required empty public constructor
     }

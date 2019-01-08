@@ -31,8 +31,8 @@ public class UserEntity {
         try {
             this.id = data.getInt("id");
             this.name = data.getString("name");
-            this.age = data.getString("author");
-            this.email = data.getString("album");
+            this.age = data.getString("age");
+            this.email = data.getString("email");
             this.password = data.getString("password");
             if(data.getJSONArray("genres") != null && data.getJSONArray("genres").length()>0){
                 for (int i=0;i<data.getJSONArray("genres").length();i++){
