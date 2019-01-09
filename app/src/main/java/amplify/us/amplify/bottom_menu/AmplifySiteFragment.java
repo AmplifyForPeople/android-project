@@ -119,13 +119,19 @@ public class AmplifySiteFragment extends Fragment {
                         setFragment(discoverFragment);
                     }else{
                         flag = true;
+                        //AVISAR AL SISTEMA QUE ESTIC A DINTRE
+                        String urlPost = url_major+"establishments/go_in/1/1";
+                        queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+                        JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
+                        queuePost.add(post);
                     }
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    setFragment(discoverFragment);
+        setFragment(discoverFragment);
                     //dialog.cancel();
                 }
             });
@@ -139,12 +145,13 @@ public class AmplifySiteFragment extends Fragment {
         PulsatorLayout pulse = rootView.findViewById(R.id.pulsator);
         pulse.start();
 
-        //AVISAR AL SISTEM QUE ESTIC A DINTRE
-        String urlPost = url_major+"establishments/go_in/1/1";
-        queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
+        if(flag){
+            String urlPost = url_major+"establishments/go_in/1/1";
+            queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
 
-        JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
-        queuePost.add(post);
+            JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
+            queuePost.add(post);
+        }
 
 
 
@@ -232,7 +239,7 @@ public class AmplifySiteFragment extends Fragment {
                         if(playList.getJSONObject(i).getString("current").equals("true")){
                             songAmplify = new SongEntity((playList.getJSONObject(i).getJSONObject("song")));
                             setAmplify(rootview);
-                            Log.d("a", response.toString());
+                            Log.d("aAAAAAAAA", songAmplify.toString());
                         }
                     }
                 } catch (JSONException e) {
