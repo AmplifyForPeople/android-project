@@ -59,6 +59,9 @@ public class AmplifySiteFragment extends Fragment {
     private TextView nameAlbum;
     private String m_Text="";
 
+    RequestQueue queue;
+
+
     private Boolean flag = false;
 
 
@@ -110,10 +113,11 @@ public class AmplifySiteFragment extends Fragment {
         PulsatorLayout pulse = rootView.findViewById(R.id.pulsator);
         pulse.start();
 
-        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url = url_major+"establishments/1";
         String url_similar = url_major+"/music/songs/similar/4";
         String url_similar2 = url_major+"/music/songs/similar/4";
+
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
 
         //AMPLIFY SITE SONG
@@ -129,6 +133,8 @@ public class AmplifySiteFragment extends Fragment {
         JsonObjectRequest similarRequest2 = volleyRequestSimilar2(rootView,url_similar2);
         queue.add(similarRequest);
         queue.add(similarRequest2);
+
+
 
 
 
@@ -192,7 +198,6 @@ public class AmplifySiteFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
                 Log.d("RESPONSE", error.toString());
             }
         });
@@ -247,7 +252,6 @@ public class AmplifySiteFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
                 Log.d("RESPONSE", error.toString());
             }
         });
@@ -402,4 +406,9 @@ public class AmplifySiteFragment extends Fragment {
         startActivity(intent);
     }
 
+    @Override
+    public void onDestroyView() {
+        queue.cancelAll(this);
+        super.onDestroyView();
+    }
 }
