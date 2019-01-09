@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,6 +36,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.database.Dao.SongDao;
@@ -48,16 +53,21 @@ import pl.bclogic.pulsator4droid.library.PulsatorLayout;
  */
 public class AmplifySiteFragment extends Fragment {
 
+    private DiscoverFragment discoverFragment;
+
+
     SongEntity songAmplify;
     private Handler handler;
     MyRunnable runnable;
     SongEntity songAmplifySimilar;
     SongEntity songAmplifySimilar2;
-    String url_major = "http://172.16.110.210:8080/AmplifyWeb/rest/";
+    String url_major = "http://brain.3utilities.com/AmplifyWeb/rest/";
     private TextView nameSong;
     private TextView nameArtist;
     private TextView nameAlbum;
     private String m_Text="";
+
+    RequestQueue queuePost;
 
     RequestQueue queue;
 
@@ -72,6 +82,8 @@ public class AmplifySiteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        discoverFragment = new DiscoverFragment();
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_amplify_site, container, false);
@@ -95,12 +107,18 @@ public class AmplifySiteFragment extends Fragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     m_Text = input.getText().toString();
+                    if(!m_Text.equals("1")){
+                        setFragment(discoverFragment);
+                    }else{
+                        flag = true;
+                    }
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
+                    setFragment(discoverFragment);
+                    //dialog.cancel();
                 }
             });
 
@@ -113,9 +131,18 @@ public class AmplifySiteFragment extends Fragment {
         PulsatorLayout pulse = rootView.findViewById(R.id.pulsator);
         pulse.start();
 
+        //AVISAR AL SISTEM QUE ESTIC A DINTRE
+        String urlPost = url_major+"establishments/go_in/1/1";
+        queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+
+
+
+
         String url = url_major+"establishments/1";
         String url_similar = url_major+"/music/songs/similar/4";
         String url_similar2 = url_major+"/music/songs/similar/4";
+
 
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -181,6 +208,36 @@ public class AmplifySiteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
     }
+
+
+    public JsonObjectRequest volleyPostRequest(View rootview, String url){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("Response Post", response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("RESPONSE", error.toString());
+            }
+        }
+        ){
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                headers.put("Content-type","application/json");
+                return headers;
+            }
+        };
+        return jsonObjectRequest;
+    }
+
+
+
+
 
     public JsonObjectRequest volleyRequest(View rootView, String url){
 
@@ -303,7 +360,6 @@ public class AmplifySiteFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
                 Log.d("RESPONSE", error.toString());
             }
         });
@@ -410,5 +466,11 @@ public class AmplifySiteFragment extends Fragment {
     public void onDestroyView() {
         queue.cancelAll(this);
         super.onDestroyView();
+    }
+
+    private void setFragment (Fragment fragment){
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }
