@@ -32,6 +32,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +45,8 @@ import java.util.Map;
 import amplify.us.amplify.R;
 import amplify.us.amplify.database.Dao.SongDao;
 import amplify.us.amplify.details.DetailSongActivity;
+import amplify.us.amplify.entities.EstablishmentEntity;
+import amplify.us.amplify.entities.GenreEntity;
 import amplify.us.amplify.entities.SongEntity;
 import amplify.us.amplify.profile.FavouriteSongsActivity;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
@@ -53,18 +57,22 @@ import pl.bclogic.pulsator4droid.library.PulsatorLayout;
  */
 public class AmplifySiteFragment extends Fragment {
 
+    TextView establishmentName;
+    TextView nameSongAmplify;
+    TextView artistSongAmplify;
+    TextView albumSongAmplify;
+    ImageView imgAmplify;
+
     private DiscoverFragment discoverFragment;
 
 
     SongEntity songAmplify;
     private Handler handler;
     MyRunnable runnable;
+    EstablishmentEntity establishmentEntity;
     SongEntity songAmplifySimilar;
     SongEntity songAmplifySimilar2;
     String url_major = "http://brain.3utilities.com/AmplifyWeb/rest/";
-    private TextView nameSong;
-    private TextView nameArtist;
-    private TextView nameAlbum;
     private String m_Text="";
 
     RequestQueue queuePost;
@@ -88,9 +96,9 @@ public class AmplifySiteFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_amplify_site, container, false);
 
-        nameSong = rootView.findViewById(R.id.name_song_amp);
+        /*nameSong = rootView.findViewById(R.id.name_song_amp);
         nameArtist = rootView.findViewById(R.id.artist_song_amp);
-        nameAlbum = rootView.findViewById(R.id.album_song_amp);
+        nameAlbum = rootView.findViewById(R.id.album_song_amp);*/
 
         if(!flag){
             AlertDialog.Builder builder = new AlertDialog.Builder(rootView.getContext());
@@ -135,11 +143,13 @@ public class AmplifySiteFragment extends Fragment {
         String urlPost = url_major+"establishments/go_in/1/1";
         queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
 
+        JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
+        queuePost.add(post);
 
 
 
 
-        String url = url_major+"establishments/1";
+        /*String url = url_major+"establishments/1";
         String url_similar = url_major+"/music/songs/similar/4";
         String url_similar2 = url_major+"/music/songs/similar/4";
 
@@ -159,7 +169,7 @@ public class AmplifySiteFragment extends Fragment {
         JsonObjectRequest similarRequest = volleyRequestSimilar(rootView,url_similar);
         JsonObjectRequest similarRequest2 = volleyRequestSimilar2(rootView,url_similar2);
         queue.add(similarRequest);
-        queue.add(similarRequest2);
+        queue.add(similarRequest2);*/
 
 
 
@@ -215,11 +225,24 @@ public class AmplifySiteFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("Response Post", response.toString());
+                establishmentEntity = new EstablishmentEntity(response);
+                try {
+                    JSONArray playList = response.getJSONArray("playlists");
+                    for (int i=0;i<playList.length();i++){
+                        if(playList.getJSONObject(i).getString("current").equals("true")){
+                            songAmplify = new SongEntity((playList.getJSONObject(i).getJSONObject("song")));
+                            setAmplify(rootview);
+                            Log.d("a", response.toString());
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("RESPONSE", error.toString());
+                Log.d("RESPONSEError", error.toString());
             }
         }
         ){
@@ -249,7 +272,6 @@ public class AmplifySiteFragment extends Fragment {
 
                         //response.getString("image");
                         updateInfoAmplifyJSON(rootView,response);
-
 
                     }
                 }, new Response.ErrorListener() {
@@ -407,16 +429,16 @@ public class AmplifySiteFragment extends Fragment {
     public void updateInfoAmplify(View rootView, SongEntity songEntity){
         //TextView nameEstablishment = rootView.findViewById(R.id.name_local);
         //ImageView imageSong = rootView.findViewById(R.id.cardSong);
-        TextView nameSong = rootView.findViewById(R.id.name_song_amp);
-        TextView nameArtist = rootView.findViewById(R.id.artist_song_amp);
-        TextView nameAlbum = rootView.findViewById(R.id.album_song_amp);
+        //TextView nameSong = rootView.findViewById(R.id.name_song_amp);
+        //TextView nameArtist = rootView.findViewById(R.id.artist_song_amp);
+        //TextView nameAlbum = rootView.findViewById(R.id.album_song_amp);
         //TextView listOfGenres = rootView.findViewById(R.id.genres_song_amp);
 
 
 
-        nameSong.setText(songEntity.getName());
+        /*nameSong.setText(songEntity.getName());
         nameAlbum.setText(songEntity.getAlbum());
-        nameArtist.setText(songEntity.getArtist());
+        nameArtist.setText(songEntity.getArtist());*/
 
     }
 
@@ -424,9 +446,8 @@ public class AmplifySiteFragment extends Fragment {
     public void updateInfoAmplifyJSON(View rootView, JSONObject response){
         //TextView nameEstablishment = rootView.findViewById(R.id.name_local);
         //ImageView imageSong = rootView.findViewById(R.id.cardSong);
-        TextView nameSong = rootView.findViewById(R.id.name_song_amp);
-        TextView nameArtist = rootView.findViewById(R.id.artist_song_amp);
-        TextView nameAlbum = rootView.findViewById(R.id.album_song_amp);
+        //TextView nameSong = rootView.findViewById(R.id.name_song_amp);
+        ////TextView nameAlbum = rootView.findViewById(R.id.album_song_amp);
         //TextView listOfGenres = rootView.findViewById(R.id.genres_song_amp);
 
 
@@ -443,9 +464,9 @@ public class AmplifySiteFragment extends Fragment {
             e.printStackTrace();
         }
 
-        nameSong.setText(songAmplify.getName());
+        /*nameSong.setText(songAmplify.getName());
         nameAlbum.setText(songAmplify.getAlbum());
-        nameArtist.setText(songAmplify.getArtist());
+        nameArtist.setText(songAmplify.getArtist());*/
 
     }
 
@@ -464,7 +485,7 @@ public class AmplifySiteFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        queue.cancelAll(this);
+        //queue.cancelAll(this);
         super.onDestroyView();
     }
 
@@ -472,5 +493,26 @@ public class AmplifySiteFragment extends Fragment {
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void setAmplify(View rootView){
+        establishmentName = rootView.findViewById(R.id.name_local);
+        nameSongAmplify = rootView.findViewById(R.id.name_song_amp1);
+        artistSongAmplify = rootView.findViewById(R.id.artist_song_amp1);
+        albumSongAmplify = rootView.findViewById(R.id.album_song_amp1);
+        imgAmplify = rootView.findViewById(R.id.cardSong);
+
+        establishmentName.setText(establishmentEntity.getName());
+        nameSongAmplify.setText(songAmplify.getName());
+        artistSongAmplify.setText(songAmplify.getArtist());
+        albumSongAmplify.setText(songAmplify.getAlbum());
+        Log.d("Rip",songAmplify.toString());
+        //Log.d("rIP", songAmplify.getUrl_image());
+        Picasso.get()
+                .load(songAmplify.getUrl_image())
+                .centerCrop()
+                .fit()
+                .into(imgAmplify);
+
     }
 }
