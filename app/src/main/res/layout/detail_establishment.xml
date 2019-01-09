@@ -96,22 +96,21 @@
         app:layout_constraintStart_toStartOf="@+id/genre1"
         app:layout_constraintTop_toBottomOf="@+id/genre1" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_1"
+    <ImageView
+        android:id="@+id/votedEstablishment1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/clearGrey"
         app:layout_constraintStart_toStartOf="@+id/voted_songs"
         app:layout_constraintTop_toBottomOf="@+id/voted_songs"/>
 
-    <android.support.v7.widget.CardView
+    <ImageView
+        android:id="@+id/votedEstablishment2"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/clearGrey"
-        app:layout_constraintStart_toEndOf="@+id/cardView_1"
+        app:layout_constraintStart_toEndOf="@+id/votedEstablishment1"
         app:layout_constraintTop_toBottomOf="@+id/voted_songs"/>
 
 </android.support.constraint.ConstraintLayout>

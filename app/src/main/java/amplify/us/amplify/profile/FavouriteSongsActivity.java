@@ -79,7 +79,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
         //Add sample data for list
         //We can get data form DB, webService here
-        //mSongList.add(new SongEntity(1,"Song 1", "artist 1", "album 1","url"));
+        mSongList.add(new SongEntity(1,"Angels", "Robbie Williams", "Robbie Wiliams album","https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Angels_cover.png/220px-Angels_cover.png",0));
 
 
         //Update Data
@@ -106,8 +106,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
         queue.add(requestUser);
 
-        adapter = new FavouriteSongsAdapter(this,mSongList);
-        lvFavSongs.setAdapter(adapter);
+
 
         //Init ContextMenu
         registerForContextMenu(lvFavSongs);
@@ -271,6 +270,8 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
              ) {
             mSongList.add(s);
         }
+        adapter = new FavouriteSongsAdapter(this,mSongList);
+        lvFavSongs.setAdapter(adapter);
     }
 
 

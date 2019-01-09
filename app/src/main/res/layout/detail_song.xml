@@ -26,8 +26,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_detail_song" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView2"
+    <ImageView
+        android:id="@+id/image_view_song"
         android:layout_width="220dp"
         android:layout_height="220dp"
         android:layout_marginStart="8dp"
@@ -50,7 +50,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintTop_toBottomOf="@+id/image_view_song" />
 
     <TextView
         android:id="@+id/album_name"
@@ -104,33 +104,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFavourite" />
 
-    <android.support.v7.widget.CardView
+    <ImageView
         android:id="@+id/similar"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/clearGrey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/similar_song_text" />
 
-    <android.support.v7.widget.CardView
+    <ImageView
         android:id="@+id/similar1"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/clearGrey"
         app:layout_constraintStart_toEndOf="@+id/similar"
         app:layout_constraintTop_toBottomOf="@+id/similar_song_text" />
 
-    <android.support.v7.widget.CardView
+    <ImageView
         android:id="@+id/similar2"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/clearGrey"
         app:layout_constraintStart_toEndOf="@+id/similar1"
         app:layout_constraintTop_toBottomOf="@+id/similar_song_text" />
 

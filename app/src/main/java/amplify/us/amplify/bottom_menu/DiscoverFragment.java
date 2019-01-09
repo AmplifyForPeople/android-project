@@ -107,18 +107,15 @@ public class DiscoverFragment extends Fragment {
                             recyclerViewSetupEstablishment(rootView);
                         }catch (JSONException arg){
                             Log.d("RIPARNAU", response.toString());
-
                             arg.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
                 Log.d("RESPONSE", error.toString());
             }
         })
-
         {
             /** Passing some request headers* */
             @Override

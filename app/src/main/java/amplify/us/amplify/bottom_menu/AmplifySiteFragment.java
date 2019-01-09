@@ -231,7 +231,8 @@ public class AmplifySiteFragment extends Fragment {
                                             ,response.getString("name")
                                             ,response.getString("author")
                                             ,response.getString("album")
-                                            ,response.getString("image"));
+                                            ,response.getString("image")
+                                            ,response.getInt("votes"));
                             Log.d("RESPONSE", response.toString());
                             //response.getString("image");
                             //updateInfoAmplify(rootView,songAmplify);
@@ -284,7 +285,8 @@ public class AmplifySiteFragment extends Fragment {
                                             ,response.getString("name")
                                             ,response.getString("author")
                                             ,response.getString("album")
-                                            ,response.getString("image"));
+                                            ,response.getString("image")
+                                            ,response.getInt("votes"));
                             //response.getString("image");
                             updateInfoAmplify(rootView,songAmplify);
 
@@ -375,7 +377,8 @@ public class AmplifySiteFragment extends Fragment {
                             ,response.getString("name")
                             ,response.getString("author")
                             ,response.getString("album")
-                            ,response.getString("image"));
+                            ,response.getString("image")
+                            ,response.getInt("votes"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

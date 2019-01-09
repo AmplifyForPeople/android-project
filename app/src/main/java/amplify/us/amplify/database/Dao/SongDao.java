@@ -65,7 +65,7 @@ public class SongDao {
     }
 
     private SongEntity build(Cursor cursor) {
-        SongEntity entity = new SongEntity(0,"","","","");
+        SongEntity entity = new SongEntity(0,"","","","",0);
 
         entity.setId(cursor.getInt(cursor.getColumnIndex(Song.Columns.ID)));
         entity.setName(cursor.getString(cursor.getColumnIndex(Song.Columns.NAME)));

@@ -52,7 +52,6 @@ public class VotedSongsAdapter extends RecyclerView.Adapter<VotedSongsAdapter.Vo
     public void onBindViewHolder(VotedSongsAdapter.VotedSongsViewHolder holder, int position){
         SongEntity songEntity = data.get(position);
         holder.name_song.setText(songEntity.getName());
-        Log.d("RIPARNAU", songEntity.getUrl_image());
         Picasso.get()
                 .load(songEntity.getUrl_image())
                 .centerCrop()
