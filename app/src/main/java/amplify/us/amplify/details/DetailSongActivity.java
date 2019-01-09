@@ -27,6 +27,7 @@ public class DetailSongActivity extends AppCompatActivity {
             String title = getIntent().getStringExtra("song");
             String artist = getIntent().getStringExtra("artist");
             String album = getIntent().getStringExtra("album");
+            String image_url = getIntent().s
             setData(title,artist,album);
         }
     }

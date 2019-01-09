@@ -64,7 +64,7 @@ public class VotedSongsAdapter extends RecyclerView.Adapter<VotedSongsAdapter.Vo
             intent.putExtra("song",data.get(position).getName());
             intent.putExtra("artist",data.get(position).getAlbum());
             intent.putExtra("album",data.get(position).getArtist());
-            //IMAGE -> intent.putExtra("info_title",data.get(position).getInfo());
+            intent.putExtra("url",data.get(position).getUrl_image());
             v.getContext().startActivity(intent);
         });
     }

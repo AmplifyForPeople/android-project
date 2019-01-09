@@ -80,10 +80,6 @@ public class DiscoverFragment extends Fragment {
         queue.add(requestEstablishment);
         queue.add(requestSongs);
 
-
-
-
-        //simulate Services info
         //RecyclerView establishments nearby
         recyclerViewSetupEstablishment(rootView);
         //RecyclerView most voted songs
@@ -106,9 +102,7 @@ public class DiscoverFragment extends Fragment {
                         try{
                             for(int i = 0;i<response.length();i++){
                                 JSONObject result = response.getJSONObject(i);
-
                                 data.add(new EstablishmentEntity(result));
-
                             }
                             recyclerViewSetupEstablishment(rootView);
                         }catch (JSONException arg){
@@ -116,12 +110,6 @@ public class DiscoverFragment extends Fragment {
 
                             arg.printStackTrace();
                         }
-
-                        //response.getString("image");
-
-                        //updateInfoAmplifyJSON(rootView,response);
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -172,27 +160,12 @@ public class DiscoverFragment extends Fragment {
                                 JSONObject result = response.getJSONObject(i);
                                 dataSong.add(new SongEntity(result));
                             }
-                            for(int i = 0;i<response.length();i++){
-                                JSONObject result = response.getJSONObject(i);
-                                int id = result.getInt("id");
-                                String name = result.getString("name");
-                                String album = result.getString("album");
-                                String author = result.getString("author");
-                                String url_image = result.getString("image");
-                                dataSong.add(new SongEntity(id,name,author,album,url_image));
-                            }
                             recyclerViewSetupVotedSongs(rootView);
                         }catch (JSONException arg){
                             Log.d("RIPARNAU", response.toString());
 
                             arg.printStackTrace();
                         }
-
-                        //response.getString("image");
-
-                        //updateInfoAmplifyJSON(rootView,response);
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -251,41 +224,6 @@ public class DiscoverFragment extends Fragment {
         rv_most_voted_songs.setLayoutManager(mLayoutManager);
         RecyclerView.Adapter mAdapter = new VotedSongsAdapter(dataSong);
         rv_most_voted_songs.setAdapter(mAdapter);
-    }
-
-    //Adding dataSet into RecyclerView Establishments Nearby
-    /*private ArrayList<EstablishmentEntity> dataSetEstablishment(){
-        EstablishmentService.getAllEstablishments();
-        ArrayList<EstablishmentEntity> data = new ArrayList<>();
-        data.add(new EstablishmentEntity(1,"Establishment 1","a", "mail@mail.com","Info Establishment 1"," ", new String[]{"genre1","genre2"}));
-        data.add(new EstablishmentEntity(2,"Establishment 2","a", "mail@mail.com","Info Establishment 2"," ", new String[]{"genre1","genre2"}));
-        data.add(new EstablishmentEntity(3,"Establishment 3","a", "mail@mail.com","Info Establishment 3"," ", new String[]{"genre1","genre2"}));
-        data.add(new EstablishmentEntity(4,"Establishment 4","a", "mail@mail.com","Info Establishment 4"," ", new String[]{"genre1","genre2"}));
-        return data;
-    }*/
-
-    //Adding dataSet into RecyclerView Establishments Nearby
-    /*private ArrayList<SongEntity> dataSetSong(){
-        //EstablishmentService.getMostVoted();
-        ArrayList<SongEntity> data = new ArrayList<>();
-        data.add(new SongEntity("song 1","artist1","album1"));
-        data.add(new SongEntity("song 2","artist2","album2"));
-        data.add(new SongEntity("song 3","artist3","album3"));
-        data.add(new SongEntity("song 4","artist4","album4"));
-        data.add(new SongEntity("song 5","artist5","album5"));
-        return data;
-    }*/
-
-    private void displayImageFromUrl(String url){
-        try {
-            URI uri = new URI(url);
-            URL link = uri.toURL();
-            Bitmap bmp = BitmapFactory.decodeStream(link.openConnection().getInputStream());
-            //imageView.setImageBitmap(bmp);
-
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }
