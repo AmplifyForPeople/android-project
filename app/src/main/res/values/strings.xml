@@ -7,7 +7,7 @@
     <string name="logoImage">LogoImage</string>
     <string name="logo">"\"Logo\""</string>
     <string name="banner">"for people"</string>
-    <string name="develop">"Develop by"</string>
+    <string name="develop">"Develop by humans"</string>
     <string name="title_activity_login">Login</string>
 
     <!--/////////////////////////////////////////////////////////////-->
@@ -207,6 +207,9 @@
     <!--Modify Genres-->
     <string name="mod_genres">Modify genres of music</string>
     <string name="beta_edition">Beta Edition</string>
+    <string name="tittle_qr">Scan Local QR</string>
+    <string name="detail_qr">for a unique experience, scan the amplify qr that is in the establishment</string>
+    <string name="icon_scan_qr_code">Scan QR Code</string>
 
 
 </resources>

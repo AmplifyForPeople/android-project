@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bannerWelcomeID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/active"/>
+        android:textColor="@color/yellow"/>
 
     <TextView
         android:id="@+id/developID"
