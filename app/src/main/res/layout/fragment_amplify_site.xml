@@ -62,7 +62,7 @@
                 app:pulse_count="4"
                 app:pulse_duration="4500"
                 app:pulse_interpolator="Linear"
-                app:pulse_repeat="0"></pl.bclogic.pulsator4droid.library.PulsatorLayout>
+                app:pulse_repeat="0" />
 
         </FrameLayout>
         
