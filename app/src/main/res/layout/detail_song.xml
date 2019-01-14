@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".details.DetailSongActivity">
+    tools:context=".details.DetailSongActivity"
+    android:background="@drawable/gradient_bg">
 
     <ImageView
         android:id="@+id/back_detail_song"
@@ -23,6 +24,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/song_name"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_detail_song" />
 
@@ -46,7 +48,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/artist_name"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +62,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/album_name"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorWhite"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +76,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:text="@string/genresSong"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorWhite"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +101,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/similar_songs"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorWhite"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFavourite" />

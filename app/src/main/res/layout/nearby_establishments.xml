@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_framesLayouts"
         android:text="@string/title_nearby_establishments"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent" />

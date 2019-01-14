@@ -12,7 +12,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/mostVotSong"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
