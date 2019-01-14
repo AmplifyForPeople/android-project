@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void set_button_sig_in(){
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener((View view) -> {
-                //attemptLogin(); TODO implement it on next sprint
+                //attemptLogin(); TODO implement it on next development
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
