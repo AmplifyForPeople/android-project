@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,45 +102,14 @@ public class AmplifySiteFragment extends Fragment {
         nameAlbum = rootView.findViewById(R.id.album_song_amp);*/
 
         if(!flag){
-            AlertDialog.Builder builder = new AlertDialog.Builder(rootView.getContext());
-            builder.setTitle("Add the Local Code");
+            flag = true;
+            //AVISAR AL SISTEMA QUE ESTIC A DINTRE
+            String urlPost = url_major+"establishments/go_in/1/1";
+            queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
 
-            // Set up the input
-            final EditText input = new EditText(rootView.getContext());
-            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            builder.setView(input);
-
-            // Set up the buttons
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    m_Text = input.getText().toString();
-                    if(!m_Text.equals("1")){
-                        setFragment(discoverFragment);
-                    }else{
-                        flag = true;
-                        //AVISAR AL SISTEMA QUE ESTIC A DINTRE
-                        String urlPost = url_major+"establishments/go_in/1/1";
-                        queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
-
-                        JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
-                        queuePost.add(post);
-                    }
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-        setFragment(discoverFragment);
-                    //dialog.cancel();
-                }
-            });
-
-            builder.show();
+            JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
+            queuePost.add(post);
         }
-
-
 
         // Pulse Animation (Amplify Active)
         PulsatorLayout pulse = rootView.findViewById(R.id.pulsator);
@@ -152,8 +122,6 @@ public class AmplifySiteFragment extends Fragment {
             JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
             queuePost.add(post);
         }
-
-
 
 
         /*String url = url_major+"establishments/1";
@@ -185,7 +153,7 @@ public class AmplifySiteFragment extends Fragment {
         //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
 
         // Add to fav song
-        Button addToFav = (Button) rootView.findViewById(R.id.addToFav);
+        ImageButton addToFav = (ImageButton) rootView.findViewById(R.id.addToFav);
         addToFav.setOnClickListener(v -> {
             addToFavSong(v,songAmplify);
             Toast.makeText(getContext(),songAmplify.getName(), Toast.LENGTH_SHORT).show();
