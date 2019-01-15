@@ -77,7 +77,7 @@ public class DetailSongActivity extends AppCompatActivity {
         button.setOnClickListener((View v) -> {
             Toast.makeText(getApplicationContext(),"Added Song",Toast.LENGTH_LONG).show();
             button.setVisibility(View.GONE);
-            String url = url_major+"/"+user.getId()+"/"+id_song;
+            String url = url_major+"/songs/"+user.getId()+"/"+id_song;
             JsonObjectRequest requestAdd = volleyPostRequest(url);
             queue.add(requestAdd);
         });
