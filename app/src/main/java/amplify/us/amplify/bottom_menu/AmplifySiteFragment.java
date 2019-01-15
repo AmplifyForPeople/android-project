@@ -139,8 +139,6 @@ public class AmplifySiteFragment extends Fragment {
         }
 
 
-
-
         //Updating songs
         String url_update_song = url_major+"establishments/1";
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -168,9 +166,6 @@ public class AmplifySiteFragment extends Fragment {
         JsonObjectRequest similarRequest2 = volleyRequestSimilar2(rootView,url_similar2);
         queue.add(similarRequest);
         queue.add(similarRequest2);*/
-
-
-
 
 
         //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
@@ -334,7 +329,6 @@ public class AmplifySiteFragment extends Fragment {
                                 JSONObject result = response.getJSONObject(i);
                                 dataSong.add(new SongEntity(result));
                             }
-                            Toast.makeText(rootView.getContext(),"LLEGEIXO",Toast.LENGTH_SHORT).show();
                             setSimilarSongs(dataSong,rootView);
                         }catch (JSONException arg){
                             Log.d("RIPARNAU", response.toString());
@@ -375,111 +369,6 @@ public class AmplifySiteFragment extends Fragment {
         });
 
         return jsonArrayRequest;
-    }
-
-
-    public JsonObjectRequest volleyRequestSimilar(View rootView,String url){
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("RESPONSE", response.toString());
-                        try{
-                            songAmplifySimilar =
-                                    new SongEntity(
-                                            response.getInt("id")
-                                            ,response.getString("name")
-                                            ,response.getString("author")
-                                            ,response.getString("album")
-                                            ,response.getString("image")
-                                            ,response.getInt("votes"));
-                            Log.d("RESPONSE", response.toString());
-                            //response.getString("image");
-                            //updateInfoAmplify(rootView,songAmplify);
-                            updateInfoAmplifyJSON(rootView,response);
-
-
-                        }catch (JSONException e){
-                            e.printStackTrace();
-
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("RESPONSE", error.toString());
-            }
-        });
-        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 50000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 50000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
-
-        return jsonObjectRequest;
-    }
-
-    public JsonObjectRequest volleyRequestSimilar2(View rootView,String url){
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("RESPONSE", response.toString());
-                        try{
-                            songAmplifySimilar2 =
-                                    new SongEntity(
-                                            response.getInt("id")
-                                            ,response.getString("name")
-                                            ,response.getString("author")
-                                            ,response.getString("album")
-                                            ,response.getString("image")
-                                            ,response.getInt("votes"));
-                            //response.getString("image");
-                            updateInfoAmplify(rootView,songAmplify);
-
-
-                        }catch (JSONException e){
-                            e.printStackTrace();
-
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("RESPONSE", error.toString());
-            }
-        });
-        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 50000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 50000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
-
-        return jsonObjectRequest;
     }
 
 

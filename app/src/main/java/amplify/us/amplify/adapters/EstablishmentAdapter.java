@@ -72,6 +72,7 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
                 intent.putExtra("info_title",data.get(position).getInfo());
                 intent.putExtra("image",data.get(position).getUrl_image());
                 intent.putExtra("genres",(ArrayList<GenreEntity>)data.get(position).getGenres());
+                intent.putExtra("id",data.get(position).getId());
                 v.getContext().startActivity(intent);
         });
     }

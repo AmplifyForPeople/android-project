@@ -1,9 +1,11 @@
 package amplify.us.amplify.details;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +30,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import amplify.us.amplify.R;
+import amplify.us.amplify.adapters.FavouriteSongsAdapter;
 import amplify.us.amplify.database.model.Song;
+import amplify.us.amplify.entities.EstablishmentEntity;
 import amplify.us.amplify.entities.SongEntity;
 import amplify.us.amplify.entities.UserEntity;
 
@@ -41,6 +45,12 @@ public class DetailSongActivity extends AppCompatActivity {
     ImageView Song1;
     ImageView Song2;
     ArrayList<SongEntity> dataSong;
+    UserEntity user;
+    String title;
+    Button button;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +68,25 @@ public class DetailSongActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String similars = url_major+"/songs/"+id_song+"/similar";
         queue.add(volleyRequest_rvSongs(similars));
+
+        String url_user = url_major+"/users/1";
+        JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
+        queue.add(requestUser);
+        button = findViewById(R.id.addFavourite);
+
+        button.setOnClickListener((View v) -> {
+            Toast.makeText(getApplicationContext(),"Added Song",Toast.LENGTH_LONG).show();
+            button.setVisibility(View.GONE);
+            String url = url_major+"/"+user.getId()+"/"+id_song;
+            JsonObjectRequest requestAdd = volleyPostRequest(url);
+            queue.add(requestAdd);
+        });
+
     }
 
     private  void getIncomingIntent(){
         if(getIntent().hasExtra("song") && getIntent().hasExtra(("artist")) && getIntent().hasExtra(("album"))){
-            String title = getIntent().getStringExtra("song");
+            title = getIntent().getStringExtra("song");
             String artist = getIntent().getStringExtra("artist");
             String album = getIntent().getStringExtra("album");
             String image_url = getIntent().getStringExtra("url");
@@ -138,6 +162,55 @@ public class DetailSongActivity extends AppCompatActivity {
         return jsonArrayRequest;
     }
 
+    public JsonObjectRequest volleyRequest_rvUser(String url) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("RESPONSE", response.toString());
+
+                        //response.getString("image");
+                        //updateInfoAmplifyJSON(rootView,response);
+                        user = new UserEntity(response);
+                        setButton();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        })
+        {
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        return jsonObjectRequest;
+    }
+
     public void setSimilarSongs(ArrayList<SongEntity> song){
         for (SongEntity s: song
              ) {
@@ -159,5 +232,40 @@ public class DetailSongActivity extends AppCompatActivity {
                 Similar += 1;
             }
         }
+    }
+
+    public void setButton(){
+        for (SongEntity s: user.getFavSongs()
+                ) {
+            if(s.getName().equals(title)){
+                button.setVisibility(View.GONE);
+
+            }
+        }
+    }
+
+    public JsonObjectRequest volleyPostRequest(String url){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error Response", error.toString());
+            }
+        }
+        ){
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                headers.put("Content-type","application/json");
+                return headers;
+            }
+        };
+        return jsonObjectRequest;
     }
 }

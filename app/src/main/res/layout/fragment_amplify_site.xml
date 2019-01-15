@@ -212,6 +212,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="20dp"
+            android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/similar_songs_amp"
             app:layout_constraintTop_toBottomOf="@+id/similar_songs_amp" />
@@ -223,6 +224,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="20dp"
+            android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/similar_amp"
             app:layout_constraintTop_toBottomOf="@+id/similar_songs_amp" />

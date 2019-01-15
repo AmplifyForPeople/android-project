@@ -15,10 +15,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -36,9 +39,16 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
 
     String url_major = "http://brain.3utilities.com/AmplifyWeb/rest";
     SongEntity songEntity;
+    int Similar = 0;
+    ArrayList<SongEntity> dataSong;
+
+    SongEntity songEntity1;
+    SongEntity getSongEntity2;
+
     int Voted = 0;
     ImageView Song1;
     ImageView Song2;
+    int id_establishment = 0;
 
 
     @Override
@@ -51,12 +61,17 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
         img.setOnClickListener((View v) ->finish());
 
         getIncomingIntent();
+        dataSong = new ArrayList<>();
+
+
+
+        id_establishment = getIntent().getIntExtra("id",0);
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String voted1 = url_major+"/songs/1";
-        String voted2 = url_major+"/songs/2";
-        queue.add(volleyVotedSongs(voted1));
-        queue.add(volleyVotedSongs(voted2));
+        String voted1 = url_major+"/songs/most_voted_establishment/"+id_establishment;
+        Toast.makeText(getApplicationContext(),voted1,Toast.LENGTH_LONG).show();
+
+        queue.add(volleyRequest_rvSongs(voted1));
 
     }
 
@@ -91,24 +106,31 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
         genre_string.setText(result);
     }
 
-    public JsonObjectRequest volleyVotedSongs(String url) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("RESPONSE", response.toString());
-                        songEntity = new SongEntity(response);
-                        setVotedSongs();
-                        //response.getString("image");
-                        //updateInfoAmplifyJSON(rootView,response);
-                        //user = new UserEntity(response);
-                        //setUser();
+    public JsonArrayRequest volleyRequest_rvSongs(String url){
 
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("VOTEDSONG", response.toString());
+                        try{
+                            Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG);
+                            for(int i = 0;i<response.length();i++){
+                                JSONObject result = response.getJSONObject(i);
+                                dataSong.add(new SongEntity(result));
+                                Log.d("VOTED", response.toString());
+
+                            }
+                            setSimilarSongs(dataSong);
+                        }catch (JSONException arg){
+                            Log.d("RIPARNAU", response.toString());
+                            arg.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
                 Log.d("RESPONSE", error.toString());
             }
         })
@@ -121,8 +143,7 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
                 return headers;
             }
         };
-
-        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
                 return 50000;
@@ -139,26 +160,30 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
             }
         });
 
-        return jsonObjectRequest;
+        return jsonArrayRequest;
     }
 
-    public void setVotedSongs(){
-        if(Voted == 0){
-            Song1 = findViewById(R.id.votedEstablishment1);
-            Picasso.get()
-                    .load(songEntity.getUrl_image())
-                    .centerCrop()
-                    .fit()
-                    .into(Song1);
-            Voted += 1;
-        }else if (Voted == 1){
-            Song2 = findViewById(R.id.votedEstablishment2);
-            Picasso.get()
-                    .load(songEntity.getUrl_image())
-                    .centerCrop()
-                    .fit()
-                    .into(Song2);
-            Voted = 0;
+
+    public void setSimilarSongs(ArrayList<SongEntity> song){
+        for (SongEntity s: song
+                ) {
+            if(Similar == 0){
+                Song1 = findViewById(R.id.votedEstablishment1);
+                Picasso.get()
+                        .load(s.getUrl_image())
+                        .centerCrop()
+                        .fit()
+                        .into(Song1);
+                Similar += 1;
+            }else if(Similar == 1){
+                Song2 = findViewById(R.id.votedEstablishment2);
+                Picasso.get()
+                        .load(s.getUrl_image())
+                        .centerCrop()
+                        .fit()
+                        .into(Song2);
+                Similar += 1;
+            }
         }
     }
 }
