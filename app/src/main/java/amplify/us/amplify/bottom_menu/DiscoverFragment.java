@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -45,6 +46,7 @@ import amplify.us.amplify.adapters.EstablishmentAdapter;
 import amplify.us.amplify.adapters.VotedSongsAdapter;
 import amplify.us.amplify.details.DetailSongActivity;
 import amplify.us.amplify.entities.EstablishmentEntity;
+import amplify.us.amplify.entities.GenreEntity;
 import amplify.us.amplify.entities.SongEntity;
 import amplify.us.amplify.services.EstablishmentService;
 
@@ -58,6 +60,9 @@ public class DiscoverFragment extends Fragment {
 
     ArrayList<EstablishmentEntity> data;
     ArrayList<SongEntity> dataSong;
+    ArrayList<GenreEntity> dataGenre;
+    String genreUpdate = "";
+    TextView genre;
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -71,14 +76,23 @@ public class DiscoverFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url_establishment = url_major+"/establishments";
         String url_song = url_major+"/songs/most_voted";
+        String url_genres = url_major+"/genres/most_voted";
+
+        genre = (TextView) rootView.findViewById(R.id.gen1);
+        genre.setText(" ");
+        genreUpdate = " ";
 
         data = new ArrayList<>();
         dataSong = new ArrayList<>();
+        dataGenre = new ArrayList<>();
 
         JsonArrayRequest requestEstablishment = volleyRequest_rvEstablishment(rootView,url_establishment);
         JsonArrayRequest requestSongs = volleyRequest_rvSongs(rootView,url_song);
+        JsonArrayRequest requestGenres = volleyRequest_rvGenres(rootView,url_genres);
+
         queue.add(requestEstablishment);
         queue.add(requestSongs);
+        queue.add(requestGenres);
 
         //RecyclerView establishments nearby
         recyclerViewSetupEstablishment(rootView);
@@ -200,6 +214,61 @@ public class DiscoverFragment extends Fragment {
         return jsonArrayRequest;
     }
 
+    public JsonArrayRequest volleyRequest_rvGenres(View rootView, String url){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("RESPONSE", response.toString());
+                        try{
+                            for(int i = 0;i<response.length();i++){
+                                JSONObject result = response.getJSONObject(i);
+                                dataGenre.add(new GenreEntity(result));
+                                genreUpdate+=(dataGenre.get(i).name+" ");
+                            }
+                            setGenre(rootView,genreUpdate);
+                        }catch (JSONException arg){
+                            Log.d("Error", response.toString());
+                            arg.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        })
+        {
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        return jsonArrayRequest;
+    }
+
 
 
 
@@ -221,6 +290,10 @@ public class DiscoverFragment extends Fragment {
         rv_most_voted_songs.setLayoutManager(mLayoutManager);
         RecyclerView.Adapter mAdapter = new VotedSongsAdapter(dataSong);
         rv_most_voted_songs.setAdapter(mAdapter);
+    }
+
+    private void setGenre(View rootView, String nameGenre){
+        genre.setText(nameGenre);
     }
 
 }
