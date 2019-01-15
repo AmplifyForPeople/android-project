@@ -69,8 +69,6 @@ public class DetailEstablishmentActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String voted1 = url_major+"/songs/most_voted_establishment/"+id_establishment;
-        Toast.makeText(getApplicationContext(),voted1,Toast.LENGTH_LONG).show();
-
         queue.add(volleyRequest_rvSongs(voted1));
 
     }

@@ -75,10 +75,7 @@ public class AmplifySiteFragment extends Fragment {
 
     UserEntity userEntity;
 
-
-
     private DiscoverFragment discoverFragment;
-
 
     SongEntity songAmplify;
     private Handler handler;
@@ -128,14 +125,14 @@ public class AmplifySiteFragment extends Fragment {
         PulsatorLayout pulse = rootView.findViewById(R.id.pulsator);
         pulse.start();
 
-        if(flag){
+        /*if(flag){
             String urlPost = url_major+"establishments/go_in/1/1";
             queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
 
             JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
             queuePost.add(post);
 
-        }
+        }*/
 
 
         //Updating songs
@@ -167,6 +164,11 @@ public class AmplifySiteFragment extends Fragment {
         addToFav = (ImageButton) rootView.findViewById(R.id.addToFav);
         addToFav.setOnClickListener(v -> {
             Toast.makeText(getContext(),songAmplify.getName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(rootView.getContext(),"Added Song",Toast.LENGTH_LONG).show();
+            addToFav.setVisibility(View.GONE);
+            String url = url_major+"songs/"+userEntity.getId()+"/"+songAmplify.getId();
+            JsonObjectRequest requestAdd = volleyPostRequest(url);
+            queue.add(requestAdd);
 
         });
 
@@ -523,8 +525,9 @@ public class AmplifySiteFragment extends Fragment {
                 .fit()
                 .into(imgAmplify);
 
-        setButton();
-
+        if(userEntity != null){
+            setButton();
+        }
 
     }
 
@@ -560,5 +563,30 @@ public class AmplifySiteFragment extends Fragment {
                 addToFav.setVisibility(View.GONE);
             }
         }
+    }
+
+    public JsonObjectRequest volleyPostRequest(String url){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error Response", error.toString());
+            }
+        }
+        ){
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                headers.put("Content-type","application/json");
+                return headers;
+            }
+        };
+        return jsonObjectRequest;
     }
 }

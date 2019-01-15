@@ -51,6 +51,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     private ListView lvFavSongs;
     private List<SongEntity> mSongList;
     private SearchView mSearchView;
+    RequestQueue queue;
 
     FavouriteSongsAdapter adapter;
     SongDao songDao;
@@ -79,7 +80,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
         //Add sample data for list
         //We can get data form DB, webService here
-        mSongList.add(new SongEntity(1,"Angels", "Robbie Williams", "Robbie Wiliams album","https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Angels_cover.png/220px-Angels_cover.png",0));
+        //mSongList.add(new SongEntity(1,"Angels", "Robbie Williams", "Robbie Wiliams album","https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Angels_cover.png/220px-Angels_cover.png",0));
 
 
         //Update Data
@@ -101,7 +102,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
             Toast.makeText(getApplicationContext(),"Clicked:"+view.getTag(), Toast.LENGTH_SHORT).show();
         });*/
 
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue = Volley.newRequestQueue(getApplicationContext());
         String url_user = url_major+"/users/1";
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
         queue.add(requestUser);
@@ -110,6 +111,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
         //Init ContextMenu
         registerForContextMenu(lvFavSongs);
+
     }
 
     /*private void saveList(){
@@ -233,17 +235,28 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
             //Delete Item
             case R.id.option_delete:
+                if(item.getTitle().equals("Delete")){
+                    // Remove Song from My Favourite Songs
 
-                // Remove Song from My Favourite Songs
+                    String url = url_major+"/songs/"+user.getId()+"/"+mSongList.get(info.position).getId()+"/delete";
+                    JsonObjectRequest requestAdd = volleyPostRequestDelete(url);
+                    queue.add(requestAdd);
 
-                mSongList.remove(mSongList.get(info.position));
-                adapter = new FavouriteSongsAdapter(this,mSongList);
-                lvFavSongs.setAdapter(adapter);
+                    mSongList.remove(mSongList.get(info.position));
+                    adapter = new FavouriteSongsAdapter(this,mSongList);
+                    lvFavSongs.setAdapter(adapter);
+
+                    //Toast.makeText(this,mSongList.get(info.position).getName()+" Deleted",Toast.LENGTH_SHORT).show();
+
+                    break;
+                }
+
+
 
                 // Toast -> NameSong deleted
-                //Toast.makeText(this,mSongList.get(info.position).getName()+" Deleted",Toast.LENGTH_SHORT).show();
 
                 //Copy Name of song
+                break;
             case R.id.option_copy:
                 if(item.getTitle().equals("Copy")){
                     ClipboardManager clipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
@@ -255,14 +268,18 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
                     // Toast -> NameSong Copied
                     Toast.makeText(this,mSongList.get(info.position).getName()+" Copied",Toast.LENGTH_SHORT).show();
+                    break;
                 }
+                break;
 
 
 
 
             default:
                 return super.onContextItemSelected(item);
+
         }
+        return true;
     }
 
     public void setListFavourites(){
@@ -272,6 +289,31 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         }
         adapter = new FavouriteSongsAdapter(this,mSongList);
         lvFavSongs.setAdapter(adapter);
+    }
+
+    public JsonObjectRequest volleyPostRequestDelete(String url){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error Response", error.toString());
+            }
+        }
+        ){
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                headers.put("Content-type","application/json");
+                return headers;
+            }
+        };
+        return jsonObjectRequest;
     }
 
 

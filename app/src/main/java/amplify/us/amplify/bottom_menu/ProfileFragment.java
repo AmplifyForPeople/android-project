@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import amplify.us.amplify.LoginActivity;
 import amplify.us.amplify.R;
+import amplify.us.amplify.StartApp;
 import amplify.us.amplify.profile.ChangePasswordActivity;
 import amplify.us.amplify.profile.EditProfileActivity;
 import amplify.us.amplify.profile.FavouriteSongsActivity;
@@ -60,7 +61,7 @@ public class ProfileFragment extends Fragment {
         Button logUot = (Button) rootView.findViewById((R.id.button_logout));
 
         logUot.setOnClickListener((View v) -> {
-                Intent intent = new Intent(v.getContext(),LoginActivity.class);
+                Intent intent = new Intent(v.getContext(),StartApp.class);
                 v.getContext().startActivity(intent);
                 getActivity().finish();
         });
