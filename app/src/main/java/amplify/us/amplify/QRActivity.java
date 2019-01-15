@@ -43,8 +43,12 @@ public class QRActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Amplify State Correct", Toast.LENGTH_SHORT).show();
-                        showNextScreen();
+                        if(result.getText().equals("1")) {
+                            Toast.makeText(getApplicationContext(), "Welcome to AmplifySite", Toast.LENGTH_SHORT).show();
+                            showNextScreen();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "QR Error, scan again", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }

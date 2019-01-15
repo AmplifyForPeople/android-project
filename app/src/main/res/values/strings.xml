@@ -128,7 +128,7 @@
     <!-- Discover Fragment -->
 
     <!--nearby establishment-->
-    <string name="title_nearby_establishments">Establishments nearby</string>
+    <string name="title_nearby_establishments">Establishments in your city</string>
     <!--cardView & detail-->
     <string name="name_establishment">Name Establishment</string>
     <string name="info_establishment">Info Establishment</string>
@@ -147,7 +147,7 @@
 
 
     <!-- Most voted songs -->
-    <string name="mostVotSong">Most voted songs</string>
+    <string name="mostVotSong">Most voted songs in your city</string>
     <!-- song detail -->
     <string name="song_name">Song name</string>
     <string name="artist_name">Artist name</string>
@@ -178,7 +178,7 @@
     <string name="account_title">Account</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="change_password">Change password</string>
-    <string name="modify_gen">Modify your favourites genres of musics</string>
+    <string name="modify_gen">Modify your favourites genres</string>
     <string name="notifications">Notifications</string>
     <string name="app_notifications">App notifications</string>
     <string name="privacity">Privacity</string>

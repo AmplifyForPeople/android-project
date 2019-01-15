@@ -71,10 +71,11 @@
 
         <ImageView
             android:id="@+id/listening_image"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:src="@drawable/listening"
+            app:layout_constraintBottom_toBottomOf="@+id/listening"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/listening" />
 
@@ -164,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@null"
             android:src="@drawable/like"
             app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@null"
             android:src="@drawable/dislike"
             app:layout_constraintStart_toEndOf="@+id/button_like"
