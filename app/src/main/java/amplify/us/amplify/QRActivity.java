@@ -43,7 +43,7 @@ public class QRActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Amplify State Correct", Toast.LENGTH_SHORT).show();
                         showNextScreen();
                     }
                 });

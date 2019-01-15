@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".register.SetSelfDataActivity">
+    tools:context=".register.SetSelfDataActivity"
+    android:background="@drawable/gradient_bg">
 
     <TextView
         android:id="@+id/hey"
@@ -18,6 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
         android:text="@string/set_self_data_hey"
+        android:textColor="@color/colorWhite"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -31,6 +33,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:paddingTop="10dp"
+        android:textColor="@color/colorWhite"
         android:text="@string/set_self_data_message"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="30sp"
@@ -44,6 +47,7 @@
         android:layout_alignStart="@+id/setSelf"
         android:layout_alignEnd="@+id/setSelf"
         android:layout_marginTop="20dp"
+        android:textColor="@color/colorWhite"
         android:text="@string/set_self_data_name"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="20sp"
@@ -53,6 +57,7 @@
         android:id="@+id/set_self_data_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
         android:layout_below="@+id/data_name"
         android:layout_marginTop="15dp"
         android:background="@drawable/shape"
@@ -69,6 +74,7 @@
         android:layout_below="@+id/set_self_data_name"
         android:layout_marginTop="15dp"
         android:text="@string/set_self_data_age"
+        android:textColor="@color/colorWhite"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -79,6 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/data_age"
         android:layout_marginTop="15dp"
+        android:textColor="@color/colorWhite"
         android:background="@drawable/shape"
         android:inputType="number"
         android:maxLines="1"
@@ -88,6 +95,7 @@
 
     <TextView
         android:id="@+id/sex_data"
+        android:textColor="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/set_self_data_age"
@@ -118,6 +126,7 @@
         android:layout_below="@+id/set_self_data_sex"
         android:layout_marginTop="15dp"
         android:text="@string/set_self_data_location"
+        android:textColor="@color/colorWhite"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -148,6 +157,7 @@
         android:layout_marginEnd="130dp"
         android:background="@drawable/shape"
         android:text="@string/set_self_data_next_button"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 
 </RelativeLayout>

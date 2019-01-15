@@ -155,9 +155,9 @@ public class AmplifySiteFragment extends Fragment {
         // Add to fav song
         ImageButton addToFav = (ImageButton) rootView.findViewById(R.id.addToFav);
         addToFav.setOnClickListener(v -> {
-            addToFavSong(v,songAmplify);
+            //addToFavSong(v,songAmplify);
             Toast.makeText(getContext(),songAmplify.getName(), Toast.LENGTH_SHORT).show();
-            handler.removeCallbacks(runnable);
+            //handler.removeCallbacks(runnable);
         });
 
         //Similar song to -> song detail (simple)

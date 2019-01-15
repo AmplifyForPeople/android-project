@@ -88,7 +88,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
                 Log.d("RESPONSE", error.toString());
             }
         })
@@ -125,9 +125,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public void setUser(){
         ageEdit.setText(user.getAge());
         nameEdit.setText(user.getName());
-        Toast.makeText(getApplicationContext(), user.getAge(), Toast.LENGTH_SHORT).show();
         ageEdit.setHint(user.getAge());
         nameEdit.setHint(user.getName());
-        Toast.makeText(getApplicationContext(),user.getName(), Toast.LENGTH_SHORT).show();
     }
 }

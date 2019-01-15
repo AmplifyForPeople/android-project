@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".bottom_menu.AmplifySiteFragment"
-    android:background="@drawable/gradient_bg">
+    android:background="@drawable/gradient_bg"
+    android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                 android:layout_marginEnd="60dp"
                 android:text="@string/active"
                 android:textColor="@color/active"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <pl.bclogic.pulsator4droid.library.PulsatorLayout
@@ -59,6 +60,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="125dp"
+                android:layout_marginLeft="5dp"
                 app:pulse_color="@color/active"
                 app:pulse_count="4"
                 app:pulse_duration="4500"

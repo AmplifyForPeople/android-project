@@ -33,54 +33,69 @@
         <activity
             android:name=".bottom_menu.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".DescriptionActivity"
             android:label="@string/title_description"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".register.RegisterActivity"
             android:label="@string/register"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".register.SetSelfDataActivity"
             android:label="SetSelfData"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".register.SetGenresActivity"
             android:label="SetGenres"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".details.DetailEstablishmentActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".details.DetailSongActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".profile.FavouriteSongsActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".profile.EditProfileActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".profile.ChangePasswordActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".profile.ModifyGenresActivitiy"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TermsAndConditionsActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".QRActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".StartApp"
-            android:theme="@style/AppTheme.FullScreenTheme"/>
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

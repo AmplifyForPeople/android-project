@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
 
         //Default MainFragment :: DiscoverFragment
-        setFragment(discoverFragment);
+        navigation.getMenu().getItem(1).setChecked(true);
+        setFragment(amplifySiteFragment);
     }
 
     // To refactor

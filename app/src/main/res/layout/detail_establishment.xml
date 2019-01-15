@@ -1,120 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg">
 
-    <ImageView
-        android:id="@+id/back_detail_establishment"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_arrow_back"
-        android:contentDescription="@string/description_info_establishment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/name_establishment"
-        android:text="@string/name_establishment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintTop_toBottomOf="@+id/back_detail_establishment"
-        style="@style/TitleDetail"/>
+        <ImageView
+            android:id="@+id/back_detail_establishment"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="@string/description_info_establishment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_establishment"
-        android:layout_width="300sp"
-        android:layout_height="240sp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="3"
-        android:background="@color/colorWhite"
-        android:contentDescription="@string/image_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_establishment" />
+        <TextView
+            android:id="@+id/name_establishment"
+            android:text="@string/name_establishment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintTop_toBottomOf="@+id/back_detail_establishment"
+            style="@style/TitleDetail"/>
 
-    <TextView
-        android:id="@+id/description_establishment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/info_establishment"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_establishment" />
+        <ImageView
+            android:id="@+id/img_establishment"
+            android:layout_width="300sp"
+            android:layout_height="240sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="3"
+            android:background="@color/colorWhite"
+            android:contentDescription="@string/image_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_establishment" />
 
-    <TextView
-        android:id="@+id/description_extended"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/description_info_establishment"
-        android:textSize="16sp"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="@+id/description_establishment"
-        app:layout_constraintTop_toBottomOf="@+id/description_establishment" />
+        <TextView
+            android:id="@+id/description_establishment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/info_establishment"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_establishment" />
 
-    <TextView
-        android:id="@+id/establishment_genres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/genres_of_this_establishment"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/description_extended"
-        app:layout_constraintTop_toBottomOf="@+id/description_extended" />
+        <TextView
+            android:id="@+id/description_extended"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/description_info_establishment"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintStart_toStartOf="@+id/description_establishment"
+            app:layout_constraintTop_toBottomOf="@+id/description_establishment" />
 
-    <TextView
-        android:id="@+id/genre1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16sp"
-        android:text="@string/genre"
-        android:textSize="16sp"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="@+id/establishment_genres"
-        app:layout_constraintTop_toBottomOf="@+id/establishment_genres" />
+        <TextView
+            android:id="@+id/establishment_genres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/genres_of_this_establishment"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/description_extended"
+            app:layout_constraintTop_toBottomOf="@+id/description_extended" />
+
+        <TextView
+            android:id="@+id/genre1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:text="@string/genre"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintStart_toStartOf="@+id/establishment_genres"
+            app:layout_constraintTop_toBottomOf="@+id/establishment_genres" />
 
 
-    <TextView
-        android:id="@+id/voted_songs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorWhite"
-        android:text="@string/most_voted_songs_in_this_establishment"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/genre1"
-        app:layout_constraintTop_toBottomOf="@+id/genre1" />
+        <TextView
+            android:id="@+id/voted_songs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:text="@string/most_voted_songs_in_this_establishment"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/genre1"
+            app:layout_constraintTop_toBottomOf="@+id/genre1" />
 
-    <ImageView
-        android:id="@+id/votedEstablishment1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/voted_songs"
-        app:layout_constraintTop_toBottomOf="@+id/voted_songs"/>
+        <ImageView
+            android:id="@+id/votedEstablishment1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/voted_songs"
+            app:layout_constraintTop_toBottomOf="@+id/voted_songs"/>
 
-    <ImageView
-        android:id="@+id/votedEstablishment2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/votedEstablishment1"
-        app:layout_constraintTop_toBottomOf="@+id/voted_songs"/>
+        <ImageView
+            android:id="@+id/votedEstablishment2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/votedEstablishment1"
+            app:layout_constraintTop_toBottomOf="@+id/voted_songs"/>
+    </android.support.constraint.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+</ScrollView>

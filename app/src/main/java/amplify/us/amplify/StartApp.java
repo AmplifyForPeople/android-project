@@ -46,9 +46,7 @@ public class StartApp extends AppCompatActivity {
         Button mEmailSignInButton = (Button) findViewById(R.id.button_qr);
         mEmailSignInButton.setOnClickListener((View view) -> {
             //attemptLogin();
-            //intent = new Intent(StartApp.this, QRActivity.class); ES LA BONA
-            intent = new Intent(StartApp.this, MainActivity.class);
-
+            intent = new Intent(StartApp.this, QRActivity.class);
             checkPermissions();
         });
     }
