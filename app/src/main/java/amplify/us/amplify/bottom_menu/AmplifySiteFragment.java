@@ -72,11 +72,8 @@ public class AmplifySiteFragment extends Fragment {
     ImageButton addToFav;
     int Similar = 0;
     Boolean first = false;
-
     UserEntity userEntity;
-
     private DiscoverFragment discoverFragment;
-
     SongEntity songAmplify;
     private Handler handler;
     MyRunnable runnable;
@@ -86,15 +83,13 @@ public class AmplifySiteFragment extends Fragment {
     String url_major = "http://brain.3utilities.com/AmplifyWeb/rest/";
     String url_similars ="";
     private String m_Text="";
-
     RequestQueue queuePost;
-
     RequestQueue queue;
     RequestQueue queue2;
     JsonArrayRequest similars;
-
-
     private Boolean flag = false;
+
+
 
 
     public AmplifySiteFragment() {
@@ -134,7 +129,6 @@ public class AmplifySiteFragment extends Fragment {
 
         }*/
 
-
         //Updating songs
         String url_update_song = url_major+"establishments/1";
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -147,20 +141,14 @@ public class AmplifySiteFragment extends Fragment {
         queue.add(requestUser);
 
 
-
-
         handler = new Handler();
         runnable = new MyRunnable(url_update_song,rootView,queue);
         handler.post(runnable);
 
 
-
-
-
-
         //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
 
-        // Add to fav song
+        // ADD TO FAV SONGS
         addToFav = (ImageButton) rootView.findViewById(R.id.addToFav);
         addToFav.setOnClickListener(v -> {
             Toast.makeText(getContext(),songAmplify.getName(), Toast.LENGTH_SHORT).show();
@@ -199,6 +187,23 @@ public class AmplifySiteFragment extends Fragment {
             intent.putExtra("url",songAmplifySimilar2.getUrl_image());
             v.getContext().startActivity(intent);
         });
+
+
+
+        //Vots
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
