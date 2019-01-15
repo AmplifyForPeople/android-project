@@ -123,22 +123,24 @@ public class AmplifySiteFragment extends Fragment {
             queuePost.add(post);
         }
 
+        //Updating songs
+        String url_update_song = url_major+"establishments/1";
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest update = volleyRequest(rootView,url_update_song);
+        queue.add(update);
+
+        handler = new Handler();
+        runnable = new MyRunnable(url_update_song,rootView,queue);
+        handler.post(runnable);
+
 
         /*String url = url_major+"establishments/1";
         String url_similar = url_major+"/music/songs/similar/4";
         String url_similar2 = url_major+"/music/songs/similar/4";
 
 
-        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-
-
         //AMPLIFY SITE SONG
         JsonObjectRequest firstRequest = volleyRequest(rootView,url);
-        queue.add(firstRequest);
-
-        handler = new Handler();
-        runnable = new MyRunnable(url,rootView,queue);
-        handler.post(runnable);
 
         //AMPLIFY SIMILAR SONGS
         JsonObjectRequest similarRequest = volleyRequestSimilar(rootView,url_similar);
@@ -207,7 +209,6 @@ public class AmplifySiteFragment extends Fragment {
                         if(playList.getJSONObject(i).getString("current").equals("true")){
                             songAmplify = new SongEntity((playList.getJSONObject(i).getJSONObject("song")));
                             setAmplify(rootview);
-                            Log.d("aAAAAAAAA", songAmplify.toString());
                         }
                     }
                 } catch (JSONException e) {
@@ -233,28 +234,42 @@ public class AmplifySiteFragment extends Fragment {
         return jsonObjectRequest;
     }
 
-
-
-
-
     public JsonObjectRequest volleyRequest(View rootView, String url){
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("RESPONSE", response.toString());
-
-                        //response.getString("image");
-                        updateInfoAmplifyJSON(rootView,response);
-
+                        Log.d("Response Post", response.toString());
+                        establishmentEntity = new EstablishmentEntity(response);
+                        try {
+                            JSONArray playList = response.getJSONArray("playlists");
+                            for (int i=0;i<playList.length();i++){
+                                if(playList.getJSONObject(i).getString("current").equals("true")){
+                                    songAmplify = new SongEntity((playList.getJSONObject(i).getJSONObject("song")));
+                                    //Toast.makeText(getContext(),"UPDATING",Toast.LENGTH_SHORT).show();
+                                    setAmplify(rootView);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("RESPONSE", error.toString());
             }
-        });
+        })
+        {
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
         jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
@@ -395,7 +410,7 @@ public class AmplifySiteFragment extends Fragment {
         public void run() {
             JsonObjectRequest firstRequest = volleyRequest(rootView,url);
             queue.add(firstRequest);
-            handler.postDelayed(this::run,30000);
+            handler.postDelayed(this::run,10000);
         }
 
     }
@@ -460,9 +475,11 @@ public class AmplifySiteFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        //queue.cancelAll(this);
+        queue.cancelAll(this);
         super.onDestroyView();
     }
+
+
 
     private void setFragment (Fragment fragment){
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
