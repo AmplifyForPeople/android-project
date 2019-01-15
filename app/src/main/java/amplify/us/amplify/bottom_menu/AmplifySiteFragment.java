@@ -47,6 +47,7 @@ import java.util.Map;
 
 import amplify.us.amplify.R;
 import amplify.us.amplify.database.Dao.SongDao;
+import amplify.us.amplify.database.model.Song;
 import amplify.us.amplify.details.DetailSongActivity;
 import amplify.us.amplify.entities.EstablishmentEntity;
 import amplify.us.amplify.entities.GenreEntity;
@@ -88,6 +89,8 @@ public class AmplifySiteFragment extends Fragment {
     RequestQueue queue2;
     JsonArrayRequest similars;
     private Boolean flag = false;
+    ImageButton button_like;
+    ImageButton button_dislike;
 
 
 
@@ -136,14 +139,32 @@ public class AmplifySiteFragment extends Fragment {
         JsonObjectRequest update = volleyRequest(rootView,url_update_song);
         queue.add(update);
 
+        //INFO USER
         String url_user = url_major+"users/1";
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user,rootView);
         queue.add(requestUser);
 
-
+        //UPDATE
         handler = new Handler();
         runnable = new MyRunnable(url_update_song,rootView,queue);
         handler.post(runnable);
+
+
+
+
+
+
+
+        //VOTES
+
+
+
+
+
+
+
+
+
 
 
         //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
@@ -151,12 +172,36 @@ public class AmplifySiteFragment extends Fragment {
         // ADD TO FAV SONGS
         addToFav = (ImageButton) rootView.findViewById(R.id.addToFav);
         addToFav.setOnClickListener(v -> {
-            Toast.makeText(getContext(),songAmplify.getName(), Toast.LENGTH_SHORT).show();
             Toast.makeText(rootView.getContext(),"Added Song",Toast.LENGTH_LONG).show();
             addToFav.setVisibility(View.GONE);
             String url = url_major+"songs/"+userEntity.getId()+"/"+songAmplify.getId();
             JsonObjectRequest requestAdd = volleyPostRequest(url);
             queue.add(requestAdd);
+            queue.add(requestUser);
+
+        });
+
+        button_dislike = (ImageButton) rootView.findViewById(R.id.dislike);
+        button_dislike.setOnClickListener(v -> {
+            Toast.makeText(rootView.getContext(),"Song Voted",Toast.LENGTH_LONG).show();
+            button_dislike.setVisibility(View.GONE);
+            button_like.setVisibility(View.GONE);
+            String url = url_major+"songs/"+userEntity.getId()+"/"+songAmplify.getId()+"/2/vote";
+
+            JsonObjectRequest requestAdd = volleyPostRequest(url);
+            queue.add(requestAdd);
+            queue.add(requestUser);
+
+        });
+        button_like = (ImageButton) rootView.findViewById(R.id.like);
+        button_like.setOnClickListener(v -> {
+            Toast.makeText(rootView.getContext(),"Song Voted",Toast.LENGTH_LONG).show();
+            button_dislike.setVisibility(View.GONE);
+            button_like.setVisibility(View.GONE);
+            String url = url_major+"songs/"+userEntity.getId()+"/"+songAmplify.getId()+"/1/vote";
+            JsonObjectRequest requestAdd = volleyPostRequest(url);
+            queue.add(requestAdd);
+            queue.add(requestUser);
 
         });
 
@@ -174,6 +219,7 @@ public class AmplifySiteFragment extends Fragment {
             v.getContext().startActivity(intent);
         });
 
+
         //Similar song to -> song detail2 (simple)
         ImageButton card_view2 = rootView.findViewById(R.id.similar_amp2); // creating a CardView and assigning a value.
 
@@ -187,24 +233,6 @@ public class AmplifySiteFragment extends Fragment {
             intent.putExtra("url",songAmplifySimilar2.getUrl_image());
             v.getContext().startActivity(intent);
         });
-
-
-
-        //Vots
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         return rootView;
@@ -532,6 +560,7 @@ public class AmplifySiteFragment extends Fragment {
 
         if(userEntity != null){
             setButton();
+            setVotes();
         }
 
     }
@@ -567,6 +596,16 @@ public class AmplifySiteFragment extends Fragment {
             if(s.getName().equals(songAmplify.getName())){
                 addToFav.setVisibility(View.GONE);
             }
+        }
+    }
+
+    public void setVotes(){
+        if(userEntity.is_voted(songAmplify.getId())){
+            button_dislike.setVisibility(View.GONE);
+            button_like.setVisibility(View.GONE);
+        }else{
+            button_dislike.setVisibility(View.VISIBLE);
+            button_like.setVisibility(View.VISIBLE);
         }
     }
 

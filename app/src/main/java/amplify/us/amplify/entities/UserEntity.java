@@ -1,10 +1,14 @@
 package amplify.us.amplify.entities;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserEntity {
     private  int    id;
@@ -14,6 +18,8 @@ public class UserEntity {
     private  String password;
     private  List<GenreEntity> genres = new ArrayList <>();
     private  List<SongEntity> favSongs = new ArrayList<>();
+    private Map<Integer, Integer> votes = new HashMap<Integer, Integer>();
+
 
 
     public UserEntity(int id, String name, String age, String email, String password, List<GenreEntity> genres, List<SongEntity> favSongs) {
@@ -44,15 +50,25 @@ public class UserEntity {
                     this.favSongs.add(new SongEntity((JSONObject) data.getJSONArray("songs").get(i)));
                 }
             }
+            if(data.getJSONArray("votes") != null && data.getJSONArray("votes").length()>0){
+                for (int i=0;i<data.getJSONArray("votes").length();i++){
+                    JSONObject vote = (JSONObject) data.getJSONArray("votes").get(i);
+                    this.votes.put(new Integer(vote.getInt("song_id")),vote.getInt("like_point"));
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
+    public boolean is_voted(int id){
+        Integer i = new Integer(id);
+        return this.votes.containsKey(i);
+    }
+
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
