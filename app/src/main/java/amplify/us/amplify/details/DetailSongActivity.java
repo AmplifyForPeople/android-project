@@ -14,16 +14,21 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import amplify.us.amplify.R;
+import amplify.us.amplify.database.model.Song;
 import amplify.us.amplify.entities.SongEntity;
 import amplify.us.amplify.entities.UserEntity;
 
@@ -32,27 +37,27 @@ public class DetailSongActivity extends AppCompatActivity {
     String url_major = "http://brain.3utilities.com/AmplifyWeb/rest";
     SongEntity songEntity;
     int Similar = 0;
+    int id_song = 0;
     ImageView Song1;
     ImageView Song2;
-    ImageView Song3;
+    ArrayList<SongEntity> dataSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_song);
+        dataSong = new ArrayList<>();
 
         ImageView img = findViewById(R.id.back_detail_song);
         img.setOnClickListener((View v) -> finish());
 
         getIncomingIntent();
 
+        id_song = getIntent().getIntExtra("id",0);
+
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String similar1 = url_major+"/songs/1";
-        String similar2 = url_major+"/songs/2";
-        String similar3 = url_major+"/songs/3";
-        queue.add(volleySimilarSongs(similar1));
-        queue.add(volleySimilarSongs(similar2));
-        queue.add(volleySimilarSongs(similar3));
+        String similars = url_major+"/songs/"+id_song+"/similar";
+        queue.add(volleyRequest_rvSongs(similars));
     }
 
     private  void getIncomingIntent(){
@@ -78,24 +83,29 @@ public class DetailSongActivity extends AppCompatActivity {
                 .into(imageView);
     }
 
-    public JsonObjectRequest volleySimilarSongs(String url) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("RESPONSE", response.toString());
-                        songEntity = new SongEntity(response);
-                        setSimilarSongs();
-                        //response.getString("image");
-                        //updateInfoAmplifyJSON(rootView,response);
-                        //user = new UserEntity(response);
-                        //setUser();
 
+    public JsonArrayRequest volleyRequest_rvSongs(String url){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("SIMILAR", response.toString());
+                        try{
+                            for(int i = 0;i<response.length();i++){
+                                JSONObject result = response.getJSONObject(i);
+                                dataSong.add(new SongEntity(result));
+                            }
+                            setSimilarSongs(dataSong);
+                        }catch (JSONException arg){
+                            Log.d("RIPARNAU", response.toString());
+                            arg.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
                 Log.d("RESPONSE", error.toString());
             }
         })
@@ -108,8 +118,7 @@ public class DetailSongActivity extends AppCompatActivity {
                 return headers;
             }
         };
-
-        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
                 return 50000;
@@ -126,34 +135,29 @@ public class DetailSongActivity extends AppCompatActivity {
             }
         });
 
-        return jsonObjectRequest;
+        return jsonArrayRequest;
     }
 
-    public void setSimilarSongs(){
-        if(Similar == 0){
-            Song1 = findViewById(R.id.similar);
-            Picasso.get()
-                    .load(songEntity.getUrl_image())
-                    .centerCrop()
-                    .fit()
-                    .into(Song1);
-            Similar += 1;
-        }else if(Similar == 1){
-            Song2 = findViewById(R.id.similar1);
-            Picasso.get()
-                    .load(songEntity.getUrl_image())
-                    .centerCrop()
-                    .fit()
-                    .into(Song2);
-            Similar += 1;
-        }else{
-            Song3 = findViewById(R.id.similar2);
-            Picasso.get()
-                    .load(songEntity.getUrl_image())
-                    .centerCrop()
-                    .fit()
-                    .into(Song3);
-            Similar = 0;
+    public void setSimilarSongs(ArrayList<SongEntity> song){
+        for (SongEntity s: song
+             ) {
+            if(Similar == 0){
+                Song1 = findViewById(R.id.similar);
+                Picasso.get()
+                        .load(s.getUrl_image())
+                        .centerCrop()
+                        .fit()
+                        .into(Song1);
+                Similar += 1;
+            }else if(Similar == 1){
+                Song2 = findViewById(R.id.similar1);
+                Picasso.get()
+                        .load(s.getUrl_image())
+                        .centerCrop()
+                        .fit()
+                        .into(Song2);
+                Similar += 1;
+            }
         }
     }
 }
