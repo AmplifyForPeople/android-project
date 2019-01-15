@@ -30,6 +30,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -40,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +65,12 @@ public class AmplifySiteFragment extends Fragment {
     TextView artistSongAmplify;
     TextView albumSongAmplify;
     ImageView imgAmplify;
+    ImageButton Song1;
+    ImageButton Song2;
+    ArrayList<SongEntity> dataSong;
+    int Similar = 0;
+    Boolean first = false;
+
 
     private DiscoverFragment discoverFragment;
 
@@ -74,11 +82,14 @@ public class AmplifySiteFragment extends Fragment {
     SongEntity songAmplifySimilar;
     SongEntity songAmplifySimilar2;
     String url_major = "http://brain.3utilities.com/AmplifyWeb/rest/";
+    String url_similars ="";
     private String m_Text="";
 
     RequestQueue queuePost;
 
     RequestQueue queue;
+    RequestQueue queue2;
+    JsonArrayRequest similars;
 
 
     private Boolean flag = false;
@@ -92,7 +103,9 @@ public class AmplifySiteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Similar = 0;
         discoverFragment = new DiscoverFragment();
+        dataSong = new ArrayList<>();
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_amplify_site, container, false);
@@ -100,6 +113,7 @@ public class AmplifySiteFragment extends Fragment {
         /*nameSong = rootView.findViewById(R.id.name_song_amp);
         nameArtist = rootView.findViewById(R.id.artist_song_amp);
         nameAlbum = rootView.findViewById(R.id.album_song_amp);*/
+
 
         if(!flag){
             flag = true;
@@ -121,12 +135,19 @@ public class AmplifySiteFragment extends Fragment {
 
             JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
             queuePost.add(post);
+
         }
+
+
+
 
         //Updating songs
         String url_update_song = url_major+"establishments/1";
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        queue2 = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest update = volleyRequest(rootView,url_update_song);
+
+
         queue.add(update);
 
         handler = new Handler();
@@ -163,25 +184,30 @@ public class AmplifySiteFragment extends Fragment {
         });
 
         //Similar song to -> song detail (simple)
-        CardView card_view = rootView.findViewById(R.id.similar_amp); // creating a CardView and assigning a value.
+        ImageButton card_view = rootView.findViewById(R.id.similar_amp); // creating a CardView and assigning a value.
 
         card_view.setOnClickListener((View v) -> {
             Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
             intent.putExtra("song",songAmplifySimilar.getName());
             intent.putExtra("album",songAmplifySimilar.getAlbum());
             intent.putExtra("artist",songAmplifySimilar.getArtist());
+            intent.putExtra("id",songAmplifySimilar.getId());
+            intent.putExtra("url",songAmplifySimilar.getUrl_image());
             //IMAGE -> intent.putExtra("info_title",data.get(position).getInfo());
             v.getContext().startActivity(intent);
         });
 
         //Similar song to -> song detail2 (simple)
-        CardView card_view2 = rootView.findViewById(R.id.similar_amp2); // creating a CardView and assigning a value.
+        ImageButton card_view2 = rootView.findViewById(R.id.similar_amp2); // creating a CardView and assigning a value.
+
 
         card_view2.setOnClickListener((View v) -> {
             Intent intent = new Intent(v.getContext(),DetailSongActivity.class);
             intent.putExtra("song",songAmplifySimilar2.getName());
             intent.putExtra("album",songAmplifySimilar2.getAlbum());
             intent.putExtra("artist",songAmplifySimilar2.getArtist());
+            intent.putExtra("id",songAmplifySimilar2.getId());
+            intent.putExtra("url",songAmplifySimilar2.getUrl_image());
             v.getContext().startActivity(intent);
         });
 
@@ -249,6 +275,11 @@ public class AmplifySiteFragment extends Fragment {
                                     songAmplify = new SongEntity((playList.getJSONObject(i).getJSONObject("song")));
                                     //Toast.makeText(getContext(),"UPDATING",Toast.LENGTH_SHORT).show();
                                     setAmplify(rootView);
+
+                                    url_similars = url_major+"songs/"+songAmplify.getId()+"/similar";
+                                    similars = volleyRequest_rvSongs(rootView,url_similars);
+                                    queue2.add(similars);
+                                    first = true;
                                 }
                             }
                         } catch (JSONException e) {
@@ -288,6 +319,62 @@ public class AmplifySiteFragment extends Fragment {
         });
 
         return jsonObjectRequest;
+    }
+
+    public JsonArrayRequest volleyRequest_rvSongs(View rootView ,String url){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("SIMILAR", response.toString());
+                        try{
+                            dataSong = new ArrayList<>();
+                            for(int i = 0;i<response.length();i++){
+                                JSONObject result = response.getJSONObject(i);
+                                dataSong.add(new SongEntity(result));
+                            }
+                            Toast.makeText(rootView.getContext(),"LLEGEIXO",Toast.LENGTH_SHORT).show();
+                            setSimilarSongs(dataSong,rootView);
+                        }catch (JSONException arg){
+                            Log.d("RIPARNAU", response.toString());
+                            arg.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(rootView.getContext(),error.toString(),Toast.LENGTH_LONG).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        })
+        {
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        return jsonArrayRequest;
     }
 
 
@@ -506,5 +593,30 @@ public class AmplifySiteFragment extends Fragment {
                 .fit()
                 .into(imgAmplify);
 
+    }
+
+    public void setSimilarSongs(ArrayList<SongEntity> song, View rootView){
+        for (SongEntity s: song
+                ) {
+            if(Similar == 0){
+                Song1 = rootView.findViewById(R.id.similar_amp);
+                Picasso.get()
+                        .load(s.getUrl_image())
+                        .centerCrop()
+                        .fit()
+                        .into(Song1);
+                Similar += 1;
+                songAmplifySimilar = s;
+            }else if(Similar == 1){
+                Song2 = rootView.findViewById(R.id.similar_amp2);
+                Picasso.get()
+                        .load(s.getUrl_image())
+                        .centerCrop()
+                        .fit()
+                        .into(Song2);
+                Similar += 1;
+                songAmplifySimilar2 = s;
+            }
+        }
     }
 }
