@@ -72,6 +72,7 @@ public class DetailSongActivity extends AppCompatActivity {
         String url_user = url_major+"/users/1";
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
         queue.add(requestUser);
+
         button = findViewById(R.id.addFavourite);
 
         button.setOnClickListener((View v) -> {

@@ -51,6 +51,7 @@ import amplify.us.amplify.details.DetailSongActivity;
 import amplify.us.amplify.entities.EstablishmentEntity;
 import amplify.us.amplify.entities.GenreEntity;
 import amplify.us.amplify.entities.SongEntity;
+import amplify.us.amplify.entities.UserEntity;
 import amplify.us.amplify.profile.FavouriteSongsActivity;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
@@ -68,8 +69,12 @@ public class AmplifySiteFragment extends Fragment {
     ImageButton Song1;
     ImageButton Song2;
     ArrayList<SongEntity> dataSong;
+    ImageButton addToFav;
     int Similar = 0;
     Boolean first = false;
+
+    UserEntity userEntity;
+
 
 
     private DiscoverFragment discoverFragment;
@@ -110,14 +115,8 @@ public class AmplifySiteFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_amplify_site, container, false);
 
-        /*nameSong = rootView.findViewById(R.id.name_song_amp);
-        nameArtist = rootView.findViewById(R.id.artist_song_amp);
-        nameAlbum = rootView.findViewById(R.id.album_song_amp);*/
-
-
         if(!flag){
             flag = true;
-            //AVISAR AL SISTEMA QUE ESTIC A DINTRE
             String urlPost = url_major+"establishments/go_in/1/1";
             queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -144,38 +143,31 @@ public class AmplifySiteFragment extends Fragment {
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue2 = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest update = volleyRequest(rootView,url_update_song);
-
-
         queue.add(update);
+
+        String url_user = url_major+"users/1";
+        JsonObjectRequest requestUser = volleyRequest_rvUser(url_user,rootView);
+        queue.add(requestUser);
+
+
+
 
         handler = new Handler();
         runnable = new MyRunnable(url_update_song,rootView,queue);
         handler.post(runnable);
 
 
-        /*String url = url_major+"establishments/1";
-        String url_similar = url_major+"/music/songs/similar/4";
-        String url_similar2 = url_major+"/music/songs/similar/4";
 
 
-        //AMPLIFY SITE SONG
-        JsonObjectRequest firstRequest = volleyRequest(rootView,url);
-
-        //AMPLIFY SIMILAR SONGS
-        JsonObjectRequest similarRequest = volleyRequestSimilar(rootView,url_similar);
-        JsonObjectRequest similarRequest2 = volleyRequestSimilar2(rootView,url_similar2);
-        queue.add(similarRequest);
-        queue.add(similarRequest2);*/
 
 
         //////// BUTTONS & ACCESS TO OTHER ACTIVITIES /////
 
         // Add to fav song
-        ImageButton addToFav = (ImageButton) rootView.findViewById(R.id.addToFav);
+        addToFav = (ImageButton) rootView.findViewById(R.id.addToFav);
         addToFav.setOnClickListener(v -> {
-            //addToFavSong(v,songAmplify);
             Toast.makeText(getContext(),songAmplify.getName(), Toast.LENGTH_SHORT).show();
-            //handler.removeCallbacks(runnable);
+
         });
 
         //Similar song to -> song detail (simple)
@@ -371,6 +363,55 @@ public class AmplifySiteFragment extends Fragment {
         return jsonArrayRequest;
     }
 
+    public JsonObjectRequest volleyRequest_rvUser(String url, View rootView) {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("RESPONSE", response.toString());
+
+                        //response.getString("image");
+                        //updateInfoAmplifyJSON(rootView,response);
+                        userEntity = new UserEntity(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(rootView.getContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("RESPONSE", error.toString());
+            }
+        })
+        {
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        return jsonObjectRequest;
+    }
+
 
 
     class MyRunnable implements Runnable{
@@ -482,6 +523,9 @@ public class AmplifySiteFragment extends Fragment {
                 .fit()
                 .into(imgAmplify);
 
+        setButton();
+
+
     }
 
     public void setSimilarSongs(ArrayList<SongEntity> song, View rootView){
@@ -505,6 +549,15 @@ public class AmplifySiteFragment extends Fragment {
                         .into(Song2);
                 Similar += 1;
                 songAmplifySimilar2 = s;
+            }
+        }
+    }
+
+    public void setButton(){
+        for (SongEntity s: userEntity.getFavSongs()
+                ) {
+            if(s.getName().equals(songAmplify.getName())){
+                addToFav.setVisibility(View.GONE);
             }
         }
     }
