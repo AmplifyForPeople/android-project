@@ -4,6 +4,7 @@ package amplify.us.amplify.bottom_menu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -56,11 +57,15 @@ import amplify.us.amplify.entities.UserEntity;
 import amplify.us.amplify.profile.FavouriteSongsActivity;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AmplifySiteFragment extends Fragment {
+
+    public static final String USERS = "MyUser";
 
     TextView establishmentName;
     TextView nameSongAmplify;
@@ -92,6 +97,8 @@ public class AmplifySiteFragment extends Fragment {
     ImageButton button_like;
     ImageButton button_dislike;
 
+    int user_id;
+
 
 
 
@@ -103,6 +110,11 @@ public class AmplifySiteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //LOAD USER
+        SharedPreferences prefs = getContext().getSharedPreferences(USERS, MODE_PRIVATE);
+        user_id = prefs.getInt("user",0);
+
+
         Similar = 0;
         discoverFragment = new DiscoverFragment();
         dataSong = new ArrayList<>();
@@ -112,7 +124,7 @@ public class AmplifySiteFragment extends Fragment {
 
         if(!flag){
             flag = true;
-            String urlPost = url_major+"establishments/go_in/1/1";
+            String urlPost = url_major+"establishments/go_in/"+user_id+"/1";
             queuePost = Volley.newRequestQueue(getActivity().getApplicationContext());
 
             JsonObjectRequest post = volleyPostRequest(rootView,urlPost);
@@ -140,7 +152,7 @@ public class AmplifySiteFragment extends Fragment {
         queue.add(update);
 
         //INFO USER
-        String url_user = url_major+"users/1";
+        String url_user = url_major+"users/"+user_id;
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user,rootView);
         queue.add(requestUser);
 
@@ -148,22 +160,6 @@ public class AmplifySiteFragment extends Fragment {
         handler = new Handler();
         runnable = new MyRunnable(url_update_song,rootView,queue);
         handler.post(runnable);
-
-
-
-
-
-
-
-        //VOTES
-
-
-
-
-
-
-
-
 
 
 
@@ -180,6 +176,9 @@ public class AmplifySiteFragment extends Fragment {
             queue.add(requestUser);
 
         });
+
+
+        //VOTES
 
         button_dislike = (ImageButton) rootView.findViewById(R.id.dislike);
         button_dislike.setOnClickListener(v -> {

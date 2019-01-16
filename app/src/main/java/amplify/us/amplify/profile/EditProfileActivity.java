@@ -1,5 +1,6 @@
 package amplify.us.amplify.profile;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,10 +30,15 @@ import amplify.us.amplify.entities.UserEntity;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+    public static final String USERS = "MyUser";
+
+
     String url_major = "http://brain.3utilities.com/AmplifyWeb/rest";
     UserEntity user;
     EditText nameEdit;
     EditText ageEdit;
+
+    int user_id;
 
 
     @Override
@@ -48,8 +54,12 @@ public class EditProfileActivity extends AppCompatActivity {
         this.save();
         this.cancel();
 
+        //LOAD USER
+        SharedPreferences prefs = getSharedPreferences(USERS, MODE_PRIVATE);
+        user_id = prefs.getInt("user",0);
+
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url_user = url_major+"/users/1";
+        String url_user = url_major+"/users/"+user_id;
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
         queue.add(requestUser);
     }

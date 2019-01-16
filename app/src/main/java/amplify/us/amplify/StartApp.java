@@ -1,7 +1,9 @@
 package amplify.us.amplify;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -24,6 +26,8 @@ public class StartApp extends AppCompatActivity {
      * permissions request code
      */
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+    private final static int USER_ID = 1;
+    public static final String USERS = "MyUser";
 
     /**
      * Permissions that need to be explicitly requested from end user.
@@ -40,6 +44,10 @@ public class StartApp extends AppCompatActivity {
 
         this.set_button_scan_qr();
 
+        //Save into sharedPreferences
+        SharedPreferences.Editor editor = getSharedPreferences(USERS, MODE_PRIVATE).edit();
+        editor.putInt("user",USER_ID);
+        editor.apply();
     }
 
     private void set_button_scan_qr(){

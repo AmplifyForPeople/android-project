@@ -60,6 +60,11 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
     String url_major = "http://brain.3utilities.com/AmplifyWeb/rest";
     UserEntity user;
 
+    public static final String USERS = "MyUser";
+    int user_id;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,10 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
 
         songDao = new SongDao(this);
         mSongList = new ArrayList<>();
+
+        //LOAD USER
+        SharedPreferences prefs = getSharedPreferences(USERS, MODE_PRIVATE);
+        user_id = prefs.getInt("user",0);
 
         setupSearchView();
 
@@ -103,7 +112,7 @@ public class FavouriteSongsActivity extends AppCompatActivity implements SearchV
         });*/
 
         queue = Volley.newRequestQueue(getApplicationContext());
-        String url_user = url_major+"/users/1";
+        String url_user = url_major+"/users/"+user_id;
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
         queue.add(requestUser);
 

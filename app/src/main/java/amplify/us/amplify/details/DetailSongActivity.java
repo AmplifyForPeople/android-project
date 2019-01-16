@@ -1,6 +1,7 @@
 package amplify.us.amplify.details;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,9 @@ public class DetailSongActivity extends AppCompatActivity {
     String title;
     Button button;
 
+    public static final String USERS = "MyUser";
+    int user_id;
+
 
 
 
@@ -57,6 +61,10 @@ public class DetailSongActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_song);
         dataSong = new ArrayList<>();
+
+        //LOAD USER
+        SharedPreferences prefs = getSharedPreferences(USERS, MODE_PRIVATE);
+        user_id = prefs.getInt("user",0);
 
         ImageView img = findViewById(R.id.back_detail_song);
         img.setOnClickListener((View v) -> finish());
@@ -69,7 +77,7 @@ public class DetailSongActivity extends AppCompatActivity {
         String similars = url_major+"/songs/"+id_song+"/similar";
         queue.add(volleyRequest_rvSongs(similars));
 
-        String url_user = url_major+"/users/1";
+        String url_user = url_major+"/users/"+user_id;
         JsonObjectRequest requestUser = volleyRequest_rvUser(url_user);
         queue.add(requestUser);
 
