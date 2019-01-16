@@ -26,7 +26,7 @@ public class StartApp extends AppCompatActivity {
      * permissions request code
      */
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
-    private final static int USER_ID = 1;
+    private final static int USER_ID = 3;
     public static final String USERS = "MyUser";
 
     /**
