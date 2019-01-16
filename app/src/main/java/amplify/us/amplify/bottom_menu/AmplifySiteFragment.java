@@ -192,6 +192,7 @@ public class AmplifySiteFragment extends Fragment {
             queue.add(requestAdd);
             queue.add(requestUser);
 
+
         });
         button_like = (ImageButton) rootView.findViewById(R.id.like);
         button_like.setOnClickListener(v -> {
@@ -603,6 +604,11 @@ public class AmplifySiteFragment extends Fragment {
         if(userEntity.is_voted(songAmplify.getId())){
             button_dislike.setVisibility(View.GONE);
             button_like.setVisibility(View.GONE);
+            if(userEntity.getVotes().get(songAmplify.getId())==1){
+                button_like.setVisibility(View.VISIBLE);
+            }else{
+                button_dislike.setVisibility(View.VISIBLE);
+            }
         }else{
             button_dislike.setVisibility(View.VISIBLE);
             button_like.setVisibility(View.VISIBLE);

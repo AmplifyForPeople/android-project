@@ -20,7 +20,13 @@ public class UserEntity {
     private  List<SongEntity> favSongs = new ArrayList<>();
     private Map<Integer, Integer> votes = new HashMap<Integer, Integer>();
 
+    public Map<Integer, Integer> getVotes() {
+        return votes;
+    }
 
+    public void setVotes(Map<Integer, Integer> votes) {
+        this.votes = votes;
+    }
 
     public UserEntity(int id, String name, String age, String email, String password, List<GenreEntity> genres, List<SongEntity> favSongs) {
         this.id = id;
@@ -30,6 +36,10 @@ public class UserEntity {
         this.password = password;
         this.genres = genres;
         this.favSongs = favSongs;
+    }
+
+    public Map<Integer,Integer> get_votes_map(){
+        return this.votes;
     }
 
     //PER EMMAGATZAMAR JSON
