@@ -145,20 +145,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/artist_song_amp1" />
 
-        <TextView
-            android:id="@+id/genres_song_amp1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/genresSong"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/album_song_amp1" />
-
 
         <ImageButton
             android:id="@+id/like"
@@ -169,7 +155,7 @@
             android:background="@null"
             android:src="@drawable/like"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genres_song_amp1" />
+            app:layout_constraintTop_toBottomOf="@+id/album_song_amp1" />
 
         <ImageButton
             android:id="@+id/icon_like"
@@ -181,7 +167,7 @@
             android:src="@drawable/ic_action_like"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genres_song_amp1" />
+            app:layout_constraintTop_toBottomOf="@+id/album_song_amp1" />
 
         <ImageButton
             android:id="@+id/dislike"
@@ -192,7 +178,7 @@
             android:background="@null"
             android:src="@drawable/dislike"
             app:layout_constraintStart_toEndOf="@+id/like"
-            app:layout_constraintTop_toBottomOf="@+id/genres_song_amp1" />
+            app:layout_constraintTop_toBottomOf="@+id/album_song_amp1" />
 
         <ImageButton
             android:id="@+id/icon_dislike"
@@ -204,7 +190,7 @@
             android:background="@null"
             android:src="@drawable/ic_action_dontlike"
             app:layout_constraintStart_toEndOf="@+id/like"
-            app:layout_constraintTop_toBottomOf="@+id/genres_song_amp1" />
+            app:layout_constraintTop_toBottomOf="@+id/album_song_amp1" />
 
 
         <ImageButton
@@ -216,7 +202,7 @@
             android:background="@null"
             android:src="@drawable/add_tofav"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genres_song_amp1" />
+            app:layout_constraintTop_toBottomOf="@+id/album_song_amp1" />
 
         <TextView
             android:id="@+id/similar_songs_amp"
@@ -229,7 +215,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genres_song_amp1" />
+            app:layout_constraintTop_toBottomOf="@+id/album_song_amp1" />
 
         <ImageButton
             android:id="@+id/similar_amp"
